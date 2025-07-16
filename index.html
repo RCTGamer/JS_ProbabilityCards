@@ -1,1 +1,139 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Problem Center</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        h1 {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            color: #e0e0e0;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+        }
+        
+        .display-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .display-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .display-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        
+        .display-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .display-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .display-description {
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .difficulty {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        .easy { background: #4CAF50; color: white; }
+        .medium { background: #FF9800; color: white; }
+        .hard { background: #F44336; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧮 Math Problem Center</h1>
+        <p class="subtitle">Click on any display below to solve challenging math problems!</p>
+        
+        <div class="display-grid">
+            <a href="algebra.html" class="display-card">
+                <div class="display-icon">📐</div>
+                <div class="display-title">Algebra Challenge</div>
+                <div class="display-description">Solve linear and quadratic equations</div>
+                <span class="difficulty medium">Medium</span>
+            </a>
+            
+            <a href="geometry.html" class="display-card">
+                <div class="display-icon">📏</div>
+                <div class="display-title">Geometry Puzzles</div>
+                <div class="display-description">Area, perimeter, and volume calculations</div>
+                <span class="difficulty easy">Easy</span>
+            </a>
+            
+            <a href="calculus.html" class="display-card">
+                <div class="display-icon">∫</div>
+                <div class="display-title">Calculus Problems</div>
+                <div class="display-description">Derivatives and integrals</div>
+                <span class="difficulty hard">Hard</span>
+            </a>
+            
+            <a href="statistics.html" class="display-card">
+                <div class="display-icon">📊</div>
+                <div class="display-title">Statistics & Probability</div>
+                <div class="display-description">Data analysis and probability theory</div>
+                <span class="difficulty medium">Medium</span>
+            </a>
+            
+            <a href="number-theory.html" class="display-card">
+                <div class="display-icon">🔢</div>
+                <div class="display-title">Number Theory</div>
+                <div class="display-description">Prime numbers, sequences, and patterns</div>
+                <span class="difficulty hard">Hard</span>
+            </a>
+            
+            <a href="logic.html" class="display-card">
+                <div class="display-icon">🧩</div>
+                <div class="display-title">Logic Puzzles</div>
+                <div class="display-description">Brain teasers and logical reasoning</div>
+                <span class="difficulty easy">Easy</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
