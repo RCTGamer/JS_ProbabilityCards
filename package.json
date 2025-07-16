@@ -1,0 +1,23 @@
+{
+  "name": "rct-web-probability",
+  "version": "1.0.0",
+  "description": "Probability Theory Center - Interactive Math Problems",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx http-server . -p 3000 -o",
+    "start": "npx http-server . -p 3000",
+    "serve": "npx live-server --port=3000"
+  },
+  "keywords": [
+    "probability",
+    "math",
+    "education",
+    "interactive"
+  ],
+  "author": "RCTGamer",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  }
+}
