@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Algebra Challenge</title>
+    <title>Expectation and Linearity</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,22 +45,32 @@
         
         .problem {
             background: #f8f9fa;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid #28a745;
             padding: 20px;
             margin: 20px 0;
             border-radius: 5px;
         }
         
         .problem h3 {
-            color: #667eea;
+            color: #28a745;
             margin-top: 0;
+        }
+        
+        .probability-scenario {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            line-height: 1.6;
         }
         
         .answer-section {
             margin: 20px 0;
         }
         
-        input[type="text"], input[type="number"] {
+        input[type="number"], input[type="text"] {
             padding: 10px;
             border: 2px solid #ddd;
             border-radius: 5px;
@@ -69,7 +79,7 @@
         }
         
         button {
-            background: #667eea;
+            background: #28a745;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -80,7 +90,7 @@
         }
         
         button:hover {
-            background: #5a67d8;
+            background: #218838;
         }
         
         .result {
@@ -117,46 +127,85 @@
     <div class="container">
         <a href="index.html" class="back-button">← Back to Home</a>
         
-        <h1>📐 Algebra Challenge</h1>
+        <h1>♣ Expectation and Linearity</h1>
         
         <div class="problem">
-            <h3>Problem 1: Linear Equation</h3>
-            <p>Solve for x: <strong>3x + 7 = 22</strong></p>
+            <h3>Problem 1: Basic Expected Value</h3>
+            <p>A fair six-sided die is rolled. What is the expected value?</p>
+            <div class="probability-scenario">
+                The possible outcomes are: 1, 2, 3, 4, 5, 6<br>
+                Each outcome has probability 1/6
+            </div>
             <div class="answer-section">
-                <input type="number" id="answer1" placeholder="Enter x value">
-                <button onclick="checkAnswer(1, 5)">Check Answer</button>
+                <input type="number" id="answer1" placeholder="Expected value" step="0.01">
+                <button onclick="checkAnswer(1, 3.5)">Check Answer</button>
                 <button onclick="showHint(1)">Hint</button>
                 <div id="result1" class="result" style="display: none;"></div>
-                <div id="hint1" class="hint">Subtract 7 from both sides first, then divide by 3.</div>
+                <div id="hint1" class="hint">E[X] = Σ x·P(X=x) = (1·1/6) + (2·1/6) + ... + (6·1/6)</div>
             </div>
         </div>
         
         <div class="problem">
-            <h3>Problem 2: Quadratic Equation</h3>
-            <p>Solve for x: <strong>x² - 5x + 6 = 0</strong></p>
-            <p><em>Enter the smaller solution first:</em></p>
+            <h3>Problem 2: Linearity of Expectation</h3>
+            <p>Two independent dice are rolled. What is the expected value of their sum?</p>
+            <div class="probability-scenario">
+                Let X = first die, Y = second die<br>
+                We want E[X + Y]
+            </div>
             <div class="answer-section">
-                <input type="number" id="answer2a" placeholder="Smaller x">
-                <input type="number" id="answer2b" placeholder="Larger x">
-                <button onclick="checkQuadratic()">Check Answer</button>
+                <input type="number" id="answer2" placeholder="Expected sum" step="0.01">
+                <button onclick="checkAnswer(2, 7)">Check Answer</button>
                 <button onclick="showHint(2)">Hint</button>
                 <div id="result2" class="result" style="display: none;"></div>
-                <div id="hint2" class="hint">Try factoring: (x - ?)(x - ?) = 0. What two numbers multiply to 6 and add to 5?</div>
+                <div id="hint2" class="hint">By linearity: E[X + Y] = E[X] + E[Y]. Each die has E = 3.5</div>
             </div>
         </div>
         
         <div class="problem">
-            <h3>Problem 3: System of Equations</h3>
-            <p>Solve the system:</p>
-            <p><strong>2x + y = 8</strong></p>
-            <p><strong>x - y = 1</strong></p>
+            <h3>Problem 3: Variance Calculation</h3>
+            <p>For a single fair die, what is the variance? Use Var(X) = E[X²] - (E[X])²</p>
+            <div class="probability-scenario">
+                E[X] = 3.5 (from Problem 1)<br>
+                Need to calculate E[X²] = (1²·1/6) + (2²·1/6) + ... + (6²·1/6)
+            </div>
             <div class="answer-section">
-                <input type="number" id="answer3x" placeholder="x value">
-                <input type="number" id="answer3y" placeholder="y value">
-                <button onclick="checkSystem()">Check Answer</button>
+                <input type="number" id="answer3" placeholder="Variance" step="0.01">
+                <button onclick="checkAnswer(3, 2.92)">Check Answer</button>
                 <button onclick="showHint(3)">Hint</button>
                 <div id="result3" class="result" style="display: none;"></div>
-                <div id="hint3" class="hint">Try adding the equations together to eliminate y, then solve for x.</div>
+                <div id="hint3" class="hint">E[X²] = (1+4+9+16+25+36)/6 = 91/6 ≈ 15.17. Then Var(X) = 15.17 - 3.5² ≈ 2.92</div>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <h3>Problem 4: Expected Value of a Function</h3>
+            <p>A coin is flipped 3 times. Let X = number of heads. What is E[2X + 1]?</p>
+            <div class="probability-scenario">
+                Possible values of X: 0, 1, 2, 3<br>
+                P(X=0) = 1/8, P(X=1) = 3/8, P(X=2) = 3/8, P(X=3) = 1/8
+            </div>
+            <div class="answer-section">
+                <input type="number" id="answer4" placeholder="E[2X + 1]" step="0.01">
+                <button onclick="checkAnswer(4, 4)">Check Answer</button>
+                <button onclick="showHint(4)">Hint</button>
+                <div id="result4" class="result" style="display: none;"></div>
+                <div id="hint4" class="hint">First find E[X] = 0·(1/8) + 1·(3/8) + 2·(3/8) + 3·(1/8) = 1.5. Then E[2X + 1] = 2·E[X] + 1 = 4</div>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <h3>Problem 5: Geometric Distribution Expected Value</h3>
+            <p>A biased coin has probability p = 0.3 of heads. What is the expected number of flips until the first head appears?</p>
+            <div class="probability-scenario">
+                This follows a geometric distribution<br>
+                For geometric distribution: E[X] = 1/p
+            </div>
+            <div class="answer-section">
+                <input type="number" id="answer5" placeholder="Expected flips" step="0.01">
+                <button onclick="checkAnswer(5, 3.33)">Check Answer</button>
+                <button onclick="showHint(5)">Hint</button>
+                <div id="result5" class="result" style="display: none;"></div>
+                <div id="hint5" class="hint">For geometric distribution with success probability p = 0.3, E[X] = 1/p = 1/0.3 ≈ 3.33</div>
             </div>
         </div>
     </div>
@@ -168,44 +217,13 @@
             
             resultDiv.style.display = 'block';
             
-            if (userAnswer === correctAnswer) {
+            const tolerance = 0.1;
+            if (Math.abs(userAnswer - correctAnswer) <= tolerance) {
                 resultDiv.className = 'result correct';
                 resultDiv.textContent = '✅ Correct! Well done!';
             } else {
                 resultDiv.className = 'result incorrect';
                 resultDiv.textContent = `❌ Incorrect. The correct answer is ${correctAnswer}.`;
-            }
-        }
-        
-        function checkQuadratic() {
-            const answer1 = parseFloat(document.getElementById('answer2a').value);
-            const answer2 = parseFloat(document.getElementById('answer2b').value);
-            const resultDiv = document.getElementById('result2');
-            
-            resultDiv.style.display = 'block';
-            
-            if ((answer1 === 2 && answer2 === 3) || (answer1 === 3 && answer2 === 2)) {
-                resultDiv.className = 'result correct';
-                resultDiv.textContent = '✅ Correct! The solutions are x = 2 and x = 3.';
-            } else {
-                resultDiv.className = 'result incorrect';
-                resultDiv.textContent = '❌ Incorrect. The correct solutions are x = 2 and x = 3.';
-            }
-        }
-        
-        function checkSystem() {
-            const x = parseFloat(document.getElementById('answer3x').value);
-            const y = parseFloat(document.getElementById('answer3y').value);
-            const resultDiv = document.getElementById('result3');
-            
-            resultDiv.style.display = 'block';
-            
-            if (x === 3 && y === 2) {
-                resultDiv.className = 'result correct';
-                resultDiv.textContent = '✅ Correct! x = 3, y = 2';
-            } else {
-                resultDiv.className = 'result incorrect';
-                resultDiv.textContent = '❌ Incorrect. The correct solution is x = 3, y = 2.';
             }
         }
         

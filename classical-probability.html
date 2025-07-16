@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Statistics & Probability</title>
+    <title>Classical and Conditional Probability</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,30 +45,25 @@
         
         .problem {
             background: #f8f9fa;
-            border-left: 4px solid #fd7e14;
+            border-left: 4px solid #dc3545;
             padding: 20px;
             margin: 20px 0;
             border-radius: 5px;
         }
         
         .problem h3 {
-            color: #fd7e14;
+            color: #dc3545;
             margin-top: 0;
         }
         
-        .data-table {
+        .probability-scenario {
             background: white;
             border: 1px solid #ddd;
             border-radius: 5px;
             padding: 15px;
             margin: 15px 0;
-            text-align: center;
-        }
-        
-        .data-set {
-            font-weight: bold;
-            font-size: 1.1em;
-            color: #333;
+            font-style: italic;
+            line-height: 1.6;
         }
         
         .answer-section {
@@ -80,11 +75,11 @@
             border: 2px solid #ddd;
             border-radius: 5px;
             font-size: 16px;
-            width: 150px;
+            width: 200px;
         }
         
         button {
-            background: #fd7e14;
+            background: #dc3545;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -95,7 +90,7 @@
         }
         
         button:hover {
-            background: #e96500;
+            background: #c82333;
         }
         
         .result {
@@ -132,76 +127,90 @@
     <div class="container">
         <a href="index.html" class="back-button">← Back to Home</a>
         
-        <h1>📊 Statistics & Probability</h1>
+        <h1>♦ Classical and Conditional Probability</h1>
         
         <div class="problem">
-            <h3>Problem 1: Mean (Average)</h3>
-            <p>Find the mean of the following data set:</p>
-            <div class="data-table">
-                <div class="data-set">12, 15, 18, 22, 13, 16, 19</div>
+            <h3>Problem 1: Basic Probability</h3>
+            <p>A standard deck of 52 cards is shuffled. What is the probability of drawing a red card?</p>
+            <div class="probability-scenario">
+                Red cards: Hearts (13) + Diamonds (13) = 26 cards<br>
+                Total cards: 52
             </div>
             <div class="answer-section">
-                <input type="number" id="answer1" placeholder="Mean" step="0.01">
-                <button onclick="checkAnswer(1, 15)">Check Answer</button>
+                <input type="text" id="answer1" placeholder="Enter as fraction or decimal">
+                <button onclick="checkBasicProbability(1)">Check Answer</button>
                 <button onclick="showHint(1)">Hint</button>
                 <div id="result1" class="result" style="display: none;"></div>
-                <div id="hint1" class="hint">Mean = (sum of all values) ÷ (number of values). Add all numbers and divide by 7.</div>
+                <div id="hint1" class="hint">P(Red) = Number of red cards / Total number of cards = 26/52 = 1/2 = 0.5</div>
             </div>
         </div>
         
         <div class="problem">
-            <h3>Problem 2: Median</h3>
-            <p>Find the median of the following data set:</p>
-            <div class="data-table">
-                <div class="data-set">8, 12, 5, 19, 7, 15, 10, 9, 14</div>
+            <h3>Problem 2: Conditional Probability</h3>
+            <p>Given that a card drawn is red, what is the probability it's a heart?</p>
+            <div class="probability-scenario">
+                We know the card is red (26 possibilities)<br>
+                Hearts among red cards: 13<br>
+                P(Heart | Red) = P(Heart ∩ Red) / P(Red)
             </div>
             <div class="answer-section">
-                <input type="number" id="answer2" placeholder="Median">
-                <button onclick="checkAnswer(2, 10)">Check Answer</button>
+                <input type="text" id="answer2" placeholder="Enter as fraction or decimal">
+                <button onclick="checkBasicProbability(2)">Check Answer</button>
                 <button onclick="showHint(2)">Hint</button>
                 <div id="result2" class="result" style="display: none;"></div>
-                <div id="hint2" class="hint">First arrange in order: 5, 7, 8, 9, 10, 12, 14, 15, 19. The median is the middle value.</div>
+                <div id="hint2" class="hint">P(Heart | Red) = 13/26 = 1/2 = 0.5 (since half of the red cards are hearts)</div>
             </div>
         </div>
         
         <div class="problem">
-            <h3>Problem 3: Probability</h3>
-            <p>A bag contains 3 red balls, 5 blue balls, and 2 green balls. What is the probability of drawing a blue ball?</p>
+            <h3>Problem 3: Bayes' Theorem</h3>
+            <p>A medical test is 95% accurate for a disease that affects 1% of the population. If someone tests positive, what's the probability they have the disease?</p>
+            <div class="probability-scenario">
+                P(Disease) = 0.01<br>
+                P(Test+ | Disease) = 0.95<br>
+                P(Test+ | No Disease) = 0.05<br>
+                Find: P(Disease | Test+)
+            </div>
             <div class="answer-section">
-                <input type="text" id="answer3" placeholder="Enter as fraction (e.g., 1/2)">
-                <button onclick="checkProbability()">Check Answer</button>
+                <input type="number" id="answer3" placeholder="Probability (decimal)" step="0.001">
+                <button onclick="checkAnswer(3, 0.161)">Check Answer</button>
                 <button onclick="showHint(3)">Hint</button>
                 <div id="result3" class="result" style="display: none;"></div>
-                <div id="hint3" class="hint">Probability = (favorable outcomes) ÷ (total outcomes). How many blue balls vs total balls?</div>
+                <div id="hint3" class="hint">Use Bayes: P(D|T+) = P(T+|D)·P(D) / [P(T+|D)·P(D) + P(T+|¬D)·P(¬D)] = (0.95·0.01) / [0.95·0.01 + 0.05·0.99]</div>
             </div>
         </div>
         
         <div class="problem">
-            <h3>Problem 4: Standard Deviation (simplified)</h3>
-            <p>Find the range of the following data set:</p>
-            <div class="data-table">
-                <div class="data-set">25, 30, 22, 35, 28, 20, 33</div>
+            <h3>Problem 4: Independence</h3>
+            <p>Two fair dice are rolled. What is the probability that both show even numbers?</p>
+            <div class="probability-scenario">
+                Even numbers on a die: 2, 4, 6 (3 out of 6)<br>
+                Events are independent<br>
+                P(Both even) = P(First even) × P(Second even)
             </div>
-            <p><em>Range = Maximum value - Minimum value</em></p>
             <div class="answer-section">
-                <input type="number" id="answer4" placeholder="Range">
-                <button onclick="checkAnswer(4, 15)">Check Answer</button>
+                <input type="text" id="answer4" placeholder="Enter as fraction or decimal">
+                <button onclick="checkBasicProbability(4)">Check Answer</button>
                 <button onclick="showHint(4)">Hint</button>
                 <div id="result4" class="result" style="display: none;"></div>
-                <div id="hint4" class="hint">Find the largest number (35) and smallest number (20), then subtract: 35 - 20 = ?</div>
+                <div id="hint4" class="hint">P(Even) = 3/6 = 1/2 for each die. P(Both even) = 1/2 × 1/2 = 1/4 = 0.25</div>
             </div>
         </div>
         
         <div class="problem">
-            <h3>Problem 5: Combinations</h3>
-            <p>In how many ways can you choose 3 students from a class of 8 students?</p>
-            <p><em>Use the combination formula: C(n,r) = n! ÷ (r!(n-r)!)</em></p>
+            <h3>Problem 5: Law of Total Probability</h3>
+            <p>A factory has 3 machines. Machine A produces 50% (2% defective), Machine B produces 30% (3% defective), Machine C produces 20% (5% defective). What's the overall defect rate?</p>
+            <div class="probability-scenario">
+                P(A) = 0.5, P(Defect|A) = 0.02<br>
+                P(B) = 0.3, P(Defect|B) = 0.03<br>
+                P(C) = 0.2, P(Defect|C) = 0.05
+            </div>
             <div class="answer-section">
-                <input type="number" id="answer5" placeholder="Number of ways">
-                <button onclick="checkAnswer(5, 56)">Check Answer</button>
+                <input type="number" id="answer5" placeholder="Defect rate (decimal)" step="0.001">
+                <button onclick="checkAnswer(5, 0.029)">Check Answer</button>
                 <button onclick="showHint(5)">Hint</button>
                 <div id="result5" class="result" style="display: none;"></div>
-                <div id="hint5" class="hint">C(8,3) = 8! ÷ (3! × 5!) = (8 × 7 × 6) ÷ (3 × 2 × 1) = 336 ÷ 6 = 56</div>
+                <div id="hint5" class="hint">P(Defect) = P(A)·P(D|A) + P(B)·P(D|B) + P(C)·P(D|C) = 0.5·0.02 + 0.3·0.03 + 0.2·0.05 = 0.029</div>
             </div>
         </div>
     </div>
@@ -223,21 +232,36 @@
             }
         }
         
-        function checkProbability() {
-            const userAnswer = document.getElementById('answer3').value.trim();
-            const resultDiv = document.getElementById('result3');
+        function checkBasicProbability(problemNum) {
+            const userAnswer = document.getElementById(`answer${problemNum}`).value.trim().toLowerCase();
+            const resultDiv = document.getElementById(`result${problemNum}`);
             
             resultDiv.style.display = 'block';
             
-            const validAnswers = ['5/10', '1/2', '0.5', '50%'];
-            const normalizedAnswer = userAnswer.toLowerCase().replace(/\s/g, '');
+            let correctAnswers = [];
+            let correctText = '';
             
-            if (validAnswers.some(answer => normalizedAnswer === answer.toLowerCase())) {
+            switch(problemNum) {
+                case 1:
+                    correctAnswers = ['1/2', '0.5', '26/52', '13/26'];
+                    correctText = '1/2 or 0.5';
+                    break;
+                case 2:
+                    correctAnswers = ['1/2', '0.5', '13/26'];
+                    correctText = '1/2 or 0.5';
+                    break;
+                case 4:
+                    correctAnswers = ['1/4', '0.25', '9/36'];
+                    correctText = '1/4 or 0.25';
+                    break;
+            }
+            
+            if (correctAnswers.some(answer => userAnswer === answer)) {
                 resultDiv.className = 'result correct';
-                resultDiv.textContent = '✅ Correct! 5 blue balls out of 10 total balls = 5/10 = 1/2 = 0.5';
+                resultDiv.textContent = '✅ Correct! Well done!';
             } else {
                 resultDiv.className = 'result incorrect';
-                resultDiv.textContent = '❌ Incorrect. The correct answer is 5/10 or 1/2 or 0.5';
+                resultDiv.textContent = `❌ Incorrect. The correct answer is ${correctText}.`;
             }
         }
         

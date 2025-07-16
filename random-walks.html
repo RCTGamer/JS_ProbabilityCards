@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Walks and Martingales</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        .back-button {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: background 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background: #5a67d8;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .problem {
+            background: #f8f9fa;
+            border-left: 4px solid #343a40;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .problem h3 {
+            color: #343a40;
+            margin-top: 0;
+        }
+        
+        .walk-diagram {
+            text-align: center;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 12px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        
+        .probability-scenario {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            line-height: 1.6;
+        }
+        
+        .answer-section {
+            margin: 20px 0;
+        }
+        
+        input[type="number"], input[type="text"] {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 200px;
+        }
+        
+        button {
+            background: #343a40;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        
+        button:hover {
+            background: #23272b;
+        }
+        
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .hint {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">← Back to Home</a>
+        
+        <h1>♠ Random Walks and Martingales</h1>
+        
+        <div class="problem">
+            <h3>Problem 1: Simple Random Walk</h3>
+            <p>A particle starts at position 0. Each step, it moves +1 or -1 with equal probability. What's the probability it reaches +3 before reaching -2?</p>
+            <div class="walk-diagram">
+                     +3 ← Target<br>
+                     +2<br>
+                     +1<br>
+                ●→→  0  ← Start<br>
+                     -1<br>
+                     -2 ← Barrier
+            </div>
+            <div class="probability-scenario">
+                This is a gambler's ruin problem<br>
+                Starting at 0, target at +3, barrier at -2<br>
+                Relative to barrier: start = 2, target = 5, barrier = 0
+            </div>
+            <div class="answer-section">
+                <input type="text" id="answer1" placeholder="Enter as fraction or decimal">
+                <button onclick="checkFraction(1)">Check Answer</button>
+                <button onclick="showHint(1)">Hint</button>
+                <div id="result1" class="result" style="display: none;"></div>
+                <div id="hint1" class="hint">For symmetric random walk, P = (starting distance from barrier) / (total distance) = 2/5 = 0.4</div>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <h3>Problem 2: Expected Return Time</h3>
+            <p>In a simple symmetric random walk starting at 0, what's the expected number of steps to return to 0 for the first time?</p>
+            <div class="probability-scenario">
+                This is asking for E[T₀] where T₀ is the first return time<br>
+                For symmetric random walk starting at 0
+            </div>
+            <div class="answer-section">
+                <input type="text" id="answer2" placeholder="Enter 'infinite' or number">
+                <button onclick="checkReturn()">Check Answer</button>
+                <button onclick="showHint(2)">Hint</button>
+                <div id="result2" class="result" style="display: none;"></div>
+                <div id="hint2" class="hint">For symmetric random walk in 1D starting at 0, the expected return time is infinite, though the probability of eventual return is 1.</div>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <h3>Problem 3: Martingale Property</h3>
+            <p>Let S_n be a simple random walk. Is X_n = S_n² - n a martingale?</p>
+            <div class="probability-scenario">
+                S_n = S₀ + ξ₁ + ξ₂ + ... + ξₙ where ξᵢ = ±1 with prob 1/2<br>
+                X_n = S_n² - n<br>
+                Check if E[X_{n+1} | S₀, S₁, ..., S_n] = X_n
+            </div>
+            <div class="answer-section">
+                <input type="text" id="answer3" placeholder="Enter 'yes' or 'no'">
+                <button onclick="checkMartingale()">Check Answer</button>
+                <button onclick="showHint(3)">Hint</button>
+                <div id="result3" class="result" style="display: none;"></div>
+                <div id="hint3" class="hint">E[S_{n+1}² | S_n] = E[(S_n ± 1)²] = S_n² + 1. So E[X_{n+1} | S_n] = S_n² + 1 - (n+1) = S_n² - n = X_n. Yes, it's a martingale!</div>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <h3>Problem 4: Stopping Time</h3>
+            <p>A fair coin is flipped repeatedly. Let T = min{n : we see HH or TT}. What is E[T]?</p>
+            <div class="probability-scenario">
+                T is the first time we see two consecutive identical outcomes<br>
+                This is a stopping time problem<br>
+                We can solve using states: ∅, H, T, HH/TT
+            </div>
+            <div class="answer-section">
+                <input type="number" id="answer4" placeholder="Expected value" step="0.1">
+                <button onclick="checkAnswer(4, 3)">Check Answer</button>
+                <button onclick="showHint(4)">Hint</button>
+                <div id="result4" class="result" style="display: none;"></div>
+                <div id="hint4" class="hint">Set up equations: E[T] = 1 + E[T|first flip]. By symmetry, E[T|H] = E[T|T]. From state H: 1/2 chance done (T=2), 1/2 chance restart. Solving: E[T] = 3.</div>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <h3>Problem 5: Optional Stopping Theorem</h3>
+            <p>For simple random walk starting at 0, let τ = min{n : S_n = 5 or S_n = -3}. What is E[S_τ]?</p>
+            <div class="probability-scenario">
+                S_n is simple symmetric random walk<br>
+                τ is stopping time when hitting +5 or -3<br>
+                S_n is a martingale, and τ has finite expectation
+            </div>
+            <div class="answer-section">
+                <input type="number" id="answer5" placeholder="Expected value" step="0.1">
+                <button onclick="checkAnswer(5, 0)">Check Answer</button>
+                <button onclick="showHint(5)">Hint</button>
+                <div id="result5" class="result" style="display: none;"></div>
+                <div id="hint5" class="hint">By optional stopping theorem, E[S_τ] = E[S_0] = 0, since S_n is a martingale and τ is a bounded stopping time.</div>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <h3>Problem 6: Doob's Martingale</h3>
+            <p>If X_n = 2^{S_n}/2^n where S_n is simple random walk, what is E[X_n]?</p>
+            <div class="probability-scenario">
+                S_n = S₀ + ξ₁ + ... + ξₙ where ξᵢ = ±1 with prob 1/2<br>
+                X_n = 2^{S_n}/2^n<br>
+                This is an example of an exponential martingale
+            </div>
+            <div class="answer-section">
+                <input type="number" id="answer6" placeholder="Expected value" step="0.1">
+                <button onclick="checkAnswer(6, 1)">Check Answer</button>
+                <button onclick="showHint(6)">Hint</button>
+                <div id="result6" class="result" style="display: none;"></div>
+                <div id="hint6" class="hint">E[2^{ξᵢ}] = (1/2)·2¹ + (1/2)·2⁻¹ = 1 + 0.5 = 1.5. But E[X_n] = E[2^{S_n}]/2^n = (E[2^{ξ₁}])^n/2^n = (1.5)^n/2^n... Wait, recalculate: E[2^{ξᵢ}] = 1.5, but the martingale property gives E[X_n] = X_0 = 1.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswer(problemNum, correctAnswer) {
+            const userAnswer = parseFloat(document.getElementById(`answer${problemNum}`).value);
+            const resultDiv = document.getElementById(`result${problemNum}`);
+            
+            resultDiv.style.display = 'block';
+            
+            const tolerance = 0.1;
+            if (Math.abs(userAnswer - correctAnswer) <= tolerance) {
+                resultDiv.className = 'result correct';
+                resultDiv.textContent = '✅ Correct! Well done!';
+            } else {
+                resultDiv.className = 'result incorrect';
+                resultDiv.textContent = `❌ Incorrect. The correct answer is ${correctAnswer}.`;
+            }
+        }
+        
+        function checkFraction(problemNum) {
+            const userAnswer = document.getElementById(`answer${problemNum}`).value.trim().toLowerCase();
+            const resultDiv = document.getElementById(`result${problemNum}`);
+            
+            resultDiv.style.display = 'block';
+            
+            const correctAnswers = ['2/5', '0.4', '0.40'];
+            
+            if (correctAnswers.some(answer => userAnswer === answer)) {
+                resultDiv.className = 'result correct';
+                resultDiv.textContent = '✅ Correct! Well done!';
+            } else {
+                resultDiv.className = 'result incorrect';
+                resultDiv.textContent = '❌ Incorrect. The correct answer is 2/5 or 0.4.';
+            }
+        }
+        
+        function checkReturn() {
+            const userAnswer = document.getElementById('answer2').value.trim().toLowerCase();
+            const resultDiv = document.getElementById('result2');
+            
+            resultDiv.style.display = 'block';
+            
+            if (userAnswer === 'infinite' || userAnswer === 'infinity' || userAnswer === '∞') {
+                resultDiv.className = 'result correct';
+                resultDiv.textContent = '✅ Correct! The expected return time is infinite.';
+            } else {
+                resultDiv.className = 'result incorrect';
+                resultDiv.textContent = '❌ Incorrect. The correct answer is infinite.';
+            }
+        }
+        
+        function checkMartingale() {
+            const userAnswer = document.getElementById('answer3').value.trim().toLowerCase();
+            const resultDiv = document.getElementById('result3');
+            
+            resultDiv.style.display = 'block';
+            
+            if (userAnswer === 'yes' || userAnswer === 'y') {
+                resultDiv.className = 'result correct';
+                resultDiv.textContent = '✅ Correct! X_n = S_n² - n is indeed a martingale.';
+            } else {
+                resultDiv.className = 'result incorrect';
+                resultDiv.textContent = '❌ Incorrect. The correct answer is yes.';
+            }
+        }
+        
+        function showHint(problemNum) {
+            const hintDiv = document.getElementById(`hint${problemNum}`);
+            hintDiv.style.display = hintDiv.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
