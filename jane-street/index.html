@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jane Street Probability Playing Cards</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: black;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .back-button {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            transition: background 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .back-button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        h1 {
+            color: white;
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            color: #e0e0e0;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+        }
+        
+        .jane-street-info {
+            background: black;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .jane-street-info h3 {
+            color: white;
+            margin-top: 0;
+            font-size: 1.4em;
+        }
+        
+        .jane-street-info p {
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        .display-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .display-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .display-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+        
+        .display-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        
+        .display-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        /* Card suit colors with important flags */
+        .display-card:nth-child(1) .display-icon { 
+            color: #000 !important; 
+            text-shadow: 0 0 0 #000;
+        } /* Clubs - Black */
+        .display-card:nth-child(2) .display-icon { 
+            color: #dc3545 !important; 
+            text-shadow: 0 0 0 #dc3545;
+        } /* Diamonds - Red */
+        .display-card:nth-child(3) .display-icon { 
+            color: #dc3545 !important; 
+            text-shadow: 0 0 0 #dc3545;
+        } /* Hearts - Red */
+        .display-card:nth-child(4) .display-icon { 
+            color: #000 !important; 
+            text-shadow: 0 0 0 #000;
+        } /* Spades - Black */
+        
+        .display-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: black;
+            margin-bottom: 10px;
+        }
+        
+        .display-description {
+            color: #0a0a0a;
+            line-height: 1.5;
+        }
+        
+        .difficulty {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        .easy { background: #4CAF50; color: white; }
+        .medium { background: #FF9800; color: white; }
+        .hard { background: #F44336; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../main.html" class="back-button">← Back to RCT Math Center</a>
+        
+        <h1>🂠 Jane Street Probability Playing Cards</h1>
+        <p class="subtitle">Master probability theory through interactive card-themed challenges</p>
+        
+        <div class="jane-street-info">
+            <h3>About This Collection</h3>
+            <p>Inspired by the rigorous quantitative challenges at Jane Street Capital, these probability problems use playing card themes to explore advanced mathematical concepts. Each suit represents a different area of probability theory, from basic concepts to sophisticated stochastic processes used in quantitative finance.</p>
+        </div>
+        
+        <div class="display-grid">
+            <a href="expectation.html" class="display-card">
+                <div class="display-icon">♣</div>
+                <div class="display-title">Expectation and Linearity</div>
+                <div class="display-description">Expected values, linearity of expectation, and variance calculations</div>
+                <span class="difficulty medium">Medium</span>
+            </a>
+            
+            <a href="classical-probability.html" class="display-card">
+                <div class="display-icon">♦</div>
+                <div class="display-title">Classical and Conditional Probability</div>
+                <div class="display-description">Basic probability, Bayes' theorem, and conditional events</div>
+                <span class="difficulty easy">Easy</span>
+            </a>
+            
+            <a href="geometric-probability.html" class="display-card">
+                <div class="display-icon">♥</div>
+                <div class="display-title">Geometric Probability</div>
+                <div class="display-description">Area-based probability and geometric distributions</div>
+                <span class="difficulty hard">Hard</span>
+            </a>
+            
+            <a href="random-walks.html" class="display-card">
+                <div class="display-icon">♠</div>
+                <div class="display-title">Random Walks and Martingales</div>
+                <div class="display-description">Stochastic processes and martingale theory</div>
+                <span class="difficulty hard">Hard</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

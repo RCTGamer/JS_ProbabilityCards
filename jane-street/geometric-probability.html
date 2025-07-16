@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classical and Conditional Probability</title>
+    <title>Geometric Probability</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,15 +45,26 @@
         
         .problem {
             background: #f8f9fa;
-            border-left: 4px solid #dc3545;
+            border-left: 4px solid #e91e63;
             padding: 20px;
             margin: 20px 0;
             border-radius: 5px;
         }
         
         .problem h3 {
-            color: #dc3545;
+            color: #e91e63;
             margin-top: 0;
+        }
+        
+        .geometric-diagram {
+            text-align: center;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 14px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
         }
         
         .probability-scenario {
@@ -79,7 +90,7 @@
         }
         
         button {
-            background: #dc3545;
+            background: #e91e63;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -90,7 +101,7 @@
         }
         
         button:hover {
-            background: #c82333;
+            background: #c2185b;
         }
         
         .result {
@@ -125,92 +136,120 @@
 </head>
 <body>
     <div class="container">
-        <a href="index.html" class="back-button">← Back to Home</a>
+        <a href="index.html" class="back-button">← Back to Jane Street Cards</a>
         
-        <h1>♦ Classical and Conditional Probability</h1>
+        <h1>♥ Geometric Probability</h1>
         
         <div class="problem">
-            <h3>Problem 1: Basic Probability</h3>
-            <p>A standard deck of 52 cards is shuffled. What is the probability of drawing a red card?</p>
+            <h3>Problem 1: Circle in Square</h3>
+            <p>A circle with radius 3 is inscribed in a square. A point is randomly chosen in the square. What's the probability it lands in the circle?</p>
+            <div class="geometric-diagram">
+                ┌─────────┐<br>
+                │   ○○○   │<br>
+                │  ○○○○○  │<br>
+                │ ○○○●○○○ │ ← Square side = 6<br>
+                │  ○○○○○  │<br>
+                │   ○○○   │<br>
+                └─────────┘
+            </div>
             <div class="probability-scenario">
-                Red cards: Hearts (13) + Diamonds (13) = 26 cards<br>
-                Total cards: 52
+                Circle radius = 3, so area = π × 3² = 9π<br>
+                Square side = 6, so area = 6² = 36<br>
+                P = Circle area / Square area
             </div>
             <div class="answer-section">
-                <input type="text" id="answer1" placeholder="Enter as fraction or decimal">
-                <button onclick="checkBasicProbability(1)">Check Answer</button>
+                <input type="number" id="answer1" placeholder="Probability (decimal)" step="0.01">
+                <button onclick="checkAnswer(1, 0.785)">Check Answer</button>
                 <button onclick="showHint(1)">Hint</button>
                 <div id="result1" class="result" style="display: none;"></div>
-                <div id="hint1" class="hint">P(Red) = Number of red cards / Total number of cards = 26/52 = 1/2 = 0.5</div>
+                <div id="hint1" class="hint">P = (9π)/36 = π/4 ≈ 0.785</div>
             </div>
         </div>
         
         <div class="problem">
-            <h3>Problem 2: Conditional Probability</h3>
-            <p>Given that a card drawn is red, what is the probability it's a heart?</p>
+            <h3>Problem 2: Dartboard Probability</h3>
+            <p>A dartboard has concentric circles with radii 2, 4, and 6. What's the probability of hitting the middle ring (between radii 2 and 4)?</p>
+            <div class="geometric-diagram">
+                      ●●●●●●●<br>
+                    ●●○○○○○●●<br>
+                   ●●○○░○○○●●<br>
+                   ●●○○░○○○●●  ← Outer ring<br>
+                   ●●○○○○○○●●  ← Middle ring<br>
+                    ●●○○○○○●●   ← Inner circle<br>
+                      ●●●●●●●
+            </div>
             <div class="probability-scenario">
-                We know the card is red (26 possibilities)<br>
-                Hearts among red cards: 13<br>
-                P(Heart | Red) = P(Heart ∩ Red) / P(Red)
+                Total area = π × 6² = 36π<br>
+                Middle ring area = π × 4² - π × 2² = 16π - 4π = 12π
             </div>
             <div class="answer-section">
                 <input type="text" id="answer2" placeholder="Enter as fraction or decimal">
-                <button onclick="checkBasicProbability(2)">Check Answer</button>
+                <button onclick="checkGeometric(2)">Check Answer</button>
                 <button onclick="showHint(2)">Hint</button>
                 <div id="result2" class="result" style="display: none;"></div>
-                <div id="hint2" class="hint">P(Heart | Red) = 13/26 = 1/2 = 0.5 (since half of the red cards are hearts)</div>
+                <div id="hint2" class="hint">P = 12π/36π = 12/36 = 1/3 ≈ 0.333</div>
             </div>
         </div>
         
         <div class="problem">
-            <h3>Problem 3: Bayes' Theorem</h3>
-            <p>A medical test is 95% accurate for a disease that affects 1% of the population. If someone tests positive, what's the probability they have the disease?</p>
+            <h3>Problem 3: Buffon's Needle Problem (Simplified)</h3>
+            <p>Parallel lines are 4 units apart. A needle of length 2 is dropped randomly. What's the probability it crosses a line?</p>
             <div class="probability-scenario">
-                P(Disease) = 0.01<br>
-                P(Test+ | Disease) = 0.95<br>
-                P(Test+ | No Disease) = 0.05<br>
-                Find: P(Disease | Test+)
+                Line spacing = 4 units<br>
+                Needle length = 2 units<br>
+                Classical result: P = (2 × length) / (π × spacing)
             </div>
             <div class="answer-section">
                 <input type="number" id="answer3" placeholder="Probability (decimal)" step="0.001">
-                <button onclick="checkAnswer(3, 0.161)">Check Answer</button>
+                <button onclick="checkAnswer(3, 0.318)">Check Answer</button>
                 <button onclick="showHint(3)">Hint</button>
                 <div id="result3" class="result" style="display: none;"></div>
-                <div id="hint3" class="hint">Use Bayes: P(D|T+) = P(T+|D)·P(D) / [P(T+|D)·P(D) + P(T+|¬D)·P(¬D)] = (0.95·0.01) / [0.95·0.01 + 0.05·0.99]</div>
+                <div id="hint3" class="hint">P = (2 × 2)/(π × 4) = 4/(4π) = 1/π ≈ 0.318</div>
             </div>
         </div>
         
         <div class="problem">
-            <h3>Problem 4: Independence</h3>
-            <p>Two fair dice are rolled. What is the probability that both show even numbers?</p>
+            <h3>Problem 4: Triangle Point Selection</h3>
+            <p>In a triangle with vertices at (0,0), (4,0), and (0,3), what's the probability a random point has y-coordinate > 1?</p>
+            <div class="geometric-diagram">
+                │<br>
+                │  ○<br>
+                3  ○○<br>
+                │  ○○○<br>
+                2  ○○○○<br>
+                │  ░░░░  ← y > 1 region<br>
+                1  ░░░░░<br>
+                │  ░░░░░░<br>
+                0──┴─────┴──<br>
+                   0  2  4
+            </div>
             <div class="probability-scenario">
-                Even numbers on a die: 2, 4, 6 (3 out of 6)<br>
-                Events are independent<br>
-                P(Both even) = P(First even) × P(Second even)
+                Triangle area = (1/2) × base × height = (1/2) × 4 × 3 = 6<br>
+                Need to find area where y > 1
             </div>
             <div class="answer-section">
                 <input type="text" id="answer4" placeholder="Enter as fraction or decimal">
-                <button onclick="checkBasicProbability(4)">Check Answer</button>
+                <button onclick="checkGeometric(4)">Check Answer</button>
                 <button onclick="showHint(4)">Hint</button>
                 <div id="result4" class="result" style="display: none;"></div>
-                <div id="hint4" class="hint">P(Even) = 3/6 = 1/2 for each die. P(Both even) = 1/2 × 1/2 = 1/4 = 0.25</div>
+                <div id="hint4" class="hint">Area where y > 1 is a triangle with vertices (0,1), (8/3,1), (0,3). Area = (1/2) × (8/3) × 2 = 8/3. P = (8/3)/6 = 4/9</div>
             </div>
         </div>
         
         <div class="problem">
-            <h3>Problem 5: Law of Total Probability</h3>
-            <p>A factory has 3 machines. Machine A produces 50% (2% defective), Machine B produces 30% (3% defective), Machine C produces 20% (5% defective). What's the overall defect rate?</p>
+            <h3>Problem 5: Meeting Time Problem</h3>
+            <p>Two people agree to meet between 2:00 and 3:00 PM. Each arrives at a random time and waits 15 minutes. What's the probability they meet?</p>
             <div class="probability-scenario">
-                P(A) = 0.5, P(Defect|A) = 0.02<br>
-                P(B) = 0.3, P(Defect|B) = 0.03<br>
-                P(C) = 0.2, P(Defect|C) = 0.05
+                Let x = arrival time of person 1 (0 to 60 minutes)<br>
+                Let y = arrival time of person 2 (0 to 60 minutes)<br>
+                They meet if |x - y| ≤ 15
             </div>
             <div class="answer-section">
-                <input type="number" id="answer5" placeholder="Defect rate (decimal)" step="0.001">
-                <button onclick="checkAnswer(5, 0.029)">Check Answer</button>
+                <input type="number" id="answer5" placeholder="Probability (decimal)" step="0.01">
+                <button onclick="checkAnswer(5, 0.44)">Check Answer</button>
                 <button onclick="showHint(5)">Hint</button>
                 <div id="result5" class="result" style="display: none;"></div>
-                <div id="hint5" class="hint">P(Defect) = P(A)·P(D|A) + P(B)·P(D|B) + P(C)·P(D|C) = 0.5·0.02 + 0.3·0.03 + 0.2·0.05 = 0.029</div>
+                <div id="hint5" class="hint">Total area = 60² = 3600. Meeting region area = 3600 - 2×(45²/2) = 3600 - 2025 = 1575. P = 1575/3600 ≈ 0.44</div>
             </div>
         </div>
     </div>
@@ -222,7 +261,7 @@
             
             resultDiv.style.display = 'block';
             
-            const tolerance = 0.01;
+            const tolerance = 0.02;
             if (Math.abs(userAnswer - correctAnswer) <= tolerance) {
                 resultDiv.className = 'result correct';
                 resultDiv.textContent = '✅ Correct! Well done!';
@@ -232,7 +271,7 @@
             }
         }
         
-        function checkBasicProbability(problemNum) {
+        function checkGeometric(problemNum) {
             const userAnswer = document.getElementById(`answer${problemNum}`).value.trim().toLowerCase();
             const resultDiv = document.getElementById(`result${problemNum}`);
             
@@ -242,21 +281,17 @@
             let correctText = '';
             
             switch(problemNum) {
-                case 1:
-                    correctAnswers = ['1/2', '0.5', '26/52', '13/26'];
-                    correctText = '1/2 or 0.5';
-                    break;
                 case 2:
-                    correctAnswers = ['1/2', '0.5', '13/26'];
-                    correctText = '1/2 or 0.5';
+                    correctAnswers = ['1/3', '0.333', '12/36'];
+                    correctText = '1/3 or 0.333';
                     break;
                 case 4:
-                    correctAnswers = ['1/4', '0.25', '9/36'];
-                    correctText = '1/4 or 0.25';
+                    correctAnswers = ['4/9', '0.444', '8/18'];
+                    correctText = '4/9 or 0.444';
                     break;
             }
             
-            if (correctAnswers.some(answer => userAnswer === answer)) {
+            if (correctAnswers.some(answer => Math.abs(parseFloat(userAnswer) - parseFloat(answer)) < 0.01 || userAnswer === answer)) {
                 resultDiv.className = 'result correct';
                 resultDiv.textContent = '✅ Correct! Well done!';
             } else {

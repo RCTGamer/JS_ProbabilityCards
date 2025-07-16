@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html l        .back-button {
+            display: inline-block;
+            background: black;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: background 0.3s ease;
+            border: 2px solid white;
+        }
+        
+        .back-button:hover {
+            background: #666;
+        }ad>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expectation and Linearity</title>
+    
+    <!-- MathJax for LaTeX rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: black;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: black;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        .back-button {
+            display: inline-block;
+            background: black;
+            color: white;
+            border: 1px solid #666;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: background 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background: #666;
+        }
+        
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .problem {
+            background: #1a1a1a;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            color: white;
+        }
+        
+        .problem h3 {
+            color: #28a745;
+            margin-top: 0;
+        }
+        
+        .probability-scenario {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        
+        .answer-section {
+            margin: 20px 0;
+        }
+        
+        input[type="number"], input[type="text"] {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 200px;
+        }
+        
+        button {
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        
+        button:hover {
+            background: #218838;
+        }
+        
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">← Back to Jane Street Cards</a>
+        
+        <h1>♣ Expectation and Linearity</h1>
+        
+        <div class="problem">
+            <h3>A♣</h3>
+            <p>Assume that <strong>A</strong> = 1, <strong>J</strong> = 11, <strong>Q</strong> = 12, 
+                <strong>K</strong> = 13. <br><br>
+                a) What is the expected value of a randomly drawn card from a standard deck?<br><br>
+                b) If you draw two cards randomly, what is, the expected value of their sum?</p>
+            <div class="answer-section">
+                <input type="number" id="answer1a" placeholder="a)">
+                <button onclick="checkAnswer('1a', 7)">Check Answer</button>
+                <div id="result1a" class="result" style="display: none;"></div>
+            </div>
+            <div class="answer-section">
+                <input type="number" id="answer1b" placeholder="b)">
+                <button onclick="checkAnswer('1b', 14)">Check Answer</button>
+                <div id="result1b" class="result" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3>2♣</h3>
+            <p> A standard deck of cards is shuffled. On average, how many cards will you have to draw the 
+                <strong>A♣</strong> if: <br><br>
+                a) You draw with replacement? <br><br>
+                b) You draw without replacement? </p>
+            <div class="answer-section">
+                <input type="number" id="answer2a" placeholder="a)">
+                <button onclick="checkAnswer('2a', 7)">Check Answer</button>
+                <div id="result2a" class="result" style="display: none;"></div>
+            </div>
+            <div class="answer-section">
+                <input type="number" id="answer2b" placeholder="b)">
+                <button onclick="checkAnswer('2b', 14)">Check Answer</button>
+                <div id="result2b" class="result" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3>3♣</h3>
+            <p>20 people are each holding a playing card. These cards are all shuffled and redistributed randomly.
+                 What is the expected number of people who get their original card back?</p>
+            <div class="answer-section">
+                <input type="number" id="answer3" placeholder="Answer">
+                <button onclick="checkAnswer('3', 7)">Check Answer</button>
+                <div id="result3" class="result" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3>4♣</h3>
+            <p>
+                10 people are sitting in a circle. Each has their own deck of cards. 
+                They each shuffle their deck and draw a random card. If the card is red, the holder turns to shake 
+                hands with the player to their left. If the card is black, they turn to shake hands with the person 
+                to their right. How many handshakes are expected to succeed?
+            </p>
+            <div class="answer-section">
+                <input type="number" id="answer4" placeholder="Answer" step="0.01">
+                <button onclick="checkAnswer('4', 7)">Check Answer</button>
+                <div id="result4" class="result" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3>5♣</h3>
+            <p>
+                While inserting two jokers into a deck of cards, we unfortunately drop the <strong>5♣</strong> on the floor.
+                We then shuffle the deck. What's the expected number of cards between the two jokers?
+            </p>
+            <div class="answer-section">
+                <input type="number" id="answer5" placeholder="Answer">
+                <button onclick="checkAnswer('5', 7)">Check Answer</button>
+                <div id="result5" class="result" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3>6♣</h3>
+            <p>
+                You have a pile of a very, very large number of cards (equal numbers of each suit).
+                How many cards on average do you have to draw before you have at least one card of each suit?
+            </p>
+            <div class="answer-section">
+                <input type="number" id="answer5" placeholder="Answer">
+                <button onclick="checkAnswer('6', 7)">Check Answer</button>
+                <div id="result6" class="result" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3>7♣</h3>
+            <p>
+                While showing off a fancy shuffling trick
+            </p>
+            <div class="answer-section">
+                <input type="number" id="answer5" placeholder="Answer">
+                <button onclick="checkAnswer('7', 7)">Check Answer</button>
+                <div id="result6" class="result" style="display: none;"></div>
+            </div>
+        </div>
+
+
+
+        <div class="problem">
+            <h3>7♣</h3>
+            <p>A biased coin with P(heads) = 0.4 is flipped until 3 heads appear. What is the expected number of flips?</p>
+            <div class="probability-scenario">
+                This follows a negative binomial distribution<br>
+                We want 3 successes with probability p = 0.4 per trial
+            </div>
+            <div class="answer-section">
+                <input type="number" id="answer7" placeholder="Expected flips" step="0.01">
+                <button onclick="checkAnswer(7, 7.5)">Check Answer</button>
+                <button onclick="showHint(7)">Hint</button>
+                <div id="result7" class="result" style="display: none;"></div>
+                <div id="hint7" class="hint">For negative binomial with r successes and probability p: E[X] = r/p = 3/0.4 = 7.5</div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3>8♣</h3>
+            <p>Two fair dice are rolled repeatedly. What is the expected number of rolls until the sum equals 7?</p>
+            <div class="probability-scenario">
+                Probability of sum = 7 is 6/36 = 1/6<br>
+                This follows a geometric distribution
+            </div>
+            <div class="answer-section">
+                <input type="number" id="answer8" placeholder="Expected rolls" step="0.01">
+                <button onclick="checkAnswer(8, 6)">Check Answer</button>
+                <button onclick="showHint(8)">Hint</button>
+                <div id="result8" class="result" style="display: none;"></div>
+                <div id="hint8" class="hint">Ways to get sum=7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1). P(sum=7) = 6/36 = 1/6. E[X] = 1/p = 6</div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3>9♣</h3>
+            <p>An urn has 5 white and 3 black balls. Balls are drawn with replacement until a black ball appears. What is the expected number of draws?</p>
+            <div class="probability-scenario">
+                Probability of black ball = 3/8<br>
+                Drawing with replacement follows geometric distribution
+            </div>
+            <div class="answer-section">
+                <input type="number" id="answer9" placeholder="Expected draws" step="0.01">
+                <button onclick="checkAnswer(9, 2.67)">Check Answer</button>
+                <button onclick="showHint(9)">Hint</button>
+                <div id="result9" class="result" style="display: none;"></div>
+                <div id="hint9" class="hint">With replacement, P(black) = 3/8 each draw. E[X] = 1/p = 1/(3/8) = 8/3 ≈ 2.67</div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3>10♣</h3>
+            <p>A random variable X follows Poisson(λ=4). What is E[X²]?</p>
+            <div class="probability-scenario">
+                For Poisson distribution: E[X] = λ and Var(X) = λ<br>
+                Use the formula: E[X²] = Var(X) + (E[X])²
+            </div>
+            <div class="answer-section">
+                <input type="number" id="answer10" placeholder="E[X²]" step="0.01">
+                <button onclick="checkAnswer(10, 20)">Check Answer</button>
+                <button onclick="showHint(10)">Hint</button>
+                <div id="result10" class="result" style="display: none;"></div>
+                <div id="hint10" class="hint">For Poisson(4): E[X] = 4, Var(X) = 4. Therefore E[X²] = Var(X) + (E[X])² = 4 + 16 = 20</div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3>J♣</h3>
+            <p>A gambler wins $3 with probability 0.3 and loses $2 with probability 0.7. What is the expected value per game?</p>
+            <div class="probability-scenario">
+                Win $3 with P = 0.3<br>
+                Lose $2 with P = 0.7
+            </div>
+            <div class="answer-section">
+                <input type="number" id="answer11" placeholder="Expected value" step="0.01">
+                <button onclick="checkAnswer(11, -0.5)">Check Answer</button>
+                <button onclick="showHint(11)">Hint</button>
+                <div id="result11" class="result" style="display: none;"></div>
+                <div id="hint11" class="hint">E[X] = 3×0.3 + (-2)×0.7 = 0.9 - 1.4 = -0.5</div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3>Q♣</h3>
+            <p>A box contains tickets numbered 1 to 100. If you draw one ticket randomly, what is the expected value of the number?</p>
+            <div class="probability-scenario">
+                Uniform distribution over {1, 2, 3, ..., 100}<br>
+                Each number has probability 1/100
+            </div>
+            <div class="answer-section">
+                <input type="number" id="answer12" placeholder="Expected value" step="0.01">
+                <button onclick="checkAnswer(12, 50.5)">Check Answer</button>
+                <button onclick="showHint(12)">Hint</button>
+                <div id="result12" class="result" style="display: none;"></div>
+                <div id="hint12" class="hint">For uniform distribution on {1,2,...,n}: E[X] = (n+1)/2 = (100+1)/2 = 50.5</div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3>K♣</h3>
+            <p>A machine produces items. Each item is defective with probability 0.1. You inspect items until finding 2 defective ones. What is the expected number of items inspected?</p>
+            <div class="probability-scenario">
+                Need 2 defective items (successes)<br>
+                Probability of defective = 0.1 per item
+            </div>
+            <div class="answer-section">
+                <input type="number" id="answer13" placeholder="Expected items" step="0.01">
+                <button onclick="checkAnswer(13, 20)">Check Answer</button>
+                <button onclick="showHint(13)">Hint</button>
+                <div id="result13" class="result" style="display: none;"></div>
+                <div id="hint13" class="hint">Negative binomial with r=2 successes and p=0.1: E[X] = r/p = 2/0.1 = 20</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswer(problemNum, correctAnswer) {
+            const userAnswer = parseFloat(document.getElementById(`answer${problemNum}`).value);
+            const resultDiv = document.getElementById(`result${problemNum}`);
+            
+            resultDiv.style.display = 'block';
+            
+            const tolerance = 0.1;
+            if (Math.abs(userAnswer - correctAnswer) <= tolerance) {
+                resultDiv.className = 'result correct';
+                resultDiv.textContent = '✅ Correct! Well done!';
+            } else {
+                resultDiv.className = 'result incorrect';
+                resultDiv.textContent = `❌ Incorrect. The correct answer is ${correctAnswer}.`;
+            }
+        }
+        
+        function showHint(problemNum) {
+            const hintDiv = document.getElementById(`hint${problemNum}`);
+            hintDiv.style.display = hintDiv.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
