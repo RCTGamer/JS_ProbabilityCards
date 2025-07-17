@@ -169,8 +169,8 @@
 
         <div class="problem">
             <h3>2♣</h3>
-            <p> A standard deck of cards is shuffled. On average, how many cards will you have to draw the 
-                <strong>A♣</strong> if: <br><br>
+            <p> A standard deck of cards is shuffled. On average, how many cards will 
+                you have to draw the <strong>A♣</strong> if: <br><br>
                 a) You draw with replacement? <br><br>
                 b) You draw without replacement? </p>
             <div class="answer-section">
@@ -187,8 +187,9 @@
 
         <div class="problem">
             <h3>3♣</h3>
-            <p>20 people are each holding a playing card. These cards are all shuffled and redistributed randomly.
-                 What is the expected number of people who get their original card back?</p>
+            <p>20 people are each holding a playing card. These cards are all shuffled and 
+                redistributed randomly. What is the expected number of people who 
+                get their original card back?</p>
             <div class="answer-section">
                 <input type="number" id="answer3" placeholder="Answer">
                 <button onclick="checkAnswer('3', 7)">Check Answer</button>
@@ -200,8 +201,9 @@
             <h3>4♣</h3>
             <p>
                 10 people are sitting in a circle. Each has their own deck of cards. 
-                They each shuffle their deck and draw a random card. If the card is red, the holder turns to shake 
-                hands with the player to their left. If the card is black, they turn to shake hands with the person 
+                They each shuffle their deck and draw a random card. If the card is red, 
+                the holder turns to shake hands with the player to their left. 
+                If the card is black, they turn to shake hands with the person 
                 to their right. How many handshakes are expected to succeed?
             </p>
             <div class="answer-section">
@@ -214,8 +216,9 @@
         <div class="problem">
             <h3>5♣</h3>
             <p>
-                While inserting two jokers into a deck of cards, we unfortunately drop the <strong>5♣</strong> on the floor.
-                We then shuffle the deck. What's the expected number of cards between the two jokers?
+                While inserting two jokers into a deck of cards, we unfortunately drop the 
+                <strong>5♣</strong> on the floor. We then shuffle the deck. 
+                What's the expected number of cards between the two jokers?
             </p>
             <div class="answer-section">
                 <input type="number" id="answer5" placeholder="Answer">
@@ -231,7 +234,7 @@
                 How many cards on average do you have to draw before you have at least one card of each suit?
             </p>
             <div class="answer-section">
-                <input type="number" id="answer5" placeholder="Answer">
+                <input type="number" id="answer6" placeholder="Answer">
                 <button onclick="checkAnswer('6', 7)">Check Answer</button>
                 <div id="result6" class="result" style="display: none;"></div>
             </div>
@@ -240,129 +243,118 @@
         <div class="problem">
             <h3>7♣</h3>
             <p>
-                While showing off a fancy shuffling trick
+                While showing off a fancy shuffling trick, you accidentaly drop almost half the deck 
+                down a storm drain. You want to figure out which cards you still have, so you try
+                to match up cards with the same rank and color (2♣ with 2♠ for example).
+                You count 34 cards remaining. How many matches do you find on average?
             </p>
             <div class="answer-section">
-                <input type="number" id="answer5" placeholder="Answer">
+                <input type="number" id="answer7" placeholder="Answer">
                 <button onclick="checkAnswer('7', 7)">Check Answer</button>
-                <div id="result6" class="result" style="display: none;"></div>
-            </div>
-        </div>
-
-
-
-        <div class="problem">
-            <h3>7♣</h3>
-            <p>A biased coin with P(heads) = 0.4 is flipped until 3 heads appear. What is the expected number of flips?</p>
-            <div class="probability-scenario">
-                This follows a negative binomial distribution<br>
-                We want 3 successes with probability p = 0.4 per trial
-            </div>
-            <div class="answer-section">
-                <input type="number" id="answer7" placeholder="Expected flips" step="0.01">
-                <button onclick="checkAnswer(7, 7.5)">Check Answer</button>
-                <button onclick="showHint(7)">Hint</button>
                 <div id="result7" class="result" style="display: none;"></div>
-                <div id="hint7" class="hint">For negative binomial with r successes and probability p: E[X] = r/p = 3/0.4 = 7.5</div>
             </div>
         </div>
+
 
         <div class="problem">
             <h3>8♣</h3>
-            <p>Two fair dice are rolled repeatedly. What is the expected number of rolls until the sum equals 7?</p>
-            <div class="probability-scenario">
-                Probability of sum = 7 is 6/36 = 1/6<br>
-                This follows a geometric distribution
-            </div>
+            <p>
+                Arrange the 13♣'s in random order. How many times do you expect the 
+                sequence to change direction (increasing to decreasing or vice versa)?
+            </p>
             <div class="answer-section">
-                <input type="number" id="answer8" placeholder="Expected rolls" step="0.01">
-                <button onclick="checkAnswer(8, 6)">Check Answer</button>
-                <button onclick="showHint(8)">Hint</button>
+                <input type="number" id="answer8" placeholder="Answer">
+                <button onclick="checkAnswer('8', 7)">Check Answer</button>
                 <div id="result8" class="result" style="display: none;"></div>
-                <div id="hint8" class="hint">Ways to get sum=7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1). P(sum=7) = 6/36 = 1/6. E[X] = 1/p = 6</div>
             </div>
         </div>
 
         <div class="problem">
             <h3>9♣</h3>
-            <p>An urn has 5 white and 3 black balls. Balls are drawn with replacement until a black ball appears. What is the expected number of draws?</p>
-            <div class="probability-scenario">
-                Probability of black ball = 3/8<br>
-                Drawing with replacement follows geometric distribution
-            </div>
+            <p>
+                A very large deck of $2N+1$ cards is cut at one of its $2N$ gaps randomly. 
+                As a fuction of $N$, on average how many cards are in the smaller pile? 
+                What is the expected ratio of the size of the larger pile to the smaller pile?
+            </p>
             <div class="answer-section">
-                <input type="number" id="answer9" placeholder="Expected draws" step="0.01">
-                <button onclick="checkAnswer(9, 2.67)">Check Answer</button>
-                <button onclick="showHint(9)">Hint</button>
+                <input type="number" id="answer9" placeholder="Answer">
+                <button onclick="checkAnswer('9', 7)">Check Answer</button>
                 <div id="result9" class="result" style="display: none;"></div>
-                <div id="hint9" class="hint">With replacement, P(black) = 3/8 each draw. E[X] = 1/p = 1/(3/8) = 8/3 ≈ 2.67</div>
             </div>
         </div>
 
         <div class="problem">
             <h3>10♣</h3>
-            <p>A random variable X follows Poisson(λ=4). What is E[X²]?</p>
-            <div class="probability-scenario">
-                For Poisson distribution: E[X] = λ and Var(X) = λ<br>
-                Use the formula: E[X²] = Var(X) + (E[X])²
-            </div>
+            <p>
+                Draw cards from a shuffled deck until you draw the<strong>J♣, Q♣,</strong> and 
+                <strong></strong>K♣</strong>. How many draws will it take on average?
+            </p>
             <div class="answer-section">
-                <input type="number" id="answer10" placeholder="E[X²]" step="0.01">
-                <button onclick="checkAnswer(10, 20)">Check Answer</button>
-                <button onclick="showHint(10)">Hint</button>
+                <input type="number" id="answer10" placeholder="Answer">
+                <button onclick="checkAnswer('10', 7)">Check Answer</button>
                 <div id="result10" class="result" style="display: none;"></div>
-                <div id="hint10" class="hint">For Poisson(4): E[X] = 4, Var(X) = 4. Therefore E[X²] = Var(X) + (E[X])² = 4 + 16 = 20</div>
             </div>
         </div>
 
         <div class="problem">
             <h3>J♣</h3>
-            <p>A gambler wins $3 with probability 0.3 and loses $2 with probability 0.7. What is the expected value per game?</p>
-            <div class="probability-scenario">
-                Win $3 with P = 0.3<br>
-                Lose $2 with P = 0.7
+            <p>
+                We have $2N$ cards: 1 through $N$ of both ♣ and ♠. Remove the 1♣ and a random ♠. 
+                Remove a pair of cards: the 2♣ and an associated ♠, the 3♣ and an associated ♠
+                (the 2♠ if you can find it, or else a random ♠). Continue similarly (with the 
+                3♣, 4♣, etc) until all cards are paired and removed. <br><br>
+                a) What's the chance $N$♣ and $N$♠ form a pair? <br><br>
+                b) On average, how many pairs have matching rank?
+            </p>
+            <div class="answer-section">
+                <input type="number" id="answerJa" placeholder="a)">
+                <button onclick="checkAnswer('Ja', 7)">Check Answer</button>
+                <div id="resultJa" class="result" style="display: none;"></div>
             </div>
             <div class="answer-section">
-                <input type="number" id="answer11" placeholder="Expected value" step="0.01">
-                <button onclick="checkAnswer(11, -0.5)">Check Answer</button>
-                <button onclick="showHint(11)">Hint</button>
-                <div id="result11" class="result" style="display: none;"></div>
-                <div id="hint11" class="hint">E[X] = 3×0.3 + (-2)×0.7 = 0.9 - 1.4 = -0.5</div>
+                <input type="number" id="answerJb" placeholder="b)">
+                <button onclick="checkAnswer('Jb', 14)">Check Answer</button>
+                <div id="resultJb" class="result" style="display: none;"></div>
             </div>
         </div>
 
         <div class="problem">
             <h3>Q♣</h3>
-            <p>A box contains tickets numbered 1 to 100. If you draw one ticket randomly, what is the expected value of the number?</p>
-            <div class="probability-scenario">
-                Uniform distribution over {1, 2, 3, ..., 100}<br>
-                Each number has probability 1/100
+            <p>
+                I deal out $MN$ cards in an $M\times N$ grid, some face up and some face down.
+                You want to maximize the number of cards face up, but you are only allowed 
+                to flip a full row or full column at a time (as many times as you like). How many
+                cards can you get face up at the same time no matter how I arrange the cards to
+                start for: <br><br>
+                a) $M = N$? <br><br>
+                b) $M = 2^N$?
+            </p>
+            <div class="answer-section">
+                <input type="number" id="answerQa" placeholder="a)">
+                <button onclick="checkAnswer('Qa', 7)">Check Answer</button>
+                <div id="resultQa" class="result" style="display: none;"></div>
             </div>
             <div class="answer-section">
-                <input type="number" id="answer12" placeholder="Expected value" step="0.01">
-                <button onclick="checkAnswer(12, 50.5)">Check Answer</button>
-                <button onclick="showHint(12)">Hint</button>
-                <div id="result12" class="result" style="display: none;"></div>
-                <div id="hint12" class="hint">For uniform distribution on {1,2,...,n}: E[X] = (n+1)/2 = (100+1)/2 = 50.5</div>
+                <input type="number" id="answerQb" placeholder="b)">
+                <button onclick="checkAnswer('Qb', 14)">Check Answer</button>
+                <div id="resultJb" class="result" style="display: none;"></div>
             </div>
         </div>
 
         <div class="problem">
             <h3>K♣</h3>
-            <p>A machine produces items. Each item is defective with probability 0.1. You inspect items until finding 2 defective ones. What is the expected number of items inspected?</p>
-            <div class="probability-scenario">
-                Need 2 defective items (successes)<br>
-                Probability of defective = 0.1 per item
-            </div>
+            <p>
+                You and I are playing a strange deck of cards that consists of 1 through $N$ ♣'s.
+                I remove $r$ cards from the deck. Without knowing which $r$ I removed, how large 
+                of a sum-free subset can you promise me you can find in your cards? (A set $S$ is
+                sum-free if there does not exist $s_1, s_2, s_3 \in S$ with $s_1 + s_2 = s_3$).
+            </p>
             <div class="answer-section">
-                <input type="number" id="answer13" placeholder="Expected items" step="0.01">
-                <button onclick="checkAnswer(13, 20)">Check Answer</button>
-                <button onclick="showHint(13)">Hint</button>
-                <div id="result13" class="result" style="display: none;"></div>
-                <div id="hint13" class="hint">Negative binomial with r=2 successes and p=0.1: E[X] = r/p = 2/0.1 = 20</div>
+                <input type="number" id="answerK" placeholder="Answer">
+                <button onclick="checkAnswer('K', 7)">Check Answer</button>
+                <div id="resultK" class="result" style="display: none;"></div>
             </div>
         </div>
-    </div>
 
     <script>
         function checkAnswer(problemNum, correctAnswer) {
