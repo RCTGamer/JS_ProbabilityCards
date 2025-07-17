@@ -3,11 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geometric Probability</title>
+    <title>Expectation and Linearity</title>
+    
+    <!-- MathJax for LaTeX rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: black;
             margin: 0;
             padding: 20px;
             min-height: 100vh;
@@ -16,7 +29,7 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background: white;
+            background: black;
             border-radius: 15px;
             padding: 40px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
@@ -24,8 +37,9 @@
         
         .back-button {
             display: inline-block;
-            background: #667eea;
+            background: black;
             color: white;
+            border: 1px solid #666;
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
@@ -34,47 +48,72 @@
         }
         
         .back-button:hover {
-            background: #5a67d8;
+            background: #666;
         }
         
         h1 {
-            color: #333;
+            color: white;
             text-align: center;
             margin-bottom: 30px;
         }
         
         .problem {
-            background: #f8f9fa;
-            border-left: 4px solid #e91e63;
+            background: #1a1a1a;
+            border-left: 4px solid #28a745;
             padding: 20px;
             margin: 20px 0;
             border-radius: 5px;
+            color: white;
+            line-height: 1.8;
         }
+        
+        /* Green to Yellow gradient (A♣ to 7♣) */
+        .problem:nth-child(3) { border-left-color: #00ff00; } /* A♣ - Pure Green */
+        .problem:nth-child(4) { border-left-color: #2aff00; } /* 2♣ - Green-Yellow */
+        .problem:nth-child(5) { border-left-color: #55ff00; } /* 3♣ - Green-Yellow */
+        .problem:nth-child(6) { border-left-color: #80ff00; } /* 4♣ - Yellow-Green */
+        .problem:nth-child(7) { border-left-color: #aaff00; } /* 5♣ - Yellow-Green */
+        .problem:nth-child(8) { border-left-color: #d5ff00; } /* 6♣ - Yellow */
+        .problem:nth-child(9) { border-left-color: #ffff00; } /* 7♣ - Pure Yellow */
+        
+        /* Yellow to Red gradient (8♣ to K♣) */
+        .problem:nth-child(10) { border-left-color: #ffd500; } /* 8♣ - Yellow-Orange */
+        .problem:nth-child(11) { border-left-color: #ffaa00; } /* 9♣ - Orange */
+        .problem:nth-child(12) { border-left-color: #ff8000; } /* 10♣ - Orange-Red */
+        .problem:nth-child(13) { border-left-color: #ff5500; } /* J♣ - Red-Orange */
+        .problem:nth-child(14) { border-left-color: #ff2a00; } /* Q♣ - Red */
+        .problem:nth-child(15) { border-left-color: #ff0000; } /* K♣ - Pure Red */
         
         .problem h3 {
-            color: #e91e63;
-            margin-top: 0;
+            font-size: 1.4em;
+            margin-top: -3px;
+            margin-bottom: -10px;
         }
         
-        .geometric-diagram {
-            text-align: center;
-            margin: 20px 0;
-            font-family: monospace;
-            font-size: 14px;
-            background: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
+        /* Match h3 colors to border colors */
+        .problem:nth-child(3) h3 { color: #00ff00;  } /* A♣ */
+        .problem:nth-child(4) h3 { color: #2aff00; } /* 2♣ */
+        .problem:nth-child(5) h3 { color: #55ff00; } /* 3♣ */
+        .problem:nth-child(6) h3 { color: #80ff00; } /* 4♣ */
+        .problem:nth-child(7) h3 { color: #aaff00; } /* 5♣ */
+        .problem:nth-child(8) h3 { color: #d5ff00; } /* 6♣ */
+        .problem:nth-child(9) h3 { color: #ffff00; } /* 7♣ */
+        .problem:nth-child(10) h3 { color: #ffd500; } /* 8♣ */
+        .problem:nth-child(11) h3 { color: #ffaa00; } /* 9♣ */
+        .problem:nth-child(12) h3 { color: #ff8000; } /* 10♣ */
+        .problem:nth-child(13) h3 { color: #ff5500; } /* J♣ */
+        .problem:nth-child(14) h3 { color: #ff2a00; } /* Q♣ */
+        .problem:nth-child(15) h3 { color: #ff0000; } /* K♣ */
         
         .probability-scenario {
-            background: white;
-            border: 1px solid #ddd;
+            background: #2a2a2a;
+            border: 1px solid #444;
             border-radius: 5px;
             padding: 15px;
             margin: 15px 0;
             font-style: italic;
             line-height: 1.6;
+            color: #ccc;
         }
         
         .answer-section {
@@ -90,7 +129,7 @@
         }
         
         button {
-            background: #e91e63;
+            background: #28a745;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -101,7 +140,7 @@
         }
         
         button:hover {
-            background: #c2185b;
+            background: #218838;
         }
         
         .result {
@@ -122,16 +161,12 @@
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
-        
-        .hint {
-            background: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeaa7;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-            display: none;
+
+        .tab-indent {
+            padding-left: 2em;
+            display: block;
         }
+        
     </style>
 </head>
 <body>
@@ -141,118 +176,212 @@
         <h1>♥ Geometric Probability</h1>
         
         <div class="problem">
-            <h3>Problem 1: Circle in Square</h3>
-            <p>A circle with radius 3 is inscribed in a square. A point is randomly chosen in the square. What's the probability it lands in the circle?</p>
-            <div class="geometric-diagram">
-                ┌─────────┐<br>
-                │   ○○○   │<br>
-                │  ○○○○○  │<br>
-                │ ○○○●○○○ │ ← Square side = 6<br>
-                │  ○○○○○  │<br>
-                │   ○○○   │<br>
-                └─────────┘
-            </div>
-            <div class="probability-scenario">
-                Circle radius = 3, so area = π × 3² = 9π<br>
-                Square side = 6, so area = 6² = 36<br>
-                P = Circle area / Square area
-            </div>
+            <h3>A♥</h3>
+            <p>
+                A tiny model airplane has gotten stuck inside an inflatable, spherical beach
+                ball of radius 1 and is flying around randomly. When you stop and look, what
+                is the probability that the plane is closer to the center of the ball than 
+                to the outside?
+            </p>
             <div class="answer-section">
-                <input type="number" id="answer1" placeholder="Probability (decimal)" step="0.01">
-                <button onclick="checkAnswer(1, 0.785)">Check Answer</button>
-                <button onclick="showHint(1)">Hint</button>
+                <input type="number" id="answer1" placeholder="Answer">
+                <button onclick="checkAnswer('1', 7)">Check Answer</button>
                 <div id="result1" class="result" style="display: none;"></div>
-                <div id="hint1" class="hint">P = (9π)/36 = π/4 ≈ 0.785</div>
             </div>
         </div>
-        
+
         <div class="problem">
-            <h3>Problem 2: Dartboard Probability</h3>
-            <p>A dartboard has concentric circles with radii 2, 4, and 6. What's the probability of hitting the middle ring (between radii 2 and 4)?</p>
-            <div class="geometric-diagram">
-                      ●●●●●●●<br>
-                    ●●○○○○○●●<br>
-                   ●●○○░○○○●●<br>
-                   ●●○○░○○○●●  ← Outer ring<br>
-                   ●●○○○○○○●●  ← Middle ring<br>
-                    ●●○○○○○●●   ← Inner circle<br>
-                      ●●●●●●●
-            </div>
-            <div class="probability-scenario">
-                Total area = π × 6² = 36π<br>
-                Middle ring area = π × 4² - π × 2² = 16π - 4π = 12π
-            </div>
+            <h3>2♥</h3>
+            <p>
+                Two planes are getting ready for takeoff, traveling down a long runway at 60mph 
+                and 180mph respectively. They both stop suddenly (and independently) after 0-60s 
+                (uniformly at random). What is the chance that the sum of the distances traveled
+                is at most a mile?
+            </p>
             <div class="answer-section">
-                <input type="text" id="answer2" placeholder="Enter as fraction or decimal">
-                <button onclick="checkGeometric(2)">Check Answer</button>
-                <button onclick="showHint(2)">Hint</button>
+                <input type="number" id="answer2" placeholder="Answer">
+                <button onclick="checkAnswer('2', 7)">Check Answer</button>
                 <div id="result2" class="result" style="display: none;"></div>
-                <div id="hint2" class="hint">P = 12π/36π = 12/36 = 1/3 ≈ 0.333</div>
             </div>
         </div>
-        
+
         <div class="problem">
-            <h3>Problem 3: Buffon's Needle Problem (Simplified)</h3>
-            <p>Parallel lines are 4 units apart. A needle of length 2 is dropped randomly. What's the probability it crosses a line?</p>
-            <div class="probability-scenario">
-                Line spacing = 4 units<br>
-                Needle length = 2 units<br>
-                Classical result: P = (2 × length) / (π × spacing)
+            <h3>3♥</h3>
+            <p>
+                Two cyclists are randomly biking around the unit circle. They each stop at
+                uniformly random spots along the boundary. Form a triangle from the two cyclists
+                and the circle's center. 
+                <span class="tab-indent">a) How likely is the triangle to be acute?</span>
+                <span class="tab-indent">b) What if they had been biking along the surface of a unit 
+                    sphere?</span>
+            </p>
+            <div class="answer-section">
+                <input type="number" id="answer3a" placeholder="Answer">
+                <button onclick="checkAnswer('3a', 7)">Check Answer</button>
+                <div id="result3a" class="result" style="display: none;"></div>
             </div>
             <div class="answer-section">
-                <input type="number" id="answer3" placeholder="Probability (decimal)" step="0.001">
-                <button onclick="checkAnswer(3, 0.318)">Check Answer</button>
-                <button onclick="showHint(3)">Hint</button>
-                <div id="result3" class="result" style="display: none;"></div>
-                <div id="hint3" class="hint">P = (2 × 2)/(π × 4) = 4/(4π) = 1/π ≈ 0.318</div>
+                <input type="number" id="answer3b" placeholder="Answer">
+                <button onclick="checkAnswer('3b', 7)">Check Answer</button>
+                <div id="result3b" class="result" style="display: none;"></div>
             </div>
         </div>
-        
+
         <div class="problem">
-            <h3>Problem 4: Triangle Point Selection</h3>
-            <p>In a triangle with vertices at (0,0), (4,0), and (0,3), what's the probability a random point has y-coordinate > 1?</p>
-            <div class="geometric-diagram">
-                │<br>
-                │  ○<br>
-                3  ○○<br>
-                │  ○○○<br>
-                2  ○○○○<br>
-                │  ░░░░  ← y > 1 region<br>
-                1  ░░░░░<br>
-                │  ░░░░░░<br>
-                0──┴─────┴──<br>
-                   0  2  4
-            </div>
-            <div class="probability-scenario">
-                Triangle area = (1/2) × base × height = (1/2) × 4 × 3 = 6<br>
-                Need to find area where y > 1
-            </div>
+            <h3>4♥</h3>
+            <p>
+                A round helicopter of diameter $3$ is trying to land. Its landing zone is 
+                covered in painted lines which form a grid of $4\times4$ squares. The helicopter
+                is supposed to land fully within a square, but the pilot did not pay attention
+                and landed randomly. What is the chance that the helicopter falls within a 
+                square nonetheless?
+            </p>
             <div class="answer-section">
-                <input type="text" id="answer4" placeholder="Enter as fraction or decimal">
-                <button onclick="checkGeometric(4)">Check Answer</button>
-                <button onclick="showHint(4)">Hint</button>
+                <input type="number" id="answer4" placeholder="Answer">
+                <button onclick="checkAnswer('4', 7)">Check Answer</button>
                 <div id="result4" class="result" style="display: none;"></div>
-                <div id="hint4" class="hint">Area where y > 1 is a triangle with vertices (0,1), (8/3,1), (0,3). Area = (1/2) × (8/3) × 2 = 8/3. P = (8/3)/6 = 4/9</div>
             </div>
         </div>
-        
+
         <div class="problem">
-            <h3>Problem 5: Meeting Time Problem</h3>
-            <p>Two people agree to meet between 2:00 and 3:00 PM. Each arrives at a random time and waits 15 minutes. What's the probability they meet?</p>
-            <div class="probability-scenario">
-                Let x = arrival time of person 1 (0 to 60 minutes)<br>
-                Let y = arrival time of person 2 (0 to 60 minutes)<br>
-                They meet if |x - y| ≤ 15
-            </div>
+            <h3>5♥</h3>
+            <p>
+                A circular zamboni (of radius $1$) was driving around an ice rink of length $l$
+                and width $w$. The zamboni broke down at a uniformly random point on the rink.
+                What is the chance that it stopped over a diagonal line?
+            </p>
             <div class="answer-section">
-                <input type="number" id="answer5" placeholder="Probability (decimal)" step="0.01">
-                <button onclick="checkAnswer(5, 0.44)">Check Answer</button>
-                <button onclick="showHint(5)">Hint</button>
+                <input type="number" id="answer5" placeholder="Answer">
+                <button onclick="checkAnswer('5', 7)">Check Answer</button>
                 <div id="result5" class="result" style="display: none;"></div>
-                <div id="hint5" class="hint">Total area = 60² = 3600. Meeting region area = 3600 - 2×(45²/2) = 3600 - 2025 = 1575. P = 1575/3600 ≈ 0.44</div>
             </div>
         </div>
-    </div>
+
+        <div class="problem">
+            <h3>6♥</h3>
+            <p>
+                Every morning, two friends independently bike to a cafe, arriving at a 
+                uniformly random time between 7am and 8am. Each person waits for $t$ minutes
+                in the parking lot, hoping their friend will join in time. If not, they leave 
+                coffeeless (they cannot carry it on their bike!). If they are 36% likely to get
+                their morning caffeine, what is $t$?
+            </p>
+            <div class="answer-section">
+                <input type="number" id="answer6" placeholder="Answer">
+                <button onclick="checkAnswer('6', 7)">Check Answer</button>
+                <div id="result6" class="result" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3>7♥</h3>
+            <p>
+                $N$ cyclists are biking around a circular track at a rate of 1rpm. They start in
+                uniformly random locations and random orientations (clockwise or counterclockwise).
+                Just before a pair would collide, they instantly reverse direction. What is the 
+                expected number of times all the cyclists reverse direction each minute?
+            </p>
+            <div class="answer-section">
+                <input type="number" id="answer7" placeholder="Answer">
+                <button onclick="checkAnswer('7', 7)">Check Answer</button>
+                <div id="result7" class="result" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3>8♥</h3>
+            <p>
+                $N$ cyclists are biking around a circular track at a rate of 1rpm. They start in
+                uniformly random locations and random orientations (clockwise or counterclockwise).
+                Just before a pair would collide, they instantly reverse direction. What is the 
+                probability that after $1$ minute, all cyclists are where they started?
+            </p>
+            <div class="answer-section">
+                <input type="number" id="answer8" placeholder="Answer">
+                <button onclick="checkAnswer('8', 7)">Check Answer</button>
+                <div id="result8" class="result" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3>9♥</h3>
+            <p>
+                Cars of length $2$ are parking on a street of length $100$, with parking meters
+                evenly spaced every length $1$. Each minute, a car arrives and parks at a 
+                uniformly randomly open spot, aligning its front bumper with a parking meter. 
+                When no more cars can possibly fit, roughly what fraction of parking meters are
+                unoccupied by a car?
+            </p>
+            <div class="answer-section">
+                <input type="number" id="answer9" placeholder="Answer">
+                <button onclick="checkAnswer('9', 7)">Check Answer</button>
+                <div id="result9" class="result" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3>10♥</h3>
+            <p>
+                Cars of length $2$ are parking on a street of length $100$, with parking meters
+                evenly spaced every length $1$. Each minute, a car arrives and parks at a 
+                uniformly randomly spot on the road without crashing into another car or running
+                off the road. When no more cars can possibly fit, roughly how many cars have parked?
+            </p>
+            <div class="answer-section">
+                <input type="number" id="answer10" placeholder="Answer">
+                <button onclick="checkAnswer('10', 7)">Check Answer</button>
+                <div id="result10" class="result" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3>J♥</h3>
+            <p>
+                Cars of length $5$ and limos of length $10$ are trying to park on a VERY long road
+                of length $L$. Each minute, either a car or limo arrives (with probability $p,1-p$
+                respectively) and attempts to park without crashing into another vehicle. When no more
+                cars or limos can fit, what fraction of the road is occupied? What $p$ minimizes this 
+                fraction?
+            </p>
+            <div class="answer-section">
+                <input type="number" id="answerJ" placeholder="Answer">
+                <button onclick="checkAnswer('J', 7)">Check Answer</button>
+                <div id="resultJ" class="result" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3>Q♥</h3>
+            <p>
+                ** Cars of length $2$ try to park on a length $L$ road. Each minute, a new car parks
+                at a uniformly random spot on the road without crashing into another car or running
+                off the road. When no more cars fit: 
+                <span class="tab-indent">a) What is the expected size of the largest gap 
+                    between adjacent cars (as a function of $L$)?</span>
+                <span class="tab-indent">b) How about the smallest gap between adjacent cars?</span>
+            </p>
+            <div class="answer-section">
+                <input type="number" id="answerQ" placeholder="Answer">
+                <button onclick="checkAnswer('Q', 7)">Check Answer</button>
+                <div id="resultQ" class="result" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3>K♥</h3>
+            <p>
+                ** Helicopters (radius $1$ circles) are landing in a very large $L\times L$ lot.
+                Each minute, a helicopter arrives and randomly picks an available point in the lot
+                to land (without crashing into another helicopter)! On average: 
+                <span class="tab-indent">a) What fraction of the lot is occupied? </span>
+                <span class="tab-indent">b)What about for $3$ and $4$ dimensions? </span>
+            </p>
+            <div class="answer-section">
+                <input type="number" id="answerK" placeholder="Answer">
+                <button onclick="checkAnswer('K', 7)">Check Answer</button>
+                <div id="resultK" class="result" style="display: none;"></div>
+            </div>
+        </div>
 
     <script>
         function checkAnswer(problemNum, correctAnswer) {
@@ -261,42 +390,13 @@
             
             resultDiv.style.display = 'block';
             
-            const tolerance = 0.02;
+            const tolerance = 0.1;
             if (Math.abs(userAnswer - correctAnswer) <= tolerance) {
                 resultDiv.className = 'result correct';
                 resultDiv.textContent = '✅ Correct! Well done!';
             } else {
                 resultDiv.className = 'result incorrect';
                 resultDiv.textContent = `❌ Incorrect. The correct answer is ${correctAnswer}.`;
-            }
-        }
-        
-        function checkGeometric(problemNum) {
-            const userAnswer = document.getElementById(`answer${problemNum}`).value.trim().toLowerCase();
-            const resultDiv = document.getElementById(`result${problemNum}`);
-            
-            resultDiv.style.display = 'block';
-            
-            let correctAnswers = [];
-            let correctText = '';
-            
-            switch(problemNum) {
-                case 2:
-                    correctAnswers = ['1/3', '0.333', '12/36'];
-                    correctText = '1/3 or 0.333';
-                    break;
-                case 4:
-                    correctAnswers = ['4/9', '0.444', '8/18'];
-                    correctText = '4/9 or 0.444';
-                    break;
-            }
-            
-            if (correctAnswers.some(answer => Math.abs(parseFloat(userAnswer) - parseFloat(answer)) < 0.01 || userAnswer === answer)) {
-                resultDiv.className = 'result correct';
-                resultDiv.textContent = '✅ Correct! Well done!';
-            } else {
-                resultDiv.className = 'result incorrect';
-                resultDiv.textContent = `❌ Incorrect. The correct answer is ${correctText}.`;
             }
         }
         
