@@ -287,8 +287,10 @@
         <div class="problem">
             <h3>8♦</h3>
             <p>
-                Arrange the <strong>13♣'s</strong> in random order. How many times do you expect the 
-                sequence to change direction (increasing to decreasing or vice versa)?
+                We are playing with a standard deck. I remove one ♦ and some non-♦s but I don't
+                tell you how many! I secretly flip a fair coin; on heads I return the missing ♦,
+                on tails I return one of the other missing cards. You shuffle the deck and draw
+                one card; it's a ♦. What's the probability my coin came up heads? 
             </p>
             <div class="answer-section">
                 <input type="number" id="answer8" placeholder="Answer">
@@ -300,9 +302,11 @@
         <div class="problem">
             <h3>9♦</h3>
             <p>
-                A very large deck of $2N+1$ cards is cut at one of its $2N$ gaps randomly. 
-                As a fuction of $N$, on average how many cards are in the smaller pile? 
-                What is the expected ratio of the size of the larger pile to the smaller pile?
+                Which of these events is most likely assuming cards are drawn from a shuffled deck 
+                with replacement:
+                <span class="tab-indent">a) at least 1 ♦ when 4 cards are drawn</span>
+                <span class="tab-indent">b) at least 2 ♦ when 8 cards are drawn</span>
+                <span class="tab-indent">c) at least 3 ♦ when 12 cards are drawn</span>
             </p>
             <div class="answer-section">
                 <input type="number" id="answer9" placeholder="Answer">
@@ -314,8 +318,11 @@
         <div class="problem">
             <h3>10♦</h3>
             <p>
-                Draw cards from a shuffled deck until you draw the <strong> J♣, Q♣,</strong> and 
-                <strong> K♣</strong>. How many draws will it take on average?
+                You have two strange decks of cards: deck A with 2 ♦s and 1 ♠ and deck B 
+                with 51 ♦s and 50 ♠s. You randomly choose a deck and draw. You can look at the 
+                color of the card, put it back in the deck (or not) and draw a second card. 
+                Your goal is to guess which deck you are drawing from. What strategy do you
+                employ and how likely is it to succeed?
             </p>
             <div class="answer-section">
                 <input type="number" id="answer10" placeholder="Answer">
@@ -327,55 +334,39 @@
         <div class="problem">
             <h3>J♦</h3>
             <p>
-                We have $2N$ cards: 1 through $N$ of both ♣ and ♠. Remove the 1♣ and a random ♠. 
-                Remove a pair of cards: the 2♣ and an associated ♠, the 3♣ and an associated ♠
-                (the 2♠ if you can find it, or else a random ♠). Continue similarly (with the 
-                3♣, 4♣, etc) until all cards are paired and removed.
-                <span class="tab-indent">a) What's the chance $N$♣ and $N$♠ form a pair?</span>
-                <span class="tab-indent">b) On average, how many pairs have matching rank?</span>
+                consider the following game: place the <strong>A♦-6♦</strong> and the 
+                <strong>A♠-6♠</strong> in a bag. You randomly draw cards one at a time from the 
+                bag and keep them, but put matching cards aside as soon as they appear in your hand.
+                The game ends and you lose if you ever hold three cards, no two of which match. 
+                What is the chance you win?
             </p>
             <div class="answer-section">
-                <input type="number" id="answerJa" placeholder="a)">
-                <button onclick="checkAnswer('Ja', 7)">Check Answer</button>
-                <div id="resultJa" class="result" style="display: none;"></div>
-            </div>
-            <div class="answer-section">
-                <input type="number" id="answerJb" placeholder="b)">
-                <button onclick="checkAnswer('Jb', 14)">Check Answer</button>
-                <div id="resultJb" class="result" style="display: none;"></div>
+                <input type="number" id="answerJ" placeholder="Answer">
+                <button onclick="checkAnswer('J', 7)">Check Answer</button>
+                <div id="resultJ" class="result" style="display: none;"></div>
             </div>
         </div>
 
         <div class="problem">
             <h3>Q♦</h3>
             <p>
-                I deal out $MN$ cards in an $M\times N$ grid, some face up and some face down.
-                You want to maximize the number of cards face up, but you are only allowed 
-                to flip a full row or full column at a time (as many times as you like). How many
-                cards can you get face up at the same time no matter how I arrange the cards to
-                start for:
-                <span class="tab-indent">a) $M = N$ ?</span>
-                <span class="tab-indent">b) $M = 2^N$ ?</span>
+                Shuffle the 13 ♦s in a deck into a random order. Suppose the longest increasing
+                subsequence of has length exactly 10 (assume <strong>A</strong> = 1). What is the
+                probability the <strong>K♦</strong> is last in the ordering?
             </p>
             <div class="answer-section">
-                <input type="number" id="answerQa" placeholder="a)">
-                <button onclick="checkAnswer('Qa', 7)">Check Answer</button>
-                <div id="resultQa" class="result" style="display: none;"></div>
-            </div>
-            <div class="answer-section">
-                <input type="number" id="answerQb" placeholder="b)">
-                <button onclick="checkAnswer('Qb', 14)">Check Answer</button>
-                <div id="resultJb" class="result" style="display: none;"></div>
+                <input type="number" id="answerQ" placeholder="Answer">
+                <button onclick="checkAnswer('Q', 7)">Check Answer</button>
+                <div id="resultQ" class="result" style="display: none;"></div>
             </div>
         </div>
 
         <div class="problem">
             <h3>K♦</h3>
             <p>
-                You and I are playing a strange deck of cards that consists of 1 through $N$ ♣'s.
-                I remove $r$ cards from the deck. Without knowing which $r$ I removed, how large 
-                of a sum-free subset can you promise me you can find in your cards? (A set $S$ is
-                sum-free if there does not exist $s_1, s_2, s_3 \in S$ with $s_1 + s_2 = s_3$).
+                * I have a very large deck of $N$ cards: the <strong>A♦-N♦</strong>. If I shuffle
+                the deck, what is the chance that the longest increasing subsequence has 
+                more than $\sqrt{2N} + \sqrt{8}N^{1/6}$ cards?
             </p>
             <div class="answer-section">
                 <input type="number" id="answerK" placeholder="Answer">
