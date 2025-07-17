@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Template</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: black;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: black;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .back-button {
+            display: inline-block;
+            background: black;
+            color: white;
+            border: 1px solid #666;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: background 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #666;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .display-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .display-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+            width: 150px;
+            height: 220px;
+            margin: 10px;
+            border: 2px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .display-card:hover {
+            transform: translateY(-10px) rotateY(5deg);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .display-icon {
+            font-size: 3.5em;
+            margin: 10px 0;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .display-card::after {
+            content: attr(data-suit);
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .display-card .corner-suit-bottom {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            line-height: 1;
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">← Back to Jane Street Cards</a>
+
+        <h1 id="category-title">Test Category</h1>
+
+        <div class="display-grid" id="cards-container">
+            <a href="#" class="display-card" data-suit="♣">
+                <div class="corner-suit-bottom">♣</div>
+                <div class="display-icon">A♣</div>
+            </a>
+
+            <a href="#" class="display-card" data-suit="♣">
+                <div class="corner-suit-bottom">♣</div>
+                <div class="display-icon">2♣</div>
+            </a>
+
+            <a href="#" class="display-card" data-suit="♣">
+                <div class="corner-suit-bottom">♣</div>
+                <div class="display-icon">3♣</div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
