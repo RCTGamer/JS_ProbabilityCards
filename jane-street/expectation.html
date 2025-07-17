@@ -1,22 +1,9 @@
 <!DOCTYPE html>
-<html l        .back-button {
-            display: inline-block;
-            background: black;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            transition: background 0.3s ease;
-            border: 2px solid white;
-        }
-        
-        .back-button:hover {
-            background: #666;
-        }ad>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expectation and Linearity</title>
+    <title>Classical and Conditional Probability</title>
     
     <!-- MathJax for LaTeX rendering -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -77,12 +64,46 @@
             margin: 20px 0;
             border-radius: 5px;
             color: white;
+            line-height: 1.8;
         }
         
+        /* Green to Yellow gradient (A♣ to 7♣) */
+        .problem:nth-child(3) { border-left-color: #00ff00; } /* A♣ - Pure Green */
+        .problem:nth-child(4) { border-left-color: #2aff00; } /* 2♣ - Green-Yellow */
+        .problem:nth-child(5) { border-left-color: #55ff00; } /* 3♣ - Green-Yellow */
+        .problem:nth-child(6) { border-left-color: #80ff00; } /* 4♣ - Yellow-Green */
+        .problem:nth-child(7) { border-left-color: #aaff00; } /* 5♣ - Yellow-Green */
+        .problem:nth-child(8) { border-left-color: #d5ff00; } /* 6♣ - Yellow */
+        .problem:nth-child(9) { border-left-color: #ffff00; } /* 7♣ - Pure Yellow */
+        
+        /* Yellow to Red gradient (8♣ to K♣) */
+        .problem:nth-child(10) { border-left-color: #ffd500; } /* 8♣ - Yellow-Orange */
+        .problem:nth-child(11) { border-left-color: #ffaa00; } /* 9♣ - Orange */
+        .problem:nth-child(12) { border-left-color: #ff8000; } /* 10♣ - Orange-Red */
+        .problem:nth-child(13) { border-left-color: #ff5500; } /* J♣ - Red-Orange */
+        .problem:nth-child(14) { border-left-color: #ff2a00; } /* Q♣ - Red */
+        .problem:nth-child(15) { border-left-color: #ff0000; } /* K♣ - Pure Red */
+        
         .problem h3 {
-            color: #28a745;
-            margin-top: 0;
+            font-size: 1.4em;
+            margin-top: -3px;
+            margin-bottom: -10px;
         }
+        
+        /* Match h3 colors to border colors */
+        .problem:nth-child(3) h3 { color: #00ff00;  } /* A♣ */
+        .problem:nth-child(4) h3 { color: #2aff00; } /* 2♣ */
+        .problem:nth-child(5) h3 { color: #55ff00; } /* 3♣ */
+        .problem:nth-child(6) h3 { color: #80ff00; } /* 4♣ */
+        .problem:nth-child(7) h3 { color: #aaff00; } /* 5♣ */
+        .problem:nth-child(8) h3 { color: #d5ff00; } /* 6♣ */
+        .problem:nth-child(9) h3 { color: #ffff00; } /* 7♣ */
+        .problem:nth-child(10) h3 { color: #ffd500; } /* 8♣ */
+        .problem:nth-child(11) h3 { color: #ffaa00; } /* 9♣ */
+        .problem:nth-child(12) h3 { color: #ff8000; } /* 10♣ */
+        .problem:nth-child(13) h3 { color: #ff5500; } /* J♣ */
+        .problem:nth-child(14) h3 { color: #ff2a00; } /* Q♣ */
+        .problem:nth-child(15) h3 { color: #ff0000; } /* K♣ */
         
         .probability-scenario {
             background: #2a2a2a;
@@ -140,6 +161,11 @@
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
+
+        .tab-indent {
+            padding-left: 2em;
+            display: block;
+        }
         
     </style>
 </head>
@@ -152,9 +178,9 @@
         <div class="problem">
             <h3>A♣</h3>
             <p>Assume that <strong>A</strong> = 1, <strong>J</strong> = 11, <strong>Q</strong> = 12, 
-                <strong>K</strong> = 13. <br><br>
-                a) What is the expected value of a randomly drawn card from a standard deck?<br><br>
-                b) If you draw two cards randomly, what is, the expected value of their sum?</p>
+                <strong>K</strong> = 13. <br>
+                <span class="tab-indent">a) What is the expected value of a randomly drawn card from a standard deck?</span>
+                <span class="tab-indent">b) If you draw two cards randomly, what is the expected value of their sum?</span></p>
             <div class="answer-section">
                 <input type="number" id="answer1a" placeholder="a)">
                 <button onclick="checkAnswer('1a', 7)">Check Answer</button>
@@ -170,9 +196,9 @@
         <div class="problem">
             <h3>2♣</h3>
             <p> A standard deck of cards is shuffled. On average, how many cards will 
-                you have to draw the <strong>A♣</strong> if: <br><br>
-                a) You draw with replacement? <br><br>
-                b) You draw without replacement? </p>
+                you have to draw the <strong>A♣</strong> if: <br>
+                <span class="tab-indent">a) You draw with replacement?</span>
+                <span class="tab-indent">b) You draw without replacement?</span></p>
             <div class="answer-section">
                 <input type="number" id="answer2a" placeholder="a)">
                 <button onclick="checkAnswer('2a', 7)">Check Answer</button>
@@ -187,7 +213,7 @@
 
         <div class="problem">
             <h3>3♣</h3>
-            <p>20 people are each holding a playing card. These cards are all shuffled and 
+            <p>$20$ people are each holding a playing card. These cards are all shuffled and 
                 redistributed randomly. What is the expected number of people who 
                 get their original card back?</p>
             <div class="answer-section">
@@ -200,7 +226,7 @@
         <div class="problem">
             <h3>4♣</h3>
             <p>
-                10 people are sitting in a circle. Each has their own deck of cards. 
+                $10$ people are sitting in a circle. Each has their own deck of cards. 
                 They each shuffle their deck and draw a random card. If the card is red, 
                 the holder turns to shake hands with the player to their left. 
                 If the card is black, they turn to shake hands with the person 
@@ -259,7 +285,7 @@
         <div class="problem">
             <h3>8♣</h3>
             <p>
-                Arrange the 13♣'s in random order. How many times do you expect the 
+                Arrange the <strong>13♣'s</strong> in random order. How many times do you expect the 
                 sequence to change direction (increasing to decreasing or vice versa)?
             </p>
             <div class="answer-section">
@@ -286,8 +312,8 @@
         <div class="problem">
             <h3>10♣</h3>
             <p>
-                Draw cards from a shuffled deck until you draw the<strong>J♣, Q♣,</strong> and 
-                <strong></strong>K♣</strong>. How many draws will it take on average?
+                Draw cards from a shuffled deck until you draw the <strong> J♣, Q♣,</strong> and 
+                <strong> K♣</strong>. How many draws will it take on average?
             </p>
             <div class="answer-section">
                 <input type="number" id="answer10" placeholder="Answer">
@@ -302,9 +328,9 @@
                 We have $2N$ cards: 1 through $N$ of both ♣ and ♠. Remove the 1♣ and a random ♠. 
                 Remove a pair of cards: the 2♣ and an associated ♠, the 3♣ and an associated ♠
                 (the 2♠ if you can find it, or else a random ♠). Continue similarly (with the 
-                3♣, 4♣, etc) until all cards are paired and removed. <br><br>
-                a) What's the chance $N$♣ and $N$♠ form a pair? <br><br>
-                b) On average, how many pairs have matching rank?
+                3♣, 4♣, etc) until all cards are paired and removed.
+                <span class="tab-indent">a) What's the chance $N$♣ and $N$♠ form a pair?</span>
+                <span class="tab-indent">b) On average, how many pairs have matching rank?</span>
             </p>
             <div class="answer-section">
                 <input type="number" id="answerJa" placeholder="a)">
@@ -325,9 +351,9 @@
                 You want to maximize the number of cards face up, but you are only allowed 
                 to flip a full row or full column at a time (as many times as you like). How many
                 cards can you get face up at the same time no matter how I arrange the cards to
-                start for: <br><br>
-                a) $M = N$? <br><br>
-                b) $M = 2^N$?
+                start for:
+                <span class="tab-indent">a) $M = N$ ?</span>
+                <span class="tab-indent">b) $M = 2^N$ ?</span>
             </p>
             <div class="answer-section">
                 <input type="number" id="answerQa" placeholder="a)">
