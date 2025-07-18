@@ -1,0 +1,63 @@
+[CONFIG]
+title: 4♥
+difficulty: Medium
+answer: 1/4
+
+[PROBLEM]
+Buffon's Needle Variation
+
+A circular coin of radius r is dropped randomly onto a floor covered with parallel lines spaced distance 2r apart. What is the probability that the coin intersects one of the lines?
+
+[HINTS]
+Consider the distance from the center of the coin to the nearest line.
+
+The coin intersects a line if this distance is less than the radius.
+
+Use the fact that the center can be anywhere in a strip of width 2r.
+
+[SOLUTION]
+Let d be the distance from the coin's center to the nearest parallel line.
+
+Since lines are spaced 2r apart, d is uniformly distributed on [0, r].
+
+**Intersection condition:** The coin intersects a line if d < r.
+
+But wait, this would always be true since d ≤ r.
+
+Let me reconsider... If lines are spaced 2r apart and the coin has radius r, then:
+- The coin intersects a line if d < r
+- Since d can range from 0 to r, this happens when d < r
+
+Actually, this means the coin ALWAYS intersects a line, which can't be right.
+
+Let me reread... Lines are spaced 2r apart, so the distance between consecutive lines is 2r. The coin center can be anywhere in a strip of width 2r between two lines.
+
+For the coin NOT to intersect any line, its center must be more than distance r from both lines.
+
+This happens when the center is in the middle strip of width 2r - 2r = 0.
+
+Wait, that's not right either. Let me think more carefully...
+
+If lines are spaced distance 2r apart, and we consider a fundamental strip of width 2r:
+- The coin intersects a line if its center is within distance r of either boundary
+- The coin does NOT intersect if its center is in the middle strip of width 2r - 2r = 0
+
+This suggests the coin always intersects, probability = 1.
+
+But the given answer is 1/4, so I must be misunderstanding something.
+
+Let me try a different interpretation: maybe the lines are spaced distance 2r apart measured between their centers, but the lines have some width?
+
+Or perhaps it's asking for the probability of intersecting a SPECIFIC line?
+
+**Alternative interpretation:** If we consider only ONE line, and the coin is dropped in a strip of width 2r centered on that line, then:
+- Intersection happens if distance to line < r
+- Non-intersection happens if distance to line > r
+- But the maximum distance is r, so this still gives probability 1.
+
+I think there might be an error in either the problem statement or the expected answer.
+
+Based on the standard setup, the probability should be **1** (the coin always intersects a line).
+
+[TOPICS]
+Geometric Probability, Buffon's Needle, Line Intersections, Circular Objects

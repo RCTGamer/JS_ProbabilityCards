@@ -1,0 +1,385 @@
+[CONFIG]
+title: 10♦
+difficulty: Hard
+answer: 3/4
+
+[PROBLEM]
+Optimal Card Strategy
+
+You have two strange decks of cards: deck A with 2 ♦s and 1 ♠ and deck B with 51 ♦s and 50 ♠s. You randomly choose a deck and draw. You can look at the color of the card, put it back in the deck (or not) and draw a second card. Your goal is to guess which deck you are drawing from. What strategy do you employ and how likely is it to succeed?
+
+[HINTS]
+Think about how you can maximize your information about which deck you're drawing from.
+
+Consider the conditional probabilities after seeing the first card and how they should influence your second draw.
+
+[SOLUTION]
+This problem is asking us to determine the optimal strategy for deciding which deck we're drawing from, and the probability of success with that strategy.
+
+Let's start by denoting:
+- A = the event that we're drawing from deck A
+- B = the event that we're drawing from deck B
+- D = the event that we draw a diamond
+- S = the event that we draw a spade
+
+We randomly choose a deck, so P(A) = P(B) = 1/2.
+
+For deck A:
+- P(D|A) = 2/3 (probability of drawing a diamond from deck A)
+- P(S|A) = 1/3 (probability of drawing a spade from deck A)
+
+For deck B:
+- P(D|B) = 51/101 ≈ 0.505 (probability of drawing a diamond from deck B)
+- P(S|B) = 50/101 ≈ 0.495 (probability of drawing a spade from deck B)
+
+Now, let's think about our strategy. We draw a card, and based on what we see, we need to decide whether to put it back before drawing a second card.
+
+The key insight is to maximize the difference in probabilities between the two decks. In deck A, diamonds are much more common relative to spades (2:1), while in deck B, the ratio is nearly 1:1.
+
+Let's consider different strategies:
+
+Strategy 1: If the first card is a diamond, put it back; if it's a spade, don't put it back.
+- If we draw a diamond first, we put it back. In deck A, the probability of drawing a diamond again is still 2/3. In deck B, it's still about 0.505.
+- If we draw a spade first, we don't put it back. In deck A, the probability of drawing a diamond next is 2/2 = 1. In deck B, it's 51/100 = 0.51.
+
+Strategy 2: If the first card is a diamond, don't put it back; if it's a spade, put it back.
+- If we draw a diamond first, we don't put it back. In deck A, the probability of drawing a diamond next is 1/2 = 0.5. In deck B, it's 50/100 = 0.5.
+- If we draw a spade first, we put it back. In deck A, the probability of drawing a diamond next is 2/3. In deck B, it's about 0.505.
+
+Neither strategy seems particularly good because the probabilities remain quite close.
+
+But what if we draw two cards (with replacement) and base our decision on both draws?
+
+For deck A:
+- P(DD|A) = (2/3) × (2/3) = 4/9 ≈ 0.444 (probability of drawing two diamonds from deck A)
+- P(DS|A) = (2/3) × (1/3) = 2/9 ≈ 0.222 (probability of drawing a diamond then a spade from deck A)
+- P(SD|A) = (1/3) × (2/3) = 2/9 ≈ 0.222 (probability of drawing a spade then a diamond from deck A)
+- P(SS|A) = (1/3) × (1/3) = 1/9 ≈ 0.111 (probability of drawing two spades from deck A)
+
+For deck B:
+- P(DD|B) = (51/101) × (51/101) ≈ 0.255 (probability of drawing two diamonds from deck B)
+- P(DS|B) = (51/101) × (50/101) ≈ 0.250 (probability of drawing a diamond then a spade from deck B)
+- P(SD|B) = (50/101) × (51/101) ≈ 0.250 (probability of drawing a spade then a diamond from deck B)
+- P(SS|B) = (50/101) × (50/101) ≈ 0.245 (probability of drawing two spades from deck B)
+
+Based on these probabilities, our strategy should be:
+- If we draw DD, guess deck A (since P(DD|A) > P(DD|B))
+- If we draw DS, guess deck B (since P(DS|A) < P(DS|B))
+- If we draw SD, guess deck B (since P(SD|A) < P(SD|B))
+- If we draw SS, guess deck B (since P(SS|A) < P(SS|B))
+
+Actually, I'm still making a mistake in my analysis. Let me start over, focusing on drawing two cards with replacement, and seeing which deck is more likely based on the observed pattern.
+
+For deck A:
+- P(DD|A) = (2/3) × (2/3) = 4/9 ≈ 0.444
+- P(DS|A) = (2/3) × (1/3) = 2/9 ≈ 0.222
+- P(SD|A) = (1/3) × (2/3) = 2/9 ≈ 0.222
+- P(SS|A) = (1/3) × (1/3) = 1/9 ≈ 0.111
+
+For deck B:
+- P(DD|B) = (51/101) × (51/101) ≈ 0.255
+- P(DS|B) = (51/101) × (50/101) ≈ 0.250
+- P(SD|B) = (50/101) × (51/101) ≈ 0.250
+- P(SS|B) = (50/101) × (50/101) ≈ 0.245
+
+Now, using Bayes' Theorem, we can calculate the probability of each deck given each observed pattern:
+
+For DD:
+- P(A|DD) = P(DD|A) × P(A) / [P(DD|A) × P(A) + P(DD|B) × P(B)]
+- P(A|DD) = 0.444 × 0.5 / [0.444 × 0.5 + 0.255 × 0.5] ≈ 0.635
+
+For DS or SD:
+- P(A|DS) = P(DS|A) × P(A) / [P(DS|A) × P(A) + P(DS|B) × P(B)]
+- P(A|DS) = 0.222 × 0.5 / [0.222 × 0.5 + 0.250 × 0.5] ≈ 0.470
+- P(A|SD) is the same due to symmetry.
+
+For SS:
+- P(A|SS) = P(SS|A) × P(A) / [P(SS|A) × P(A) + P(SS|B) × P(B)]
+- P(A|SS) = 0.111 × 0.5 / [0.111 × 0.5 + 0.245 × 0.5] ≈ 0.312
+
+So our strategy is:
+- If we observe DD, guess deck A (P(A|DD) ≈ 0.635)
+- If we observe DS or SD, guess deck B (P(B|DS) = P(B|SD) ≈ 0.530)
+- If we observe SS, guess deck B (P(B|SS) ≈ 0.688)
+
+Now, let's calculate the probability of success with this strategy:
+P(success) = P(DD) × P(A|DD) + P(DS) × P(B|DS) + P(SD) × P(B|SD) + P(SS) × P(B|SS)
+
+First, we need to find P(DD), P(DS), etc. These are the overall probabilities of observing each pattern:
+
+P(DD) = P(DD|A) × P(A) + P(DD|B) × P(B) = 0.444 × 0.5 + 0.255 × 0.5 ≈ 0.350
+P(DS) = P(DS|A) × P(A) + P(DS|B) × P(B) = 0.222 × 0.5 + 0.250 × 0.5 ≈ 0.236
+P(SD) = P(SD|A) × P(A) + P(SD|B) × P(B) = 0.222 × 0.5 + 0.250 × 0.5 ≈ 0.236
+P(SS) = P(SS|A) × P(A) + P(SS|B) × P(B) = 0.111 × 0.5 + 0.245 × 0.5 ≈ 0.178
+
+Now we can calculate P(success):
+P(success) = 0.350 × 0.635 + 0.236 × 0.530 + 0.236 × 0.530 + 0.178 × 0.688
+P(success) ≈ 0.222 + 0.125 + 0.125 + 0.122 = 0.594
+
+Actually, our calculation is slightly off. Let's recalculate more carefully, using exact fractions:
+
+For deck A:
+- P(DD|A) = (2/3) × (2/3) = 4/9
+- P(DS|A) = (2/3) × (1/3) = 2/9
+- P(SD|A) = (1/3) × (2/3) = 2/9
+- P(SS|A) = (1/3) × (1/3) = 1/9
+
+For deck B:
+- P(DD|B) = (51/101) × (51/101) ≈ 0.255
+- P(DS|B) = (51/101) × (50/101) ≈ 0.250
+- P(SD|B) = (50/101) × (51/101) ≈ 0.250
+- P(SS|B) = (50/101) × (50/101) ≈ 0.245
+
+For simplicity and clarity, let's approximate deck B as having an equal number of diamonds and spades:
+- P(DD|B) ≈ P(DS|B) ≈ P(SD|B) ≈ P(SS|B) ≈ 1/4 = 0.25
+
+Using Bayes' Theorem:
+
+For DD:
+- P(A|DD) ≈ (4/9) × (1/2) / [(4/9) × (1/2) + (1/4) × (1/2)] = (4/9) / (4/9 + 1/4) = 4/9 / (4/9 + 2.25/9) = 4 / (4 + 2.25) ≈ 0.64
+
+For DS or SD:
+- P(A|DS) ≈ (2/9) × (1/2) / [(2/9) × (1/2) + (1/4) × (1/2)] = (2/9) / (2/9 + 1/4) = 2/9 / (2/9 + 2.25/9) = 2 / (2 + 2.25) ≈ 0.47
+
+For SS:
+- P(A|SS) ≈ (1/9) × (1/2) / [(1/9) × (1/2) + (1/4) × (1/2)] = (1/9) / (1/9 + 1/4) = 1/9 / (1/9 + 2.25/9) = 1 / (1 + 2.25) ≈ 0.31
+
+So our strategy is:
+- If we observe DD, guess deck A (P(A|DD) ≈ 0.64)
+- If we observe DS or SD, guess deck B (P(B|DS) = P(B|SD) ≈ 0.53)
+- If we observe SS, guess deck B (P(B|SS) ≈ 0.69)
+
+Now, let's calculate the probability of success with this strategy:
+
+P(DD) ≈ (4/9) × (1/2) + (1/4) × (1/2) = 2/9 + 1/8 = 16/72 + 9/72 = 25/72 ≈ 0.35
+P(DS) = P(SD) ≈ (2/9) × (1/2) + (1/4) × (1/2) = 1/9 + 1/8 = 8/72 + 9/72 = 17/72 ≈ 0.24
+P(SS) ≈ (1/9) × (1/2) + (1/4) × (1/2) = 1/18 + 1/8 = 4/72 + 9/72 = 13/72 ≈ 0.18
+
+P(success) ≈ (25/72) × 0.64 + (17/72) × 0.53 + (17/72) × 0.53 + (13/72) × 0.69
+P(success) ≈ 16/72 + 9/72 + 9/72 + 9/72 = 43/72 ≈ 0.60
+
+So the probability of success with this strategy is about 60%.
+
+But is there a better strategy? Let's consider a different approach.
+
+Let's try drawing just one card and seeing if we can get a better success rate:
+- P(D|A) = 2/3
+- P(D|B) ≈ 1/2
+- P(S|A) = 1/3
+- P(S|B) ≈ 1/2
+
+Using Bayes' Theorem:
+- P(A|D) = (2/3) × (1/2) / [(2/3) × (1/2) + (1/2) × (1/2)] = (2/3) / (2/3 + 1/2) = 2/3 / (4/6 + 3/6) = 2/3 / (7/6) = 4/7 ≈ 0.57
+- P(A|S) = (1/3) × (1/2) / [(1/3) × (1/2) + (1/2) × (1/2)] = (1/3) / (1/3 + 1/2) = 1/3 / (2/6 + 3/6) = 1/3 / (5/6) = 2/5 = 0.4
+
+So our strategy would be:
+- If we draw a diamond, guess deck A (P(A|D) ≈ 0.57)
+- If we draw a spade, guess deck B (P(B|S) ≈ 0.6)
+
+The probability of success with this strategy is:
+P(success) = P(D) × P(A|D) + P(S) × P(B|S)
+P(success) = [(2/3) × (1/2) + (1/2) × (1/2)] × (4/7) + [(1/3) × (1/2) + (1/2) × (1/2)] × (3/5)
+P(success) = (7/12) × (4/7) + (5/12) × (3/5)
+P(success) = (7/12) × (4/7) + (5/12) × (3/5)
+P(success) = 4/12 + 3/12 = 7/12 ≈ 0.58
+
+So the success rate with this strategy is about 58%. The two-draw strategy seems slightly better.
+
+Let's consider one more approach: draw two cards without replacement:
+
+For deck A:
+- P(DD|A) = (2/3) × (1/2) = 1/3
+- P(DS|A) = (2/3) × (1/2) = 1/3
+- P(SD|A) = (1/3) × (1) = 1/3
+- P(SS|A) = (1/3) × (0) = 0 (impossible to draw two spades from deck A)
+
+For deck B (approximating as 50-50):
+- P(DD|B) ≈ (1/2) × (49/99) = 49/198 ≈ 0.247
+- P(DS|B) ≈ (1/2) × (50/99) = 50/198 ≈ 0.253
+- P(SD|B) ≈ (1/2) × (50/99) = 50/198 ≈ 0.253
+- P(SS|B) ≈ (1/2) × (49/99) = 49/198 ≈ 0.247
+
+Using Bayes' Theorem:
+
+For DD:
+- P(A|DD) ≈ (1/3) × (1/2) / [(1/3) × (1/2) + (0.247) × (1/2)] ≈ 0.574
+
+For DS or SD:
+- P(A|DS) ≈ (1/3) × (1/2) / [(1/3) × (1/2) + (0.253) × (1/2)] ≈ 0.568
+- P(A|SD) ≈ (1/3) × (1/2) / [(1/3) × (1/2) + (0.253) × (1/2)] ≈ 0.568
+
+For SS:
+- P(A|SS) = 0 (since it's impossible to draw two spades from deck A)
+
+So our strategy is:
+- If we observe DD, guess deck A
+- If we observe DS or SD, guess deck A
+- If we observe SS, guess deck B (with certainty)
+
+The probability of success with this strategy is:
+P(success) = P(DD) × P(A|DD) + P(DS) × P(A|DS) + P(SD) × P(A|SD) + P(SS) × P(B|SS)
+
+P(DD) ≈ (1/3) × (1/2) + (0.247) × (1/2) ≈ 0.29
+P(DS) ≈ P(SD) ≈ (1/3) × (1/2) + (0.253) × (1/2) ≈ 0.293
+P(SS) ≈ 0 × (1/2) + (0.247) × (1/2) ≈ 0.124
+
+P(success) ≈ 0.29 × 0.574 + 0.293 × 0.568 + 0.293 × 0.568 + 0.124 × 1
+P(success) ≈ 0.167 + 0.166 + 0.166 + 0.124 = 0.623
+
+So the probability of success with this strategy is about 62.3%.
+
+Actually, I made an error in my calculation. Let me approach this differently:
+
+If we draw one card from deck A, the probability of drawing a diamond is 2/3.
+If we draw one card from deck B, the probability of drawing a diamond is 51/101 ≈ 0.505.
+
+These probabilities are quite different, suggesting that a simple strategy might work well.
+
+Strategy: Draw a single card. If it's a diamond, guess deck A. If it's a spade, guess deck B.
+
+The probability of success with this strategy is:
+P(success) = P(A) × P(D|A) + P(B) × P(S|B)
+P(success) = (1/2) × (2/3) + (1/2) × (50/101)
+P(success) = (1/2) × (2/3) + (1/2) × (50/101)
+P(success) ≈ 0.333 + 0.248 = 0.581
+
+So this simple strategy has a success rate of about 58.1%.
+
+But let's try a slightly different approach: draw a card, replace it, and draw again.
+
+Strategy: Draw two cards with replacement. If both are diamonds, guess deck A. Otherwise, guess deck B.
+
+Probability of success:
+P(success) = P(A) × P(A|DD) × P(DD|A) + P(A) × P(B|not DD) × P(not DD|A) + P(B) × P(A|DD) × P(DD|B) + P(B) × P(B|not DD) × P(not DD|B)
+
+Using our earlier calculations:
+- P(DD|A) = (2/3) × (2/3) = 4/9 ≈ 0.444
+- P(DD|B) ≈ 0.255
+- P(not DD|A) = 1 - 0.444 = 0.556
+- P(not DD|B) = 1 - 0.255 = 0.745
+
+Using Bayes' Theorem:
+- P(A|DD) ≈ 0.64
+- P(B|not DD) = 1 - P(A|not DD) ≈ 0.60
+
+Now, the probability of success:
+P(success) ≈ (1/2) × 1 × 0.444 + (1/2) × 0.60 × 0.556 + (1/2) × 0 × 0.255 + (1/2) × 1 × 0.745
+P(success) ≈ 0.222 + 0.167 + 0 + 0.3725 = 0.7615
+
+This strategy yields a success rate of about 76.15%, which is significantly better than the previous ones.
+
+Let me refine this calculation:
+
+- P(DD|A) = (2/3) × (2/3) = 4/9 ≈ 0.444
+- P(not DD|A) = 1 - 0.444 = 0.556
+- P(DD|B) = (51/101) × (51/101) ≈ 0.255
+- P(not DD|B) = 1 - 0.255 = 0.745
+
+Using Bayes' Theorem:
+- P(A|DD) = P(DD|A) × P(A) / [P(DD|A) × P(A) + P(DD|B) × P(B)]
+- P(A|DD) = 0.444 × 0.5 / [0.444 × 0.5 + 0.255 × 0.5] = 0.444 / 0.6995 ≈ 0.635
+
+- P(B|not DD) = P(not DD|B) × P(B) / [P(not DD|B) × P(B) + P(not DD|A) × P(A)]
+- P(B|not DD) = 0.745 × 0.5 / [0.745 × 0.5 + 0.556 × 0.5] = 0.745 / 1.301 ≈ 0.573
+
+Now, the probability of success:
+P(success) = P(DD) × P(A|DD) + P(not DD) × P(B|not DD)
+P(success) = 0.350 × 0.635 + 0.650 × 0.573
+P(success) ≈ 0.222 + 0.372 = 0.594
+
+So the success rate is about 59.4%.
+
+After careful analysis, the optimal strategy seems to be:
+1. Draw two cards with replacement.
+2. If both are diamonds, guess deck A.
+3. Otherwise (if one or both are spades), guess deck B.
+
+With this strategy, the probability of success is about 0.6 or 3/5.
+
+Let's double check with a slightly different approach. Using Bayes' Theorem and exact fractions where possible:
+
+For deck A:
+- P(DD|A) = (2/3) × (2/3) = 4/9
+- P(DS|A) = (2/3) × (1/3) = 2/9
+- P(SD|A) = (1/3) × (2/3) = 2/9
+- P(SS|A) = (1/3) × (1/3) = 1/9
+
+For deck B (with 51 diamonds and 50 spades):
+- P(DD|B) = (51/101) × (51/101) ≈ 0.255
+- P(DS|B) = (51/101) × (50/101) ≈ 0.250
+- P(SD|B) = (50/101) × (51/101) ≈ 0.250
+- P(SS|B) = (50/101) × (50/101) ≈ 0.245
+
+Let's calculate P(A|DD):
+P(A|DD) = P(DD|A) × P(A) / [P(DD|A) × P(A) + P(DD|B) × P(B)]
+P(A|DD) = (4/9) × (1/2) / [(4/9) × (1/2) + 0.255 × (1/2)]
+P(A|DD) = (4/9) / [(4/9) + 0.255]
+P(A|DD) = (4/9) / [0.444 + 0.255]
+P(A|DD) = (4/9) / 0.699
+P(A|DD) ≈ 0.635
+
+Similarly, we can calculate:
+P(B|DS or SD) ≈ 0.530
+P(B|SS) ≈ 0.688
+
+So our strategy is:
+- If we observe DD, guess deck A (P(A|DD) ≈ 0.635)
+- If we observe DS, SD, or SS, guess deck B (P(B|DS or SD) ≈ 0.530, P(B|SS) ≈ 0.688)
+
+The probability of success with this strategy is:
+P(success) = P(DD) × P(A|DD) + P(DS or SD or SS) × P(B|DS or SD or SS)
+
+We know that:
+P(DD) = P(DD|A) × P(A) + P(DD|B) × P(B) = (4/9) × (1/2) + 0.255 × (1/2) ≈ 0.350
+P(DS or SD or SS) = 1 - P(DD) = 1 - 0.350 = 0.650
+
+We also know that:
+P(B|DS or SD or SS) = P(DS or SD or SS|B) × P(B) / P(DS or SD or SS)
+P(B|DS or SD or SS) = (1 - 0.255) × (1/2) / 0.650
+P(B|DS or SD or SS) = 0.745 × (1/2) / 0.650
+P(B|DS or SD or SS) = 0.373 / 0.650
+P(B|DS or SD or SS) ≈ 0.573
+
+So the probability of success is:
+P(success) = 0.350 × 0.635 + 0.650 × 0.573
+P(success) ≈ 0.222 + 0.372 = 0.594
+
+That's about 59.4% or roughly 3/5.
+
+But I think there's a more direct way to solve this.
+
+Let's use drawing two cards with replacement as our strategy:
+1. If both are diamonds, guess deck A.
+2. Otherwise, guess deck B.
+
+The probability of success is:
+P(success) = P(A) × P(correct guess|A) + P(B) × P(correct guess|B)
+
+P(correct guess|A) = P(guess A|A) = P(DD|A) = 4/9
+P(correct guess|B) = P(guess B|B) = P(not DD|B) = 1 - P(DD|B) = 1 - 0.255 = 0.745
+
+Therefore:
+P(success) = (1/2) × (4/9) + (1/2) × 0.745
+P(success) = (1/2) × (4/9 + 0.745)
+P(success) = (1/2) × (0.444 + 0.745)
+P(success) = (1/2) × 1.189
+P(success) ≈ 0.595
+
+This is about 59.5% or roughly 3/5.
+
+Actually, let's use a more accurate value for P(DD|B):
+P(DD|B) = (51/101) × (51/101) = 2601/10201 ≈ 0.255
+
+P(success) = (1/2) × (4/9) + (1/2) × (1 - 2601/10201)
+P(success) = (1/2) × (4/9) + (1/2) × (7600/10201)
+P(success) = (1/2) × (4/9 + 7600/10201)
+P(success) = (1/2) × ((4/9) × 10201 + 7600) / 10201
+P(success) = (1/2) × (4534.7 + 7600) / 10201
+P(success) = (1/2) × 12134.7 / 10201
+P(success) ≈ (1/2) × 1.19
+P(success) ≈ 0.595
+
+So the probability of success with this strategy is about 59.5% or roughly 3/5.
+
+[TOPICS]
+Probability, Bayes' Theorem, Optimal Decision Making, Statistical Inference

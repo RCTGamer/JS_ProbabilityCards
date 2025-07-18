@@ -1,0 +1,29 @@
+[CONFIG]
+title: A♠
+difficulty: Medium
+answer: 0.3125
+
+[PROBLEM]
+**Two Crabs Random Walk**
+
+Two crabs are facing each other on the beach. Each second they randomly walk one step to the right or one step to the left (independently). After $6$ seconds, what is the chance they are still across from each other?
+
+[HINT]
+Consider the relative position between the two crabs. Think about what it means for them to be "across from each other" after 6 steps.
+
+[SOLUTION]
+Let's denote the relative position between the two crabs. Initially they are distance 0 apart.
+
+Each second, the relative distance changes by:
+- +2 with probability 1/4 (both move away from each other)
+- 0 with probability 1/2 (one moves toward, one away)  
+- -2 with probability 1/4 (both move toward each other)
+
+For them to be across from each other after 6 seconds, their relative distance must be 0.
+
+This is equivalent to a random walk where we move +1 with probability 1/4, stay at 0 with probability 1/2, and move -1 with probability 1/4.
+
+After 6 steps, the probability of being at position 0 is $\frac{5}{16} = 0.3125$.
+
+[TOPICS]
+Random Walks, Probability, Symmetric Random Walk

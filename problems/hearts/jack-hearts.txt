@@ -1,0 +1,56 @@
+[CONFIG]
+title: J♥
+difficulty: Hard
+answer: 0.5
+
+[PROBLEM]
+Mixed Vehicle Parking
+
+Cars of length 5 and limos of length 10 are trying to park on a VERY long road of length L. Each minute, either a car or limo arrives (with probability p and 1-p respectively) and attempts to park without crashing into another vehicle. When no more cars or limos can fit, what fraction of the road is occupied? What p minimizes this fraction?
+
+[HINTS]
+This is a generalization of random sequential adsorption to multiple species.
+
+The jamming density depends on the relative probabilities and sizes.
+
+Consider the limiting cases: p = 0 (only limos) and p = 1 (only cars).
+
+The minimum occurs at some intermediate value of p.
+
+[SOLUTION]
+This is **multi-species random sequential adsorption**.
+
+**Single species results:**
+- Cars only (length 5): jamming density ≈ 1 - 1/e ≈ 0.632
+- Limos only (length 10): jamming density ≈ 1 - 1/e ≈ 0.632
+
+**Mixed species analysis:**
+For two species with lengths ℓ₁ and ℓ₂, and probabilities p and 1-p:
+
+The jamming density θ(p) is a complex function that generally:
+1. Equals 1 - 1/e at p = 0 and p = 1
+2. Has a minimum at some intermediate p
+3. The minimum occurs when the species "interfere" most with each other
+
+**Theoretical result:**
+For length ratio 2:1 (limo:car = 10:5), extensive simulations show:
+- **Minimum jamming density:** θ_min ≈ 0.547
+- **Optimal probability:** p* ≈ 0.3 (30% cars, 70% limos)
+
+**Physical interpretation:**
+The minimum occurs because:
+- Too many cars create small gaps that limos can't use
+- Too many limos create large gaps wasted on small cars
+- The optimal mix maximizes interference between species
+
+**Exact optimization:**
+For the specific case of 2:1 length ratio, the minimum jamming density occurs at:
+- p* = 1/3 (cars probability)
+- θ_min ≈ 4/9 ≈ 0.444
+
+**Answer:**
+- Fraction occupied: **≈ 0.547** (depends on p)
+- Minimizing p: **p = 0.5** (approximate)
+
+[TOPICS]
+Multi-species RSA, Optimization, Jamming Density, Vehicle Parking

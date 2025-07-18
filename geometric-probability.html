@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expectation and Linearity</title>
+    <title>Geometric Probability</title>
     
     <!-- MathJax for LaTeX rendering -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -27,12 +27,24 @@
         }
         
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background: black;
             border-radius: 15px;
             padding: 40px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .problem-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s ease;
+        }
+        
+        .problem-link:hover {
+            transform: translateY(-2px);
         }
         
         .back-button {
@@ -57,116 +69,122 @@
             margin-bottom: 30px;
         }
         
-        .problem {
-            background: #1a1a1a;
-            border-left: 4px solid #28a745;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-            color: white;
-            line-height: 1.8;
+        .display-grid {
+            display: flex; /* Use flexbox for centering */
+            flex-wrap: wrap; /* Allow wrapping of cards */
+            justify-content: center; /* Center horizontally */
         }
         
-        /* Green to Yellow gradient (A♣ to 7♣) */
-        .problem:nth-child(3) { border-left-color: #00ff00; } /* A♣ - Pure Green */
-        .problem:nth-child(4) { border-left-color: #2aff00; } /* 2♣ - Green-Yellow */
-        .problem:nth-child(5) { border-left-color: #55ff00; } /* 3♣ - Green-Yellow */
-        .problem:nth-child(6) { border-left-color: #80ff00; } /* 4♣ - Yellow-Green */
-        .problem:nth-child(7) { border-left-color: #aaff00; } /* 5♣ - Yellow-Green */
-        .problem:nth-child(8) { border-left-color: #d5ff00; } /* 6♣ - Yellow */
-        .problem:nth-child(9) { border-left-color: #ffff00; } /* 7♣ - Pure Yellow */
-        
-        /* Yellow to Red gradient (8♣ to K♣) */
-        .problem:nth-child(10) { border-left-color: #ffd500; } /* 8♣ - Yellow-Orange */
-        .problem:nth-child(11) { border-left-color: #ffaa00; } /* 9♣ - Orange */
-        .problem:nth-child(12) { border-left-color: #ff8000; } /* 10♣ - Orange-Red */
-        .problem:nth-child(13) { border-left-color: #ff5500; } /* J♣ - Red-Orange */
-        .problem:nth-child(14) { border-left-color: #ff2a00; } /* Q♣ - Red */
-        .problem:nth-child(15) { border-left-color: #ff0000; } /* K♣ - Pure Red */
-        
-        .problem h3 {
-            font-size: 1.4em;
-            margin-top: -3px;
-            margin-bottom: -10px;
-        }
-        
-        /* Match h3 colors to border colors */
-        .problem:nth-child(3) h3 { color: #00ff00;  } /* A♣ */
-        .problem:nth-child(4) h3 { color: #2aff00; } /* 2♣ */
-        .problem:nth-child(5) h3 { color: #55ff00; } /* 3♣ */
-        .problem:nth-child(6) h3 { color: #80ff00; } /* 4♣ */
-        .problem:nth-child(7) h3 { color: #aaff00; } /* 5♣ */
-        .problem:nth-child(8) h3 { color: #d5ff00; } /* 6♣ */
-        .problem:nth-child(9) h3 { color: #ffff00; } /* 7♣ */
-        .problem:nth-child(10) h3 { color: #ffd500; } /* 8♣ */
-        .problem:nth-child(11) h3 { color: #ffaa00; } /* 9♣ */
-        .problem:nth-child(12) h3 { color: #ff8000; } /* 10♣ */
-        .problem:nth-child(13) h3 { color: #ff5500; } /* J♣ */
-        .problem:nth-child(14) h3 { color: #ff2a00; } /* Q♣ */
-        .problem:nth-child(15) h3 { color: #ff0000; } /* K♣ */
-        
-        .probability-scenario {
-            background: #2a2a2a;
-            border: 1px solid #444;
-            border-radius: 5px;
-            padding: 15px;
-            margin: 15px 0;
-            font-style: italic;
-            line-height: 1.6;
-            color: #ccc;
-        }
-        
-        .answer-section {
-            margin: 20px 0;
-        }
-        
-        input[type="number"], input[type="text"] {
-            padding: 10px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            width: 200px;
-        }
-        
-        button {
-            background: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
+        .display-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
             cursor: pointer;
-            font-size: 16px;
-            margin-left: 10px;
-        }
-        
-        button:hover {
-            background: #218838;
-        }
-        
-        .result {
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-        
-        .correct {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .incorrect {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+            width: 150px; /* Scale down the card size */
+            height: 220px; /* Adjust height proportionally */
+            margin: 10px; /* Add spacing between cards */
+            border: 2px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
         }
 
-        .tab-indent {
-            padding-left: 2em;
-            display: block;
+        .display-card::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            pointer-events: none;
         }
-        
+
+        .display-card:hover {
+            transform: translateY(-10px) rotateY(5deg);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .display-icon {
+            font-size: 3.5em;
+            margin: 10px 0;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Card suit colors */
+        .display-card[data-suit="♣"] .display-icon,
+        .display-card[data-suit="♣"]::after,
+        .display-card[data-suit="♣"] .corner-suit-bottom { 
+            color: #000 !important; 
+        } /* Clubs - Black */
+
+        .display-card[data-suit="♦"] .display-icon,
+        .display-card[data-suit="♦"]::after,
+        .display-card[data-suit="♦"] .corner-suit-bottom { 
+            color: #dc3545 !important; 
+        } /* Diamonds - Red */
+
+        .display-card[data-suit="♥"] .display-icon,
+        .display-card[data-suit="♥"]::after,
+        .display-card[data-suit="♥"] .corner-suit-bottom { 
+            color: #dc3545 !important; 
+        } /* Hearts - Red */
+
+        .display-card[data-suit="♠"] .display-icon,
+        .display-card[data-suit="♠"]::after,
+        .display-card[data-suit="♠"] .corner-suit-bottom { 
+            color: #000 !important; 
+        } /* Spades - Black */
+
+        .display-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: black;
+            margin: 10px 0;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .display-description {
+            color: #333;
+            line-height: 1.3;
+            font-size: 0.85em;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+        }
+
+        /* Add corner suit symbols like real playing cards */
+        .display-card::after {
+            content: attr(data-suit);
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .display-card .corner-suit-bottom {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            line-height: 1;
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 <body>
@@ -175,235 +193,72 @@
         
         <h1>♥ Geometric Probability</h1>
         
-        <div class="problem">
-            <h3>A♥</h3>
-            <p>
-                A tiny model airplane has gotten stuck inside an inflatable, spherical beach
-                ball of radius 1 and is flying around randomly. When you stop and look, what
-                is the probability that the plane is closer to the center of the ball than 
-                to the outside?
-            </p>
-            <div class="answer-section">
-                <input type="number" id="answer1" placeholder="Answer">
-                <button onclick="checkAnswer('1', 7)">Check Answer</button>
-                <div id="result1" class="result" style="display: none;"></div>
-            </div>
-        </div>
+        <div class="display-grid">
+            <a href="problems/hearts-problem-template.html?problem=ace-hearts" class="display-card" data-suit="♥">
+                <div class="corner-suit-bottom">♥</div>
+                <div class="display-icon">A♥</div>
+            </a>
 
-        <div class="problem">
-            <h3>2♥</h3>
-            <p>
-                Two planes are getting ready for takeoff, traveling down a long runway at 60mph 
-                and 180mph respectively. They both stop suddenly (and independently) after 0-60s 
-                (uniformly at random). What is the chance that the sum of the distances traveled
-                is at most a mile?
-            </p>
-            <div class="answer-section">
-                <input type="number" id="answer2" placeholder="Answer">
-                <button onclick="checkAnswer('2', 7)">Check Answer</button>
-                <div id="result2" class="result" style="display: none;"></div>
-            </div>
-        </div>
+            <a href="problems/hearts-problem-template.html?problem=two-hearts" class="display-card" data-suit="♥">
+                <div class="corner-suit-bottom">♥</div>
+                <div class="display-icon">2♥</div>
+            </a>
 
-        <div class="problem">
-            <h3>3♥</h3>
-            <p>
-                Two cyclists are randomly biking around the unit circle. They each stop at
-                uniformly random spots along the boundary. Form a triangle from the two cyclists
-                and the circle's center. 
-                <span class="tab-indent">a) How likely is the triangle to be acute?</span>
-                <span class="tab-indent">b) What if they had been biking along the surface of a unit 
-                    sphere?</span>
-            </p>
-            <div class="answer-section">
-                <input type="number" id="answer3a" placeholder="Answer">
-                <button onclick="checkAnswer('3a', 7)">Check Answer</button>
-                <div id="result3a" class="result" style="display: none;"></div>
-            </div>
-            <div class="answer-section">
-                <input type="number" id="answer3b" placeholder="Answer">
-                <button onclick="checkAnswer('3b', 7)">Check Answer</button>
-                <div id="result3b" class="result" style="display: none;"></div>
-            </div>
-        </div>
+            <a href="problems/hearts-problem-template.html?problem=three-hearts" class="display-card" data-suit="♥">
+                <div class="corner-suit-bottom">♥</div>
+                <div class="display-icon">3♥</div>
+            </a>
 
-        <div class="problem">
-            <h3>4♥</h3>
-            <p>
-                A round helicopter of diameter $3$ is trying to land. Its landing zone is 
-                covered in painted lines which form a grid of $4\times4$ squares. The helicopter
-                is supposed to land fully within a square, but the pilot did not pay attention
-                and landed randomly. What is the chance that the helicopter falls within a 
-                square nonetheless?
-            </p>
-            <div class="answer-section">
-                <input type="number" id="answer4" placeholder="Answer">
-                <button onclick="checkAnswer('4', 7)">Check Answer</button>
-                <div id="result4" class="result" style="display: none;"></div>
-            </div>
-        </div>
+            <a href="problems/hearts-problem-template.html?problem=four-hearts" class="display-card" data-suit="♥">
+                <div class="corner-suit-bottom">♥</div>
+                <div class="display-icon">4♥</div>
+            </a>
 
-        <div class="problem">
-            <h3>5♥</h3>
-            <p>
-                A circular zamboni (of radius $1$) was driving around an ice rink of length $l$
-                and width $w$. The zamboni broke down at a uniformly random point on the rink.
-                What is the chance that it stopped over a diagonal line?
-            </p>
-            <div class="answer-section">
-                <input type="number" id="answer5" placeholder="Answer">
-                <button onclick="checkAnswer('5', 7)">Check Answer</button>
-                <div id="result5" class="result" style="display: none;"></div>
-            </div>
-        </div>
+            <a href="problems/hearts-problem-template.html?problem=five-hearts" class="display-card" data-suit="♥">
+                <div class="corner-suit-bottom">♥</div>
+                <div class="display-icon">5♥</div>
+            </a>
 
-        <div class="problem">
-            <h3>6♥</h3>
-            <p>
-                Every morning, two friends independently bike to a cafe, arriving at a 
-                uniformly random time between 7am and 8am. Each person waits for $t$ minutes
-                in the parking lot, hoping their friend will join in time. If not, they leave 
-                coffeeless (they cannot carry it on their bike!). If they are 36% likely to get
-                their morning caffeine, what is $t$?
-            </p>
-            <div class="answer-section">
-                <input type="number" id="answer6" placeholder="Answer">
-                <button onclick="checkAnswer('6', 7)">Check Answer</button>
-                <div id="result6" class="result" style="display: none;"></div>
-            </div>
-        </div>
+            <a href="problems/hearts-problem-template.html?problem=six-hearts" class="display-card" data-suit="♥">
+                <div class="corner-suit-bottom">♥</div>
+                <div class="display-icon">6♥</div>
+            </a>
 
-        <div class="problem">
-            <h3>7♥</h3>
-            <p>
-                $N$ cyclists are biking around a circular track at a rate of 1rpm. They start in
-                uniformly random locations and random orientations (clockwise or counterclockwise).
-                Just before a pair would collide, they instantly reverse direction. What is the 
-                expected number of times all the cyclists reverse direction each minute?
-            </p>
-            <div class="answer-section">
-                <input type="number" id="answer7" placeholder="Answer">
-                <button onclick="checkAnswer('7', 7)">Check Answer</button>
-                <div id="result7" class="result" style="display: none;"></div>
-            </div>
-        </div>
+            <a href="problems/hearts-problem-template.html?problem=seven-hearts" class="display-card" data-suit="♥">
+                <div class="corner-suit-bottom">♥</div>
+                <div class="display-icon">7♥</div>
+            </a>
 
-        <div class="problem">
-            <h3>8♥</h3>
-            <p>
-                $N$ cyclists are biking around a circular track at a rate of 1rpm. They start in
-                uniformly random locations and random orientations (clockwise or counterclockwise).
-                Just before a pair would collide, they instantly reverse direction. What is the 
-                probability that after $1$ minute, all cyclists are where they started?
-            </p>
-            <div class="answer-section">
-                <input type="number" id="answer8" placeholder="Answer">
-                <button onclick="checkAnswer('8', 7)">Check Answer</button>
-                <div id="result8" class="result" style="display: none;"></div>
-            </div>
-        </div>
+            <a href="problems/hearts-problem-template.html?problem=eight-hearts" class="display-card" data-suit="♥">
+                <div class="corner-suit-bottom">♥</div>
+                <div class="display-icon">8♥</div>
+            </a>
 
-        <div class="problem">
-            <h3>9♥</h3>
-            <p>
-                Cars of length $2$ are parking on a street of length $100$, with parking meters
-                evenly spaced every length $1$. Each minute, a car arrives and parks at a 
-                uniformly randomly open spot, aligning its front bumper with a parking meter. 
-                When no more cars can possibly fit, roughly what fraction of parking meters are
-                unoccupied by a car?
-            </p>
-            <div class="answer-section">
-                <input type="number" id="answer9" placeholder="Answer">
-                <button onclick="checkAnswer('9', 7)">Check Answer</button>
-                <div id="result9" class="result" style="display: none;"></div>
-            </div>
-        </div>
+            <a href="problems/hearts-problem-template.html?problem=nine-hearts" class="display-card" data-suit="♥">
+                <div class="corner-suit-bottom">♥</div>
+                <div class="display-icon">9♥</div>
+            </a>
 
-        <div class="problem">
-            <h3>10♥</h3>
-            <p>
-                Cars of length $2$ are parking on a street of length $100$, with parking meters
-                evenly spaced every length $1$. Each minute, a car arrives and parks at a 
-                uniformly randomly spot on the road without crashing into another car or running
-                off the road. When no more cars can possibly fit, roughly how many cars have parked?
-            </p>
-            <div class="answer-section">
-                <input type="number" id="answer10" placeholder="Answer">
-                <button onclick="checkAnswer('10', 7)">Check Answer</button>
-                <div id="result10" class="result" style="display: none;"></div>
-            </div>
-        </div>
+            <a href="problems/hearts-problem-template.html?problem=ten-hearts" class="display-card" data-suit="♥">
+                <div class="corner-suit-bottom">♥</div>
+                <div class="display-icon">10♥</div>
+            </a>
 
-        <div class="problem">
-            <h3>J♥</h3>
-            <p>
-                Cars of length $5$ and limos of length $10$ are trying to park on a VERY long road
-                of length $L$. Each minute, either a car or limo arrives (with probability $p,1-p$
-                respectively) and attempts to park without crashing into another vehicle. When no more
-                cars or limos can fit, what fraction of the road is occupied? What $p$ minimizes this 
-                fraction?
-            </p>
-            <div class="answer-section">
-                <input type="number" id="answerJ" placeholder="Answer">
-                <button onclick="checkAnswer('J', 7)">Check Answer</button>
-                <div id="resultJ" class="result" style="display: none;"></div>
-            </div>
-        </div>
+            <a href="problems/hearts-problem-template.html?problem=jack-hearts" class="display-card" data-suit="♥">
+                <div class="corner-suit-bottom">♥</div>
+                <div class="display-icon">J♥</div>
+            </a>
 
-        <div class="problem">
-            <h3>Q♥</h3>
-            <p>
-                ** Cars of length $2$ try to park on a length $L$ road. Each minute, a new car parks
-                at a uniformly random spot on the road without crashing into another car or running
-                off the road. When no more cars fit: 
-                <span class="tab-indent">a) What is the expected size of the largest gap 
-                    between adjacent cars (as a function of $L$)?</span>
-                <span class="tab-indent">b) How about the smallest gap between adjacent cars?</span>
-            </p>
-            <div class="answer-section">
-                <input type="number" id="answerQ" placeholder="Answer">
-                <button onclick="checkAnswer('Q', 7)">Check Answer</button>
-                <div id="resultQ" class="result" style="display: none;"></div>
-            </div>
-        </div>
+            <a href="problems/hearts-problem-template.html?problem=queen-hearts" class="display-card" data-suit="♥">
+                <div class="corner-suit-bottom">♥</div>
+                <div class="display-icon">Q♥</div>
+            </a>
 
-        <div class="problem">
-            <h3>K♥</h3>
-            <p>
-                ** Helicopters (radius $1$ circles) are landing in a very large $L\times L$ lot.
-                Each minute, a helicopter arrives and randomly picks an available point in the lot
-                to land (without crashing into another helicopter)! On average: 
-                <span class="tab-indent">a) What fraction of the lot is occupied? </span>
-                <span class="tab-indent">b)What about for $3$ and $4$ dimensions? </span>
-            </p>
-            <div class="answer-section">
-                <input type="number" id="answerK" placeholder="Answer">
-                <button onclick="checkAnswer('K', 7)">Check Answer</button>
-                <div id="resultK" class="result" style="display: none;"></div>
-            </div>
+            <a href="problems/hearts-problem-template.html?problem=king-hearts" class="display-card" data-suit="♥">
+                <div class="corner-suit-bottom">♥</div>
+                <div class="display-icon">K♥</div>
+            </a>
         </div>
-
-    <script>
-        function checkAnswer(problemNum, correctAnswer) {
-            const userAnswer = parseFloat(document.getElementById(`answer${problemNum}`).value);
-            const resultDiv = document.getElementById(`result${problemNum}`);
-            
-            resultDiv.style.display = 'block';
-            
-            const tolerance = 0.1;
-            if (Math.abs(userAnswer - correctAnswer) <= tolerance) {
-                resultDiv.className = 'result correct';
-                resultDiv.textContent = '✅ Correct! Well done!';
-            } else {
-                resultDiv.className = 'result incorrect';
-                resultDiv.textContent = `❌ Incorrect. The correct answer is ${correctAnswer}.`;
-            }
-        }
-        
-        function showHint(problemNum) {
-            const hintDiv = document.getElementById(`hint${problemNum}`);
-            hintDiv.style.display = hintDiv.style.display === 'none' ? 'block' : 'none';
-        }
-    </script>
+    </div>
 </body>
 </html>

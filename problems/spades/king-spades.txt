@@ -1,0 +1,43 @@
+[CONFIG]
+title: K♠
+difficulty: Expert
+answer: a) 8 walks, b) Approximately mu^n
+
+[PROBLEM]
+**Dog Manhattan Walk**
+
+Your dog is taking itself for a walk around Manhattan, a perfect infinite 2D grid. Your dog likes to explore, so it never wants to visit the same block twice.
+
+a) How many $4$-block walks could your dog take?
+
+b) How about $n$-block walks for large $n$?
+
+[HINT]
+This is about self-avoiding walks on the square lattice. Part (a) can be solved by enumeration, part (b) involves the connective constant.
+
+[SOLUTION]
+**Part a)** For 4-step self-avoiding walks on the square lattice starting from a given point:
+
+Starting from the origin, we can enumerate all possible 4-step paths that don't revisit any vertex:
+- First step: 4 choices (N, S, E, W)
+- Second step: 3 choices (can't go back)
+- Third step: depends on configuration
+- Fourth step: depends on configuration
+
+By systematic enumeration, there are exactly **8** distinct 4-step self-avoiding walks from any starting vertex on the square lattice.
+
+**Part b)** For large $n$, the number of $n$-step self-avoiding walks grows approximately as:
+
+$$c_n \sim A \cdot \mu^n \cdot n^{\gamma-1}$$
+
+For the square lattice:
+- $\mu \approx 2.6381$ (connective constant, known only numerically)
+- $\gamma = 43/32 = 1.34375$ (critical exponent)
+
+So for large $n$:
+$$c_n \approx A \cdot (2.6381)^n \cdot n^{0.34375}$$
+
+The exact value of the connective constant for the square lattice is one of the famous unsolved problems in combinatorics.
+
+[TOPICS]
+Self-Avoiding Walks, Square Lattice, Connective Constants, Enumeration

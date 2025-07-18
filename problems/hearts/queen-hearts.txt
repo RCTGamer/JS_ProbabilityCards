@@ -1,0 +1,61 @@
+[CONFIG]
+title: Q♥
+difficulty: Hard
+answer: ln(L)
+
+[PROBLEM]
+Parking Gap Analysis
+
+Cars of length 2 try to park on a length L road. Each minute, a new car parks at a uniformly random spot on the road without crashing into another car or running off the road. When no more cars fit:
+a) What is the expected size of the largest gap between adjacent cars (as a function of L)?
+b) How about the smallest gap between adjacent cars?
+
+[HINTS]
+After jamming, all gaps have length < 2 (otherwise another car could fit).
+
+The number of gaps grows proportionally to L.
+
+For the maximum: think about extreme value statistics.
+
+For the minimum: consider the distribution of gap sizes.
+
+[SOLUTION]
+After the parking process jams, we have approximately L/3.17 cars (from jamming density 1-1/e) and thus about L/3.17 gaps.
+
+**Part (a): Largest gap**
+
+In random sequential adsorption, the gap sizes follow an exponential distribution with rate λ = 1 (in units where car length = 1, so gaps < 1).
+
+For our problem with car length 2, gaps have size < 2.
+
+**Gap size distribution:**
+f(x) = e^(-x) for 0 ≤ x < 2 (rescaled)
+
+**Extreme value theory:**
+For n i.i.d. exponential random variables with rate 1:
+E[max] ≈ ln(n)
+
+With n ≈ L/3.17 gaps:
+**E[largest gap] ≈ ln(L/3.17) ≈ ln(L) - ln(3.17) ≈ ln(L) - 1.15**
+
+For large L: **E[largest gap] ≈ ln(L)**
+
+**Part (b): Smallest gap**
+
+For the minimum of n exponential random variables:
+E[min] ≈ 1/n
+
+With n ≈ L/3.17:
+**E[smallest gap] ≈ 3.17/L**
+
+**Summary:**
+a) **Largest gap: ≈ ln(L)**
+b) **Smallest gap: ≈ 3.17/L**
+
+**Physical interpretation:**
+- The largest gap grows logarithmically with road length
+- The smallest gap shrinks inversely with road length
+- This reflects the exponential distribution of gap sizes in jammed configurations
+
+[TOPICS]
+Extreme Value Statistics, Random Sequential Adsorption, Gap Size Distribution, Logarithmic Growth

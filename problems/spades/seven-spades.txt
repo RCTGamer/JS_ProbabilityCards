@@ -1,0 +1,32 @@
+[CONFIG]
+title: 7♠
+difficulty: Hard
+answer: Depends on N
+
+[PROBLEM]
+**Crow and Raven Coin Collection**
+
+A crow and a raven are each picking up coins off the street at the same pace. They are clever and keep track of who has picked up more coins that were facing heads than tails after each coin. They each collect $N$ coins in total. What is the chance they never had collected the same number of heads after they started?
+
+[HINT]
+This is related to the ballot problem and Catalan numbers. Consider the difference in the number of heads between the two birds.
+
+[SOLUTION]
+This is a variant of the ballot problem. We're looking at the probability that two random walks (representing the cumulative difference in heads) never meet.
+
+Let $S_n$ be the difference in heads after $n$ coins for each bird. We want the probability that $S_k \neq 0$ for all $k = 1, 2, \ldots, N$.
+
+By the reflection principle and properties of random walks, this probability is:
+
+$P = \frac{1}{N+1} \binom{2N}{N} \cdot \frac{1}{4^N}$
+
+For large $N$, this approaches $\frac{1}{\sqrt{\pi N}}$.
+
+However, the exact answer depends on the specific value of $N$ and involves ballot numbers and Catalan number-related calculations.
+
+For $N = 1$: $P = 1/2$
+For $N = 2$: $P = 1/3$  
+For general $N$: $P = \frac{1}{N+1}$
+
+[TOPICS]
+Ballot Problem, Catalan Numbers, Random Walk Non-Intersection

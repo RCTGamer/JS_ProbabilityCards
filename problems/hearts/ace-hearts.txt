@@ -1,0 +1,37 @@
+[CONFIG]
+title: A♥
+difficulty: Easy
+answer: π/4
+
+[PROBLEM]
+Circle in a Square
+
+A circle is inscribed in a unit square. If you throw a dart randomly at the square, what is the probability that it lands inside the circle?
+
+[HINTS]
+Think about the ratio of areas: the area of the circle compared to the area of the square.
+
+For a unit square, what is the radius of the inscribed circle?
+
+The area of a circle is πr², and the area of a square is side².
+
+[SOLUTION]
+We have a unit square (side length = 1) with an inscribed circle.
+
+For a circle inscribed in a unit square:
+- The circle's diameter equals the side length of the square
+- So the radius r = 1/2
+
+**Area calculations:**
+- Area of square = 1² = 1
+- Area of circle = πr² = π(1/2)² = π/4
+
+**Probability:**
+Since the dart is thrown randomly, the probability of landing in the circle equals the ratio of areas:
+
+P(dart lands in circle) = Area of circle / Area of square = (π/4) / 1 = π/4
+
+Therefore, the probability is **π/4 ≈ 0.785** or about **78.5%**.
+
+[TOPICS]
+Geometric Probability, Area Ratios, Circle and Square, Inscribed Figures

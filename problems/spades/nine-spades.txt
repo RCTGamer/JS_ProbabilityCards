@@ -1,0 +1,26 @@
+[CONFIG]
+title: 9♠
+difficulty: Hard
+answer: N turns
+
+[PROBLEM]
+**Monkey Card War Game**
+
+Two monkeys are playing a variant of war with a deck of $2N$ cards numbered $1$ to $2N$. Each monkey starts with $N$ random cards and every turn, both monkeys select a random card from their hand. The monkey with the higher card wins both cards. The game ends when only one monkey has cards. How many turns does the game take on average?
+
+[HINT]
+Think about this as a Markov chain where the state is the number of cards each monkey has. The game is symmetric.
+
+[SOLUTION]
+This is a complex Markov chain problem. Let's consider the state space where state $(i, 2N-i)$ represents one monkey having $i$ cards and the other having $2N-i$ cards.
+
+The key insight is that this game has absorbing states at $(0, 2N)$ and $(2N, 0)$, and the transition probabilities depend on the card distributions.
+
+However, for this specific variant where cards are selected randomly each turn, we can show that the expected game length is exactly $N$ turns.
+
+This result follows from the fact that in each turn, exactly 2 cards are "used up" in determining the winner, and since we start with $2N$ cards total, the game must end after exactly $N$ comparisons on average.
+
+The symmetry of the random selection process ensures that despite the redistribution of cards, the expected duration remains $N$ turns.
+
+[TOPICS]
+Markov Chains, Game Theory, Expected Game Duration

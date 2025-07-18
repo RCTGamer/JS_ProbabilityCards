@@ -1,0 +1,71 @@
+[CONFIG]
+title: 6♦
+difficulty: Hard
+answer: 52^3
+
+[PROBLEM]
+New Deck vs. Shuffled Deck
+
+You are given a deck of cards that is equally likely to either be perfectly shuffled or brand new (i.e. ordered A♦-K♦, A♠-K♠, etc). You draw the top 3 cards and they are the **A♦, 2♦, and 3♦** in that order. How much more likely is the deck to be brand new vs. shuffled?
+
+[HINTS]
+Use Bayes' Theorem to update your beliefs based on the observed evidence.
+
+Think about the probability of drawing those specific three cards in that specific order from a brand new deck versus from a shuffled deck.
+
+[SOLUTION]
+Let's use Bayes' Theorem to solve this problem.
+
+Let's denote:
+- N = the event that the deck is brand new
+- S = the event that the deck is shuffled
+- E = the event that we draw A♦, 2♦, and 3♦ in that order
+
+We want to find the ratio: P(N|E) / P(S|E)
+
+Using Bayes' Theorem:
+P(N|E) = P(E|N) × P(N) / P(E)
+P(S|E) = P(E|S) × P(S) / P(E)
+
+So P(N|E) / P(S|E) = [P(E|N) × P(N)] / [P(E|S) × P(S)]
+
+Given that the deck is equally likely to be new or shuffled, P(N) = P(S) = 1/2.
+
+So P(N|E) / P(S|E) = P(E|N) / P(E|S)
+
+Now we need to calculate P(E|N) and P(E|S).
+
+If the deck is brand new (N), then drawing A♦, 2♦, and 3♦ in that order happens with certainty, since these are the first three cards in a brand new deck.
+Therefore, P(E|N) = 1.
+
+If the deck is shuffled (S), then the probability of drawing those specific three cards in that specific order is:
+P(E|S) = 1/52 × 1/51 × 1/50 = 1/(52 × 51 × 50) = 1/132600
+
+Therefore:
+P(N|E) / P(S|E) = P(E|N) / P(E|S) = 1 / (1/132600) = 132600
+
+So the deck is 132,600 times more likely to be brand new than shuffled.
+
+Wait, I need to double-check my calculation for P(E|S).
+
+If the deck is shuffled (S), we need the probability of drawing specifically A♦, 2♦, and 3♦ in that exact order. This is:
+- Probability of drawing A♦ first: 1/52
+- Probability of drawing 2♦ second, given A♦ was drawn first: 1/51
+- Probability of drawing 3♦ third, given A♦ and 2♦ were drawn first and second: 1/50
+
+So P(E|S) = 1/52 × 1/51 × 1/50 = 1/(52 × 51 × 50)
+
+This equals approximately 7.53 × 10^-6 or about 1 in 132,600.
+
+Therefore:
+P(N|E) / P(S|E) = 1 / (7.53 × 10^-6) ≈ 132,600
+
+So the deck is approximately 132,600 times more likely to be brand new than shuffled.
+
+Let me double-check my arithmetic:
+52 × 51 × 50 = 52 × 2550 = 132,600
+
+So the answer is confirmed: the deck is 132,600 times more likely to be brand new than shuffled.
+
+[TOPICS]
+Bayes' Theorem, Conditional Probability, Card Probability, Statistical Inference

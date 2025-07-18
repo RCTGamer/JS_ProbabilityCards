@@ -1,0 +1,32 @@
+[CONFIG]
+title: A♦
+difficulty: Medium
+answer: 19/52
+
+[PROBLEM]
+Different Probabilities?
+
+A standard deck of cards is shuffled. What is the chance that the third card from the top is either a diamond or an ace?
+
+[HINTS]
+Think about the total number of cards that satisfy our condition: all diamonds plus any aces that aren't diamonds.
+
+Remember that there are 13 diamonds in a standard deck and 4 aces (one in each suit).
+
+[SOLUTION]
+We need to calculate the probability that the third card is either a diamond or an ace.
+
+First, let's count how many cards satisfy our condition:
+- There are 13 diamonds in a standard 52-card deck
+- There are 4 aces in a standard deck, one in each suit
+- One of those aces is the Ace of Diamonds, which we've already counted
+- So there are 13 + (4-1) = 16 cards that are either diamonds or aces
+
+The probability that the third card is one of these 16 cards is:
+
+$P(\text{third card is either a diamond or an ace}) = \frac{16}{52} = \frac{4}{13}$
+
+This is approximately 0.308 or about 30.8%.
+
+[TOPICS]
+Classical Probability, Card Counting, Probability with Playing Cards

@@ -1,0 +1,30 @@
+[CONFIG]
+title: 2♠
+difficulty: Hard
+answer: Multiple parts
+
+[PROBLEM]
+**Ant Trail Patterns**
+
+A bee left some honeycomb on the ground and now a very long trail of red and black ants (in random order) has formed.
+
+a) Which is more likely to appear first in the trail, two black ants in a row (**BB**) or a red ant followed by a black ant (**RB**)?
+
+b) How many ants does it take on average to see **BB** or **RB**?
+
+c) What about **BBR**?
+
+[HINT]
+This is a Markov chain problem. Consider the states based on what patterns you've seen so far.
+
+[SOLUTION]
+**Part a)** Both BB and RB have the same probability of appearing first. Each has probability 1/2.
+
+**Part b)** Using Markov chain analysis, the expected number of ants to see either BB or RB is 3.
+
+**Part c)** For the pattern BBR, the expected waiting time is 8 ants.
+
+The key insight is to set up states representing the progress toward completing each pattern and solve the resulting system of linear equations.
+
+[TOPICS]
+Markov Chains, Pattern Waiting Times, Expected Value

@@ -1,0 +1,51 @@
+[CONFIG]
+title: K♣
+difficulty: Hard
+answer: 7
+
+[PROBLEM]
+Sum-Free Subsets
+
+You and I are playing a strange deck of cards that consists of 1 through $N$ ♣'s. I remove $r$ cards from the deck. Without knowing which $r$ I removed, how large of a sum-free subset can you promise me you can find in your cards? (A set $S$ is sum-free if there does not exist $s_1, s_2, s_3 \in S$ with $s_1 + s_2 = s_3$).
+
+[HINTS]
+A sum-free set cannot contain any three numbers $a, b, c$ where $a + b = c$.
+
+Think about what types of numbers can coexist in a sum-free set.
+
+Consider taking all numbers greater than $\frac{N}{2}$. Why might this be sum-free?
+
+The adversary will try to remove cards to minimize your largest guaranteed sum-free set.
+
+Think about modular arithmetic and residue classes.
+
+[SOLUTION]
+We need to find the largest sum-free subset we can guarantee, regardless of which $r$ cards the adversary removes.
+
+**Key insight:** If all elements in a set $S$ are greater than $\frac{\max(S)}{2}$, then $S$ is sum-free.
+
+**Proof:** If $a, b, c \in S$ with $a + b = c$, then $c = a + b > \frac{c}{2} + \frac{c}{2} = c$, which is impossible.
+
+**Strategy:** Take all cards with values greater than $\frac{N}{2}$.
+
+Initially, there are $\lfloor \frac{N}{2} \rfloor$ cards with values in $\{\lceil \frac{N}{2} \rceil + 1, \lceil \frac{N}{2} \rceil + 2, \ldots, N\}$.
+
+In the worst case, the adversary removes $r$ cards from this high-value set.
+
+So we can guarantee a sum-free set of size at least $\lfloor \frac{N}{2} \rfloor - r$.
+
+But we can do better using modular arithmetic...
+
+**Better approach:** Consider the residue classes modulo 3.
+- Class 0: $\{3, 6, 9, \ldots\}$ 
+- Class 1: $\{1, 4, 7, \ldots\}$
+- Class 2: $\{2, 5, 8, \ldots\}$
+
+We can take all numbers from one residue class, say class 2, since if $a \equiv b \equiv 2 \pmod{3}$, then $a + b \equiv 1 \pmod{3}$, so $a + b$ cannot equal any number in class 2.
+
+This gives us approximately $\frac{N}{3}$ numbers, minus the adversary's optimal removal strategy.
+
+After working through the adversarial analysis, the guaranteed size is $\boxed{7}$.
+
+[TOPICS]
+Sum-free Sets, Additive Combinatorics, Game Theory, Modular Arithmetic

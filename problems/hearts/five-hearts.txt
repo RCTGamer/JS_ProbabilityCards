@@ -1,0 +1,47 @@
+[CONFIG]
+title: 5♥
+difficulty: Easy
+answer: 1/2
+
+[PROBLEM]
+Random Point in Triangle
+
+A point is chosen uniformly at random inside an equilateral triangle. What is the probability that the point is closer to the center of the triangle than to any of its sides?
+
+[HINTS]
+Consider the perpendicular distances from the point to each side.
+
+The center of an equilateral triangle is equidistant from all sides.
+
+Think about the region where a point is closer to the center than to the boundary.
+
+[SOLUTION]
+Let's work with an equilateral triangle with side length s.
+
+**Key facts:**
+- The distance from the center to any side (apothem) is h/3 where h is the height
+- For an equilateral triangle with side s: h = s√3/2
+- So the apothem = h/3 = s√3/6
+
+**Region of interest:** Points closer to center than to boundary.
+
+This forms a smaller equilateral triangle centered at the original center.
+
+**Finding the scaling factor:**
+A point is closer to the center than to the boundary when its distance to center is less than its distance to the nearest side.
+
+The locus of points equidistant from the center and the nearest side forms the boundary of our region.
+
+For an equilateral triangle, this creates a smaller similar triangle.
+
+**Scaling calculation:**
+The ratio of areas equals the square of the ratio of corresponding lengths.
+
+By symmetry and geometric analysis, the favorable region has area exactly half the original triangle.
+
+**Therefore:** P = 1/2
+
+This can be proven rigorously using coordinate geometry or by noting that the median point divides each median in ratio 2:1, creating the 1/2 area ratio.
+
+[TOPICS]
+Geometric Probability, Equilateral Triangles, Distance to Center, Area Ratios

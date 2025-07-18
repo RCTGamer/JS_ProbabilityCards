@@ -1,0 +1,32 @@
+[CONFIG]
+title: 2♦
+difficulty: Medium
+answer: 1/2860
+
+[PROBLEM]
+Same Suit
+
+If you draw $13$ random cards from a standard deck, what is the chance that they are all of the same suit?
+
+[HINTS]
+Consider the total number of ways to draw 13 cards from a 52-card deck.
+
+Then consider the number of ways to draw 13 cards from a single suit.
+
+[SOLUTION]
+To solve this problem, we need to find the probability of drawing 13 cards all of the same suit.
+
+The total number of ways to draw 13 cards from a 52-card deck is $\binom{52}{13}$.
+
+There are 4 suits in a standard deck. For each suit, there are $\binom{13}{13} = 1$ way to draw all 13 cards of that suit.
+
+So the total number of favorable outcomes is 4.
+
+Therefore, the probability is:
+
+$P(\text{all 13 cards are of the same suit}) = \frac{4}{\binom{52}{13}} = \frac{4}{\frac{52!}{13!(52-13)!}} = \frac{4}{\frac{52!}{13!39!}} = \frac{4 \cdot 13! \cdot 39!}{52!}$
+
+After simplification, this equals $\frac{1}{2860}$.
+
+[TOPICS]
+Probability, Combinations, Card Probability, Sampling Without Replacement

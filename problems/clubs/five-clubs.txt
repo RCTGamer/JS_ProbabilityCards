@@ -1,0 +1,36 @@
+[CONFIG]
+title: 5♣
+difficulty: Medium
+answer: 17
+
+[PROBLEM]
+Two Jokers
+
+While inserting two jokers into a deck of cards, we unfortunately drop the **5♣** on the floor. We then shuffle the deck. What's the expected number of cards between the two jokers?
+
+[HINTS]
+Think about the deck without the 5♣. How many cards are there?
+
+Consider the positions of the two jokers among all possible arrangements.
+
+Use the fact that if we have $n$ cards total, and we place two jokers randomly, we can think of this as dividing the cards into 3 groups.
+
+The symmetry of the problem suggests that each of the 3 sections (before first joker, between jokers, after second joker) should have the same expected size.
+
+[SOLUTION]
+After dropping the 5♣, we have 51 cards plus 2 jokers, for a total of 53 cards.
+
+When we place the 2 jokers randomly among these 53 positions, we create 3 sections:
+1. Cards before the first joker
+2. Cards between the two jokers  
+3. Cards after the second joker
+
+By symmetry, each section has the same expected number of cards.
+
+Since we have 51 regular cards total, and they're divided equally among 3 sections:
+Expected cards in each section = $\frac{51}{3} = 17$
+
+Therefore, the expected number of cards between the two jokers is $\boxed{17}$.
+
+[TOPICS]
+Expected Value, Symmetry Arguments, Random Arrangements

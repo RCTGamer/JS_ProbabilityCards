@@ -1,0 +1,58 @@
+[CONFIG]
+title: K♥
+difficulty: Hard
+answer: 0.547
+
+[PROBLEM]
+Random Disk Packing
+
+Helicopters (radius 1 circles) are landing in a very large L×L lot. Each minute, a helicopter arrives and randomly picks an available point in the lot to land (without crashing into another helicopter). When no more helicopters can fit:
+a) What fraction of the lot is occupied?
+b) What about for 3 and 4 dimensions?
+
+[HINTS]
+This is related to random sequential adsorption (RSA).
+
+In 1D, this becomes the parking problem for intervals.
+
+The jamming density depends on the dimension.
+
+For circles in 2D, this is a classic problem in statistical physics.
+
+[SOLUTION]
+This is the classic **Random Sequential Adsorption (RSA)** problem for hard disks.
+
+**2D Case (circles):**
+When circles of radius 1 are placed randomly until no more can fit:
+- Each placed circle excludes area π from future placements (its own area)
+- But it also creates "dead zones" where future circle centers cannot be placed
+- The excluded area per placed circle is larger than π
+
+Through extensive computer simulations and theoretical analysis:
+- **Jamming coverage:** θ∞ ≈ 0.547
+- This means about 54.7% of the area gets covered
+
+**3D Case (spheres):**
+For spheres in 3D space:
+- **Jamming coverage:** θ∞ ≈ 0.384
+- About 38.4% of the volume gets covered
+
+**4D Case (hyperspheres):**
+For hyperspheres in 4D space:
+- **Jamming coverage:** θ∞ ≈ 0.253
+- About 25.3% of the hypervolume gets covered
+
+**General pattern:**
+The jamming density decreases with dimension. This is because:
+1. Higher dimensions have more "directions" to avoid collisions
+2. The excluded volume per particle increases relative to the particle volume
+3. Geometric constraints become more restrictive
+
+**Note:** These values are from extensive computer simulations as exact analytical solutions don't exist for d ≥ 2.
+
+**Answer:**
+a) 2D: **≈ 0.547** (54.7%)
+b) 3D: **≈ 0.384**, 4D: **≈ 0.253**
+
+[TOPICS]
+Random Sequential Adsorption, Statistical Physics, Jamming, High-Dimensional Geometry

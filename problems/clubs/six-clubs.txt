@@ -1,0 +1,41 @@
+[CONFIG]
+title: 6♣
+difficulty: Medium
+answer: 8.33
+
+[PROBLEM]
+One of Each Suit
+
+You have a pile of a very, very large number of cards (equal numbers of each suit). How many cards on average do you have to draw before you have at least one card of each suit?
+
+[HINTS]
+This is a classic "coupon collector" problem with 4 suits.
+
+Think about the expected time to collect all 4 suits.
+
+Use the fact that once you have $k$ distinct suits, the probability of getting a new suit on the next draw is $\frac{4-k}{4}$.
+
+The expected number of draws to get the $(k+1)$-th new suit, given you already have $k$ suits, follows a geometric distribution.
+
+[SOLUTION]
+This is the coupon collector problem with 4 suits.
+
+Let $T_k$ be the expected number of additional draws needed to go from having $k$ distinct suits to having $k+1$ distinct suits.
+
+When we have $k$ suits, the probability of drawing a new suit is $p_k = \frac{4-k}{4}$.
+
+The expected number of draws until success (geometric distribution) is $T_k = \frac{1}{p_k} = \frac{4}{4-k}$.
+
+So:
+- $T_0 = \frac{4}{4-0} = 1$ (to get the first suit)
+- $T_1 = \frac{4}{4-1} = \frac{4}{3}$ (to get the second suit)  
+- $T_2 = \frac{4}{4-2} = 2$ (to get the third suit)
+- $T_3 = \frac{4}{4-3} = 4$ (to get the fourth suit)
+
+The total expected number of draws is:
+$E[T] = T_0 + T_1 + T_2 + T_3 = 1 + \frac{4}{3} + 2 + 4 = 1 + 1.333... + 2 + 4 = 8.333...$
+
+Therefore, the expected number of cards to draw is $\boxed{\frac{25}{3} \approx 8.33}$.
+
+[TOPICS]
+Coupon Collector Problem, Geometric Distribution, Expected Value

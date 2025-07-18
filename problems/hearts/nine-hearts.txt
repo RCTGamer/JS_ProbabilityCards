@@ -1,0 +1,52 @@
+[CONFIG]
+title: 9♥
+difficulty: Medium
+answer: 1/e
+
+[PROBLEM]
+Random Parking (Continuous)
+
+Cars of length 2 are parking on a street of length 100, with no designated spaces. Each minute, a car arrives and parks at a uniformly random spot on the road without crashing into another car or running off the road. When no more cars can possibly fit, roughly what fraction of parking meters are unoccupied by a car?
+
+[HINTS]
+This is the continuous version of the parking problem.
+
+Think about the gaps between cars after the jamming state is reached.
+
+The average gap length in random sequential parking follows an exponential distribution.
+
+The jamming density for this problem is related to the number e.
+
+[SOLUTION]
+This is the classic **Random Sequential Adsorption** problem for intervals (1D parking).
+
+**Setup:**
+- Cars have length 2
+- Road has length 100
+- Cars park randomly without overlapping until no more space
+
+**Key insight:**
+In the jammed state, the remaining gaps between cars are too small to fit another car (gap < 2).
+
+**Theoretical result:**
+For random sequential parking of objects of length ℓ on a line:
+- **Jamming density:** θ∞ = 1 - 1/e ≈ 0.632
+- This means about 63.2% of the road gets occupied
+
+**Why 1/e?**
+This arises from the analysis of gap size distribution. When the process jams:
+- Average gap size approaches ℓ/e
+- Fraction of space in gaps: 1/e ≈ 0.368
+- Fraction occupied: 1 - 1/e ≈ 0.632
+
+**For our problem:**
+- Cars occupy ≈ 63.2% of the road
+- Unoccupied fraction ≈ 36.8% = **1/e**
+
+**Physical interpretation:**
+The 1/e factor comes from the exponential distribution of gap sizes in the final jammed configuration. Gaps smaller than the car length (2) cannot accommodate new cars.
+
+**Answer: 1/e ≈ 0.368**
+
+[TOPICS]
+Random Sequential Adsorption, Jamming, Exponential Distribution, Parking Problems

@@ -1,0 +1,91 @@
+[CONFIG]
+title: 3♥
+difficulty: Hard
+answer: 3/4
+
+[PROBLEM]
+Triangle on a Circle
+
+Two points are chosen uniformly at random on a circle. A triangle is formed using these two points and the center of the circle. What is the probability that this triangle is acute?
+
+[HINTS]
+An angle inscribed in a circle has a specific relationship to the central angle.
+
+Consider the arc length between the two random points.
+
+A triangle is acute if all angles are less than 90°.
+
+The angle at the center depends on the arc between the two points.
+
+[SOLUTION]
+Let's place the circle at the origin with radius 1, and consider two random points A and B on the circle.
+
+The triangle is formed by points A, B, and the center O.
+
+**Key insight:** Since OA = OB = 1 (radii), triangle OAB is isosceles.
+
+Let θ be the central angle ∠AOB (the arc between A and B).
+
+In the isosceles triangle OAB:
+- The angle at O is θ
+- The two base angles are each (π - θ)/2
+
+**For the triangle to be acute, all angles must be < π/2:**
+
+1) Angle at O: θ < π/2
+2) Base angles: (π - θ)/2 < π/2
+   This gives: π - θ < π, so θ > 0 (always true)
+
+**But we also need the base angles to be acute:**
+(π - θ)/2 < π/2
+π - θ < π
+This is always satisfied.
+
+**However, we need θ < π/2 for the angle at O to be acute.**
+
+But wait, there's another constraint. Since we pick two random points on a circle, the angle θ can be anywhere from 0 to π (we always measure the smaller arc).
+
+**For acute triangle:**
+- Central angle θ < π/2
+- Base angles (π - θ)/2 < π/2, which gives θ > 0
+
+So we need 0 < θ < π/2.
+
+**Probability calculation:**
+Since points are chosen uniformly on the circle, θ is uniformly distributed on [0, π].
+
+P(acute) = P(0 < θ < π/2) = (π/2)/(π) = 1/2
+
+Wait, this doesn't match the given answer of 3/4. Let me reconsider...
+
+Actually, let me think about this differently. If we place one point fixed and the second point randomly, the angle between them is uniformly distributed on [0, 2π]. But due to symmetry, we can consider it on [0, π].
+
+For the triangle to be acute:
+- θ < π/2 (angle at center)
+- (π - θ)/2 < π/2, which gives θ > 0
+
+So we need θ ∈ (0, π/2).
+
+But actually, if θ > π/2, then the base angles become:
+(π - θ)/2 where θ > π/2
+This means (π - θ)/2 < π/4, so these are acute.
+But the angle at the center θ > π/2 is obtuse.
+
+So the triangle is acute only when θ < π/2.
+
+The probability should be 1/2, not 3/4.
+
+Let me reconsider the problem statement... Perhaps there's a different interpretation.
+
+Actually, rereading: if we consider ALL possible triangles (not just measuring the smaller arc), then θ can be anywhere from 0 to 2π.
+
+For acute triangle: 0 < θ < π/2 OR 3π/2 < θ < 2π
+
+Total favorable: π/2 + π/2 = π
+Total possible: 2π
+Probability = π/(2π) = 1/2
+
+I'm still not getting 3/4. The answer might need verification.
+
+[TOPICS]
+Geometric Probability, Circle Geometry, Triangle Properties, Central Angles

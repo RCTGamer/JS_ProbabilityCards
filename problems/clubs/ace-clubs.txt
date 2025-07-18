@@ -1,0 +1,35 @@
+[CONFIG]
+title: A♣
+difficulty: Easy
+answer_a: 7
+answer_b: 14
+
+[PROBLEM]
+Expected Value of Playing Cards
+
+Assume that **A** = 1, **J** = 11, **Q** = 12, **K** = 13.
+
+a) What is the expected value of a randomly drawn card from a standard deck?
+b) If you draw two cards randomly, what is the expected value of their sum?
+
+[HINTS]
+Part a: Calculate the expected value using the formula $E[X] = \sum xP(X=x)$ for each card value.
+
+Part b: Use the linearity of expectation: $E[X + Y] = E[X] + E[Y]$.
+
+[SOLUTION]
+Part a) Expected value of a single card:
+In a standard deck, we have 4 cards each of values 1, 2, 3, ..., 10, 11, 12, 13.
+Each card has probability $\frac{1}{52}$ of being drawn.
+
+$E[X] = \frac{1}{52} \times 4 \times (1 + 2 + 3 + ... + 13)$
+$E[X] = \frac{4}{52} \times \frac{13 \times 14}{2} = \frac{4}{52} \times 91 = \frac{364}{52} = 7$
+
+---
+
+Part b) Expected value of sum of two cards:
+By linearity of expectation: $E[X + Y] = E[X] + E[Y]$
+Since each card has the same expected value: $E[X + Y] = 7 + 7 = 14$
+
+[TOPICS]
+Expected Value, Linearity of Expectation, Probability Theory, Playing Cards

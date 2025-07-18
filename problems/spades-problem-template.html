@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Problem Template</title>
+    
+    <!-- MathJax for LaTeX rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 1px solid #333;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #333;
+            color: #e0e0e0;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background: #444;
+        }
+        
+        .problem-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+        
+        .problem-title {
+            font-size: 2.5em;
+            font-weight: 300;
+            margin: 0;
+            color: #fff;
+        }
+        
+        .problem-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+        
+        .difficulty {
+            background: #28a745;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .difficulty.medium {
+            background: #ffc107;
+            color: #000;
+        }
+        
+        .difficulty.hard {
+            background: #dc3545;
+        }
+        
+        .problem-statement {
+            background: #2a2a2a;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+        
+        .problem-statement p {
+            margin-top: 0;
+        }
+        
+        .problem-statement p strong:first-child {
+            display: block;
+            margin-bottom: 8px; /* Increased spacing between title and description */
+            font-size: 1.2em; /* Slightly bigger font size for the title */
+            font-weight: 600; /* Making the font slightly bolder */
+        }
+        
+        .problem-parts {
+            margin-top: 10px;
+        }
+        
+        .problem-part {
+            margin: 12px 0;
+            padding-left: 20px;
+            color: #ccc;
+        }
+        
+        .answer-section {
+            background: #2a2a2a;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .answer-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .answer-label {
+            min-width: 30px;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .answer-input {
+            background: #1a1a1a;
+            border: 1px solid #444;
+            color: #e0e0e0;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 16px;
+            width: 160px; /* Reduced width from 200px */
+        }
+        
+        .answer-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+        
+        .submit-btn {
+            background: #8b5cf6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        
+        .submit-btn:hover {
+            background: #7c3aed;
+        }
+        
+        .result {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        
+        .result.correct {
+            background: #10b981;
+            color: white;
+        }
+        
+        .result.incorrect {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .problem-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+        
+        .problem-nav-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .problem-nav-btn:hover {
+            background: #0056b3;
+        }
+        
+        .problem-nav-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .expandable-section {
+            margin: 20px 0;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .section-header {
+            background: #333;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+        
+        .section-header:hover {
+            background: #3a3a3a;
+        }
+        
+        .section-content {
+            padding: 20px;
+            background: #2a2a2a;
+            display: none;
+        }
+        
+        .section-content.expanded {
+            display: block;
+        }
+        
+        .chevron {
+            transition: transform 0.2s;
+        }
+        
+        .chevron.expanded {
+            transform: rotate(180deg);
+        }
+        
+        .solution-content {
+            line-height: 1.8;
+        }
+        
+        .solution-step {
+            margin: 15px 0;
+            padding: 15px;
+            background: #1a1a1a;
+            border-left: 4px solid #8b5cf6;
+            border-radius: 4px;
+        }
+        
+        .side-nav-btn {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #333;
+            color: #e0e0e0;
+            border: none;
+            width: 50px;
+            height: 60px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .side-nav-btn:hover {
+            background: #444;
+            transform: translateY(-50%) scale(1.05);
+        }
+        
+        .side-nav-btn:disabled {
+            background: #2a2a2a;
+            color: #666;
+            cursor: not-allowed;
+            transform: translateY(-50%);
+        }
+        
+        .side-nav-btn.left {
+            left: 20px;
+        }
+        
+        .side-nav-btn.right {
+            right: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .side-nav-btn {
+                display: none;
+            }
+        }
+        
+        .tab-container {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .tab-navigation {
+            display: flex;
+            gap: 0;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .tab-btn {
+            background: #2a2a2a;
+            color: #e0e0e0;
+            border: none;
+            border-bottom: 3px solid transparent;
+            padding: 15px 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .tab-btn.active {
+            color: #8b5cf6;
+            border-bottom-color: #8b5cf6;
+            background: #333;
+        }
+        
+        .tab-btn:hover:not(.active) {
+            background: #333;
+            color: #fff;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Side navigation buttons -->
+    <button class="side-nav-btn left" onclick="previousProblem()" id="side-prev-btn">‹</button>
+    <button class="side-nav-btn right" onclick="nextProblem()" id="side-next-btn">›</button>
+    
+    <div class="container">
+        <div class="header">
+            <div class="nav-buttons">
+                <a href="../classical-probability.html" class="nav-btn">← Question List</a>
+                <button class="nav-btn" onclick="previousProblem()">‹</button>
+                <button class="nav-btn" onclick="nextProblem()">›</button>
+            </div>
+        </div>
+
+        <div class="problem-header">
+            <h1 class="problem-title" id="problem-title"></h1>
+            <div class="problem-meta">
+                <div class="difficulty" id="problem-difficulty"></div>
+            </div>
+        </div>
+
+        <div class="tab-container">
+            <div class="tab-navigation">
+                <button class="tab-btn active" onclick="switchTab('problem')">Problem</button>
+                <button class="tab-btn" onclick="switchTab('solution')">Solution</button>
+            </div>
+        </div>
+
+        <div id="problem-tab" class="tab-content active">
+            <div class="problem-statement">
+                <div id="problem-content"></div>
+                <div class="problem-parts" id="problem-parts"></div>
+            </div>
+
+            <div class="answer-section" id="answer-section">
+                <!-- Answers will be dynamically loaded here -->
+            </div>
+
+            <div class="expandable-section">
+                <div class="section-header" onclick="toggleSection('hint')">
+                    <span>Hint</span>
+                    <span class="chevron" id="hint-chevron">▼</span>
+                </div>
+                <div class="section-content" id="hint-content">
+                    <!-- Hints will be dynamically loaded here -->
+                </div>
+            </div>
+            
+            <div class="expandable-section">
+                <div class="section-header" onclick="toggleSection('topics')">
+                    <span>Related Topic/Tags</span>
+                    <span class="chevron" id="topics-chevron">▼</span>
+                </div>
+                <div class="section-content" id="topics-content">
+                    <!-- Topics will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <div id="solution-tab" class="tab-content">
+            <div class="expandable-section">
+                <div class="section-header" onclick="toggleSection('solution')">
+                    <span>Solution</span>
+                    <span class="chevron" id="solution-chevron">▼</span>
+                </div>
+                <div class="section-content expanded" id="solution-content">
+                    <!-- Solutions will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="problem-navigation">
+            <button class="problem-nav-btn" onclick="previousProblem()" id="prev-btn">← Previous</button>
+            <button class="problem-nav-btn" onclick="nextProblem()" id="next-btn">Next →</button>
+        </div>
+    </div>
+
+    <script>
+        // Problem order for navigation
+        const problemOrder = [
+            "ace-spades", "two-spades", "three-spades", "four-spades", "five-spades", 
+            "six-spades", "seven-spades", "eight-spades", "nine-spades", "ten-spades", 
+            "jack-spades", "queen-spades", "king-spades"
+        ];
+        
+        // Get current problem from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentProblem = urlParams.get('problem') || 'ace-diamonds';
+        
+        // Function to load text file content
+        async function loadTextFile(filePath) {
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) throw new Error(`Failed to load ${filePath}`);
+                return await response.text();
+            } catch (error) {
+                console.error('Error loading file:', error);
+                return '';
+            }
+        }
+        
+        // Function to parse the single content file
+        function parseContentFile(content) {
+            const sections = {};
+            const lines = content.split('\n');
+            let currentSection = null;
+            let currentContent = [];
+            
+            for (const line of lines) {
+                const trimmedLine = line.trim();
+                
+                // Check for section headers
+                if (trimmedLine.startsWith('[') && trimmedLine.endsWith(']')) {
+                    // Save previous section
+                    if (currentSection) {
+                        sections[currentSection] = currentContent.join('\n').trim();
+                    }
+                    
+                    // Start new section
+                    currentSection = trimmedLine.slice(1, -1).toLowerCase();
+                    currentContent = [];
+                } else {
+                    // Add line to current section (preserve original line including whitespace)
+                    currentContent.push(line);
+                }
+            }
+            
+            // Save the last section and trim leading/trailing whitespace
+            if (currentSection) {
+                sections[currentSection] = currentContent.join('\n').trim();
+            }
+            
+            return sections;
+        }
+        
+        // Function to parse config section
+        function parseConfig(configText) {
+            const config = {};
+            const lines = configText.split('\n');
+            for (const line of lines) {
+                if (line.trim() && line.includes(':')) {
+                    const [key, value] = line.split(':').map(s => s.trim());
+                    config[key] = value;
+                }
+            }
+            return config;
+        }
+        
+        // Function to parse answers from config
+        function parseAnswers(config) {
+            const answers = [];
+            
+            // Look for answer, answer_a, answer_b, etc.
+            for (const [key, value] of Object.entries(config)) {
+                if (key.startsWith('answer')) {
+                    let label = '';
+                    let id = key;
+                    
+                    if (key === 'answer') {
+                        id = '1';
+                        label = '';
+                    } else if (key.includes('_')) {
+                        const suffix = key.split('_')[1];
+                        id = suffix;
+                        label = suffix + ')';
+                    }
+                    
+                    answers.push({
+                        id: id,
+                        correct: parseFloat(value),
+                        label: label
+                    });
+                }
+            }
+            
+            return answers;
+        }
+        
+        // Function to convert basic Markdown to HTML
+        function convertMarkdownToHtml(text, isFullProblem = false) {
+            if (isFullProblem) {
+                // For full problem content, handle title and indented parts
+                const lines = text.split('\n').filter(line => line.trim()); // Remove empty lines first
+                const processedLines = [];
+                
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i];
+                    const trimmedLine = line.trim();
+                    
+                    if (i === 0 && trimmedLine) {
+                        // First line is the title - make it bold
+                        processedLines.push(`<strong>${trimmedLine}</strong>`);
+                    } else if (trimmedLine.match(/^[a-z]\)/)) {
+                        // Lines starting with a), b), etc. - add indentation
+                        processedLines.push(`&nbsp;&nbsp;&nbsp;&nbsp;${trimmedLine}`);
+                    } else if (trimmedLine) {
+                        // Non-empty lines
+                        processedLines.push(trimmedLine);
+                    }
+                }
+                
+                // Join all lines with <br> EXCEPT after the title
+                let result = '';
+                for (let i = 0; i < processedLines.length; i++) {
+                    result += processedLines[i];
+                    // Only add <br> if not the title (first element) and not the last element
+                    if (i !== 0 && i < processedLines.length - 1) {
+                        result += '<br>';
+                    }
+                }
+                
+                result = result
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // **bold** to <strong>
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>')              // *italic* to <em>
+                    .replace(/`(.*?)`/g, '<code>$1</code>');           // `code` to <code>
+                
+                // Remove any leading break lines
+                result = result.replace(/^<br>\s*/g, '');
+                
+                return result;
+            } else {
+                // For other content (hints, solutions, etc.)
+                return text
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // **bold** to <strong>
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>')              // *italic* to <em>
+                    .replace(/`(.*?)`/g, '<code>$1</code>')            // `code` to <code>
+                    .replace(/\n\n/g, '</p><p>')                       // Double line breaks to paragraphs
+                    .replace(/\n/g, '<br>');                           // Single line breaks to <br>
+            }
+        }
+        
+        // Function to format problem content
+        function formatProblemContent(problemText) {
+            const lines = problemText.split('\n');
+            const title = lines[0];
+            let description = '';
+            const parts = [];
+            
+            let currentSection = 'description';
+            for (let i = 1; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (!line) continue;
+                
+                if (line.match(/^[a-z]\)/)) {
+                    currentSection = 'parts';
+                    parts.push(line);
+                } else if (currentSection === 'description') {
+                    description += (description ? ' ' : '') + line;
+                } else if (currentSection === 'parts') {
+                    parts[parts.length - 1] += ' ' + line;
+                }
+            }
+            
+            // Remove leading break line from description if it exists
+            description = description.replace(/^<br>\s*/, '');
+            
+            return { title, description, parts };
+        }
+        
+        // Function to format hints
+        function formatHints(hintsText) {
+            return hintsText.split('\n\n').filter(hint => hint.trim());
+        }
+        
+        // Function to format solution
+        function formatSolution(solutionText) {
+            const sections = solutionText.split('---').map(s => s.trim()).filter(s => s);
+            return sections.map(section => {
+                const lines = section.split('\n');
+                const title = lines[0];
+                const content = lines.slice(1).join('<br>');
+                return { title, content };
+            });
+        }
+        
+        // Load problem content
+        async function loadProblem(problemId) {
+            try {
+                // Load the single content file for this problem
+                const contentText = await loadTextFile(`spades/${problemId}.txt`);
+                
+                // Parse the content into sections
+                const sections = parseContentFile(contentText);
+                
+                // Parse the config section
+                const config = parseConfig(sections.config || '');
+                const problemContent = formatProblemContent(sections.problem || '');
+                const hints = formatHints(sections.hints || '');
+                const solutions = formatSolution(sections.solution || '');
+                const answers = parseAnswers(config);
+                
+                // Update page title and content
+                const problemTitle = config.title || problemId.replace('-', ' ').toUpperCase();
+                document.getElementById('page-title').textContent = `${problemTitle} - Problem`;
+                document.getElementById('problem-title').textContent = problemTitle;
+                
+                // Load problem content with description
+                const contentEl = document.getElementById('problem-content');
+                // Display the entire problem text with proper formatting
+                const rawContent = sections.problem || 'Problem content not found.';
+                contentEl.innerHTML = '<p>' + convertMarkdownToHtml(rawContent, true) + '</p>';
+                
+                // Debug mode flag - set to true to enable debug overlay
+                const DEBUG_MODE = false;
+                
+                // Enhanced Debug Information - only shown when DEBUG_MODE is true
+                if (DEBUG_MODE) {
+                    setTimeout(() => {
+                        const titleEl = contentEl.querySelector('strong:first-child');
+                        const firstPara = contentEl.querySelector('p');
+                        
+                        // Console logging
+                        console.log('Title element:', titleEl);
+                        console.log('Raw content:', rawContent);
+                        console.log('Formatted content:', contentEl.innerHTML);
+                        console.log('Problem content object:', problemContent);
+                        
+                        // Create a styled debug overlay
+                        const debugDiv = document.createElement('div');
+                        debugDiv.id = 'debug-overlay';
+                        debugDiv.style.background = '#333';
+                        debugDiv.style.padding = '15px';
+                        debugDiv.style.color = '#fff';
+                        debugDiv.style.position = 'fixed';
+                        debugDiv.style.top = '10px';
+                        debugDiv.style.right = '10px';
+                        debugDiv.style.zIndex = '1000';
+                        debugDiv.style.width = '400px';
+                        debugDiv.style.maxHeight = '80vh';
+                        debugDiv.style.overflowY = 'auto';
+                        debugDiv.style.fontFamily = 'monospace';
+                        debugDiv.style.fontSize = '12px';
+                        debugDiv.style.borderRadius = '4px';
+                        debugDiv.style.boxShadow = '0 0 10px rgba(0,0,0,0.5)';
+                    
+                    // Toggle button to hide/show content
+                    const toggleBtn = document.createElement('button');
+                    toggleBtn.innerText = 'Toggle Debug View';
+                    toggleBtn.style.background = '#8b5cf6';
+                    toggleBtn.style.border = 'none';
+                    toggleBtn.style.color = 'white';
+                    toggleBtn.style.padding = '5px 10px';
+                    toggleBtn.style.borderRadius = '4px';
+                    toggleBtn.style.cursor = 'pointer';
+                    toggleBtn.style.marginBottom = '10px';
+                    toggleBtn.onclick = function() {
+                        const content = document.getElementById('debug-content');
+                        content.style.display = content.style.display === 'none' ? 'block' : 'none';
+                    };
+                    
+                    // Content container
+                    const contentContainer = document.createElement('div');
+                    contentContainer.id = 'debug-content';
+                    
+                    // Format HTML to display nicely in the debug panel
+                    const formatHTML = (html) => {
+                        return html
+                            .replace(/</g, '&lt;')
+                            .replace(/>/g, '&gt;')
+                            .replace(/&lt;br&gt;/g, '&lt;br&gt;\n');
+                    };
+                    
+                    // Add CSS styles
+                    const styles = document.createElement('style');
+                    styles.textContent = `
+                        .debug-section {
+                            margin-bottom: 15px;
+                            border-bottom: 1px solid #555;
+                            padding-bottom: 15px;
+                        }
+                        .debug-section h3 {
+                            margin: 0 0 8px 0;
+                            color: #8b5cf6;
+                        }
+                        .debug-content {
+                            background: #222;
+                            padding: 8px;
+                            border-radius: 4px;
+                            white-space: pre-wrap;
+                            word-break: break-word;
+                            line-height: 1.4;
+                        }
+                        .debug-property {
+                            margin: 5px 0;
+                        }
+                        .property-name {
+                            color: #4ade80;
+                            font-weight: bold;
+                        }
+                    `;
+                    document.head.appendChild(styles);
+                    
+                    // Populate content
+                    contentContainer.innerHTML = `
+                        <div class="debug-section">
+                            <h3>Spacing Info</h3>
+                            <div class="debug-property">
+                                <span class="property-name">Title margin-bottom:</span> 
+                                ${titleEl ? window.getComputedStyle(titleEl).marginBottom : 'N/A'}
+                            </div>
+                            <div class="debug-property">
+                                <span class="property-name">Paragraph margin:</span> 
+                                ${firstPara ? window.getComputedStyle(firstPara).margin : 'N/A'}
+                            </div>
+                        </div>
+                        
+                        <div class="debug-section">
+                            <h3>Problem Structure</h3>
+                            <div class="debug-property">
+                                <span class="property-name">Title:</span> 
+                                "${problemContent.title}"
+                            </div>
+                            <div class="debug-property">
+                                <span class="property-name">Description:</span> 
+                                "${problemContent.description}"
+                            </div>
+                            <div class="debug-property">
+                                <span class="property-name">Parts (${problemContent.parts.length}):</span>
+                                <div class="debug-content">
+                                    ${problemContent.parts.map((part, i) => `${i+1}. "${part}"`).join('<br>')}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="debug-section">
+                            <h3>HTML Output</h3>
+                            <div class="debug-content">${formatHTML(contentEl.innerHTML)}</div>
+                        </div>
+                        
+                        <div class="debug-section">
+                            <h3>Raw Content</h3>
+                            <div class="debug-content">${rawContent.replace(/\n/g, '<br>')}</div>
+                        </div>
+                    `;
+                    
+                    // Assemble and add to page
+                    debugDiv.appendChild(toggleBtn);
+                    debugDiv.appendChild(contentContainer);
+                    document.body.appendChild(debugDiv);
+                }, 500);
+                }
+                
+                // Set difficulty
+                const difficultyEl = document.getElementById('problem-difficulty');
+                const difficulty = config.difficulty || 'Medium';
+                difficultyEl.textContent = difficulty;
+                difficultyEl.className = `difficulty ${difficulty.toLowerCase()}`;
+                
+                // Load problem parts (skip this since we're showing the full problem above)
+                const partsEl = document.getElementById('problem-parts');
+                partsEl.innerHTML = '';
+                
+                // Load answer section
+                const answerEl = document.getElementById('answer-section');
+                answerEl.innerHTML = answers.map(answer => `
+                    <div class="answer-row">
+                        ${answer.label ? `<span class="answer-label">${answer.label}</span>` : ''}
+                        <input type="number" class="answer-input" id="answer${answer.id}" placeholder="Answer" step="0.01">
+                        <button class="submit-btn" onclick="checkAnswer('${answer.id}', ${answer.correct})">Submit</button>
+                        <div id="result${answer.id}" class="result" style="display: none;"></div>
+                    </div>
+                `).join('');
+                
+                // Load hints
+                const hintEl = document.getElementById('hint-content');
+                if (hints && hints.length > 0) {
+                    hintEl.innerHTML = hints.map(hint => `<p>${convertMarkdownToHtml(hint)}</p>`).join('');
+                }
+                
+                // Load solutions
+                const solutionEl = document.getElementById('solution-content');
+                if (solutions && solutions.length > 0) {
+                    solutionEl.innerHTML = `
+                        <div class="solution-content">
+                            ${solutions.map(solution => `
+                                <div class="solution-step">
+                                    <strong>${convertMarkdownToHtml(solution.title)}</strong><br>
+                                    ${convertMarkdownToHtml(solution.content)}
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+                
+                // Load topics
+                const topicsEl = document.getElementById('topics-content');
+                const topicsText = sections.topics || '';
+                if (topicsText && topicsText.trim()) {
+                    topicsEl.innerHTML = `<p>${convertMarkdownToHtml(topicsText.trim())}</p>`;
+                }
+                
+                // Update navigation buttons
+                const currentIndex = problemOrder.indexOf(problemId);
+                const prevBtn = document.getElementById('prev-btn');
+                const nextBtn = document.getElementById('next-btn');
+                const sidePrevBtn = document.getElementById('side-prev-btn');
+                const sideNextBtn = document.getElementById('side-next-btn');
+                
+                prevBtn.disabled = currentIndex === 0;
+                nextBtn.disabled = currentIndex === problemOrder.length - 1;
+                sidePrevBtn.disabled = currentIndex === 0;
+                sideNextBtn.disabled = currentIndex === problemOrder.length - 1;
+                
+                // Re-render MathJax
+                if (window.MathJax) {
+                    MathJax.typesetPromise();
+                }
+            } catch (error) {
+                console.error('Error loading problem:', error);
+                document.getElementById('problem-content').innerHTML = '<p>Error loading problem content.</p>';
+            }
+        }
+        
+        // Check answer function
+        function checkAnswer(answerId, correctAnswer) {
+            const userAnswer = parseFloat(document.getElementById(`answer${answerId}`).value);
+            const resultDiv = document.getElementById(`result${answerId}`);
+            
+            resultDiv.style.display = 'block';
+            
+            const tolerance = 0.01;
+            if (Math.abs(userAnswer - correctAnswer) <= tolerance) {
+                resultDiv.className = 'result correct';
+                resultDiv.textContent = '✅ Correct! Well done!';
+            } else {
+                resultDiv.className = 'result incorrect';
+                resultDiv.textContent = `❌ Incorrect. The correct answer is ${correctAnswer}.`;
+            }
+        }
+        
+        // Toggle expandable sections
+        function toggleSection(sectionName) {
+            const content = document.getElementById(`${sectionName}-content`);
+            const chevron = document.getElementById(`${sectionName}-chevron`);
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                chevron.classList.remove('expanded');
+            } else {
+                content.classList.add('expanded');
+                chevron.classList.add('expanded');
+            }
+        }
+        
+        // Switch between tabs
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+            
+            // Add active class to clicked tab button
+            event.target.classList.add('active');
+        }
+        
+        // Navigation functions
+        function previousProblem() {
+            const currentIndex = problemOrder.indexOf(currentProblem);
+            if (currentIndex > 0) {
+                const prevProblem = problemOrder[currentIndex - 1];
+                window.location.href = `spades-problem-template.html?problem=${prevProblem}`;
+            }
+        }
+        
+        function nextProblem() {
+            const currentIndex = problemOrder.indexOf(currentProblem);
+            if (currentIndex < problemOrder.length - 1) {
+                const nextProblem = problemOrder[currentIndex + 1];
+                window.location.href = `spades-problem-template.html?problem=${nextProblem}`;
+            }
+        }
+        
+        // Load the current problem
+        loadProblem(currentProblem);
+    </script>
+</body>
+</html>

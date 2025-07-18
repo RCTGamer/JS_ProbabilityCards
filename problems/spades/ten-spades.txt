@@ -1,0 +1,28 @@
+[CONFIG]
+title: 10♠
+difficulty: Medium
+answer: 1
+
+[PROBLEM]
+**Antelope 2D Random Walk**
+
+A confused antelope is looking for food and each second takes a random step equally likely to be N, S, E, or W. What is the probability that the antelope ever makes it back to where it started?
+
+[HINT]
+This is a 2D symmetric random walk recurrence problem. Consider the fundamental properties of random walks in different dimensions.
+
+[SOLUTION]
+This is a classic result in probability theory about random walks on the integer lattice $\mathbb{Z}^2$.
+
+For a simple symmetric random walk in 2D (where each step is equally likely to be in any of the 4 cardinal directions), the probability of eventually returning to the starting point is exactly 1.
+
+This can be proven using generating functions or Fourier analysis. The key insight is that:
+
+$$P(\text{return to origin}) = \left(\int_{-\pi}^{\pi} \frac{1}{2 - \cos(x) - \cos(y)} dx dy\right)^{-1} = 1$$
+
+This is in contrast to 1D (where return probability is also 1) and 3D (where return probability is approximately 0.34).
+
+The result follows from the fact that in 2D, the random walk is recurrent, meaning that almost surely the walker will return to any given point infinitely often.
+
+[TOPICS]
+2D Random Walk, Recurrence, Return Probability

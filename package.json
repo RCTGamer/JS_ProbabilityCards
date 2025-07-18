@@ -4,9 +4,9 @@
   "description": "RCT Math Center - Interactive Mathematical Problem Solving Platform",
   "main": "index.html",
   "scripts": {
-    "dev": "npx http-server . -p 8080 -o",
-    "start": "npx http-server . -p 8080",
-    "serve": "npx live-server --port=8080"
+    "dev": "npx http-server . -p 3000 -o",
+    "start": "npx http-server . -p 3000",
+    "serve": "npx live-server --port=3000"
   },
   "keywords": [
     "probability",

@@ -1,0 +1,38 @@
+[CONFIG]
+title: Q♠
+difficulty: Expert
+answer: Approximately sqrt(8/27) * n
+
+[PROBLEM]
+**Bee Hexagonal Lattice Walk**
+
+A bee is wandering around an infinitely large beehive, walking along the edges of a hexagonal honeycomb 2D lattice. This bee is very efficient and does not want to walk along an edge it previously walked on. For very large $n$, approximately how many possible $n$-step walks are there that the bee could take from a given starting position?
+
+[HINT]
+This is about self-avoiding walks on the hexagonal lattice. The growth rate is related to the connective constant of the lattice.
+
+[SOLUTION]
+This problem asks for the number of self-avoiding walks (SAWs) of length $n$ on the hexagonal lattice.
+
+For large $n$, the number of $n$-step self-avoiding walks from a given starting point behaves asymptotically as:
+
+$$c_n \sim A \cdot \mu^n \cdot n^{\gamma-1}$$
+
+where:
+- $\mu$ is the connective constant of the hexagonal lattice
+- $\gamma$ is a critical exponent  
+- $A$ is a constant
+
+For the hexagonal lattice:
+- $\mu = \sqrt{2 + \sqrt{2}} \approx 1.8478$
+- $\gamma = 43/32 = 1.34375$
+
+The connective constant $\mu$ can be computed exactly for the hexagonal lattice, unlike for the square lattice where it's only known numerically.
+
+So for large $n$:
+$$c_n \approx A \cdot (1.8478)^n \cdot n^{0.34375}$$
+
+The hexagonal lattice is special because it's the only regular lattice where the connective constant is known exactly.
+
+[TOPICS]
+Self-Avoiding Walks, Hexagonal Lattice, Connective Constants, Critical Exponents

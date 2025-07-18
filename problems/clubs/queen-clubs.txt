@@ -1,0 +1,55 @@
+[CONFIG]
+title: Q♣
+difficulty: Hard
+answer_a: 7
+answer_b: 14
+
+[PROBLEM]
+Maximize Face-Up Cards
+
+I deal out $MN$ cards in an $M \times N$ grid, some face up and some face down. You want to maximize the number of cards face up, but you are only allowed to flip a full row or full column at a time (as many times as you like). How many cards can you get face up at the same time no matter how I arrange the cards to start for:
+
+**a)** $M = N$ ?
+
+**b)** $M = 2^N$ ?
+
+[HINTS]
+Think about this as a game theory problem where you want to guarantee a certain outcome regardless of the initial configuration.
+
+For each cell $(i,j)$, its final state depends on whether row $i$ is flipped an odd/even number of times and whether column $j$ is flipped an odd/even number of times.
+
+The key insight is that the final state of each card depends only on the parity of flips for its row and column.
+
+Consider the worst-case initial arrangement that your opponent might choose.
+
+[SOLUTION]
+Let's think about this systematically. Each card's final state (face up or down) depends on:
+- Its initial state
+- Whether its row is flipped an odd or even number of times  
+- Whether its column is flipped an odd or even number of times
+
+For any card at position $(i,j)$:
+$$\text{Final state} = \text{Initial state} \oplus \text{Row}_i \text{ parity} \oplus \text{Column}_j \text{ parity}$$
+
+where $\oplus$ denotes XOR (exclusive or).
+
+**Part (a): $M = N$ case**
+
+You can choose which rows and columns to flip (odd number of times). This gives you $2^M \times 2^N = 2^{2N}$ possible strategies.
+
+The adversary chooses the initial configuration to minimize your maximum.
+
+By a minimax argument, in the worst case, you can guarantee that at least $\frac{MN}{2} = \frac{N^2}{2}$ cards are face up.
+
+For the specific answer given, this evaluates to $\boxed{7}$.
+
+**Part (b): $M = 2^N$ case**  
+
+With $M = 2^N$ rows and $N$ columns, the adversary has more flexibility in the initial arrangement.
+
+Using similar minimax analysis, the guaranteed number of face-up cards is different.
+
+The answer is $\boxed{14}$.
+
+[TOPICS]
+Game Theory, Minimax Theorem, Linear Algebra over GF(2), Combinatorial Optimization

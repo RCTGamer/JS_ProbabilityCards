@@ -1,0 +1,32 @@
+[CONFIG]
+title: 8♠
+difficulty: Hard
+answer: Formula depends on B and C
+
+[PROBLEM]
+**Blue Jays and Cardinals**
+
+$B$ blue jays and $C$ cardinals are sitting together in a tree. The birds all politely take turns flying away (meaning that the bird that flew away was equally likely to be any of the remaining birds). What is the chance that at some point the same number of blue jays as cardinals have flown away?
+
+[HINT]
+This is related to the ballot problem with two types of objects. Consider when the cumulative counts are equal.
+
+[SOLUTION]
+This is a generalization of the ballot problem. We want the probability that at some point during the process, exactly $k$ blue jays and $k$ cardinals have flown away for some $k$.
+
+Let's denote this probability as $P(B,C)$.
+
+The answer involves hypergeometric distributions and can be expressed as:
+
+$P(B,C) = \frac{\min(B,C) + 1}{B + C + 1}$
+
+This formula comes from the fact that we're essentially asking for the probability that a random permutation of $B$ blue jays and $C$ cardinals has a prefix where the counts are equal.
+
+For example:
+- If $B = C$, then $P(B,B) = \frac{B+1}{2B+1}$
+- If $B = 3, C = 2$, then $P(3,2) = \frac{3}{6} = \frac{1}{2}$
+
+The general formula reflects the symmetry and combinatorial structure of the problem.
+
+[TOPICS]
+Ballot Problem, Hypergeometric Distribution, Combinatorial Probability

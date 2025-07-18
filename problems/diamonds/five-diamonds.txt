@@ -1,0 +1,72 @@
+[CONFIG]
+title: 5♦
+difficulty: Hard
+answer_a: 1
+answer_b: 11/12
+
+[PROBLEM]
+More Monty Hall
+
+I have all $13$♦s. We both want to end the game with the **5♦**. You randomly select one of my cards but cannot look at it. I look at my cards and then place $11$ face up. The **5♦** is not among them.
+a) Should you trade the card you initially chose for my remaining card?
+b) What is the chance you find the **5♦** if so?
+
+[HINTS]
+For part a), think about the Monty Hall problem. When do I have to withhold the 5♦ from the cards I place face up?
+
+For part b), calculate the probability that the 5♦ is in my remaining card, given what you know.
+
+[SOLUTION]
+This problem is a variation of the famous Monty Hall problem.
+
+Part a): Should you trade the card you initially chose for the remaining card?
+
+Initially, you randomly select 1 card out of 13 diamonds. The probability that you selected the 5♦ is 1/13.
+
+I then place 11 cards face up, and the 5♦ is not among them. This means that the 5♦ is either the card you selected initially or the card I'm still holding.
+
+If you selected the 5♦ initially (which happens with probability 1/13), then I had no choice but to withhold the 5♦ from the cards I placed face up. I simply displayed 11 random non-5♦ cards.
+
+If you didn't select the 5♦ initially (which happens with probability 12/13), then the 5♦ is among my remaining cards. But since I only show 11 cards and don't show the 5♦, it must be the remaining card I'm holding.
+
+So if you stick with your initial choice, your probability of having the 5♦ is 1/13. If you switch to my remaining card, your probability of getting the 5♦ is 12/13.
+
+Therefore, you should trade your card for my remaining card.
+
+Part b): What is the chance you find the 5♦ if you switch?
+
+As calculated above, if you switch, your probability of getting the 5♦ is 12/13, which is approximately 0.9231 or about 92.31%.
+
+Let me double-check my logic:
+
+There are 13 diamonds total. You select 1 card randomly, and I'm left with 12 cards.
+Then I place 11 cards face up, and the 5♦ is not among them.
+
+If you selected the 5♦ initially (probability = 1/13), then I could show any 11 of the 12 cards I have.
+If you didn't select the 5♦ initially (probability = 12/13), then the 5♦ is among my 12 cards, and I deliberately don't show it.
+
+This means that if you didn't select the 5♦ initially (probability = 12/13), then the 5♦ is definitely the remaining card I'm holding.
+
+Therefore, if you switch, your probability of getting the 5♦ is 12/13.
+
+Actually, I need to be even more careful. Let's reanalyze:
+
+You randomly select 1 card out of 13 diamonds, and I have the remaining 12 cards.
+I place 11 cards face up, ensuring that the 5♦ is not among them.
+
+Case 1: You initially selected the 5♦ (probability = 1/13).
+In this case, the 5♦ is not among my 12 cards, so I can show any 11 of the 12 cards.
+The remaining card I'm holding is just one of the diamonds, but definitely not the 5♦.
+
+Case 2: You didn't initially select the 5♦ (probability = 12/13).
+In this case, the 5♦ is among my 12 cards. Since I don't show the 5♦, it must be either among the 11 cards I show or the remaining card I'm holding.
+Since the 5♦ is not among the 11 cards I show, it must be the remaining card I'm holding.
+
+So if you switch:
+- If you initially had the 5♦ (probability = 1/13), you will not get the 5♦.
+- If you initially didn't have the 5♦ (probability = 12/13), you will definitely get the 5♦.
+
+Therefore, if you switch, your probability of getting the 5♦ is 12/13.
+
+[TOPICS]
+Monty Hall Problem, Conditional Probability, Bayes' Theorem, Card Probability

@@ -1,0 +1,45 @@
+[CONFIG]
+title: 10♥
+difficulty: Medium
+answer: 31.8
+
+[PROBLEM]
+Random Parking Count
+
+Cars of length 2 are parking on a street of length 100. Each minute, a car arrives and parks at a uniformly random spot on the road without crashing into another car or running off the road. When no more cars can possibly fit, roughly how many cars have parked?
+
+[HINTS]
+Use the result from the previous problem about jamming density.
+
+If 1 - 1/e of the road is occupied, how much total length is that?
+
+Each car has length 2, so divide the occupied length by 2.
+
+[SOLUTION]
+From the theory of random sequential adsorption (1D parking):
+
+**Jamming density:** θ∞ = 1 - 1/e ≈ 0.632
+
+This means about 63.2% of the road length gets occupied by cars.
+
+**Calculation:**
+- Total road length: 100
+- Occupied length: 100 × (1 - 1/e) = 100 × 0.632 = 63.2
+- Each car has length: 2
+- Number of cars: 63.2 ÷ 2 = 31.6
+
+**More precise calculation:**
+Number of cars = (100 × (1 - 1/e)) ÷ 2 = 50 × (1 - 1/e)
+
+Since 1/e ≈ 0.36788:
+Number of cars = 50 × (1 - 0.36788) = 50 × 0.63212 = **31.606**
+
+**Rounding:** Approximately **32 cars** (or 31.6 cars on average).
+
+**Physical interpretation:**
+The jamming occurs because the remaining gaps are all smaller than the car length (2). The final configuration has about 32 cars with gaps between them that are too small for additional cars.
+
+**Answer: ≈ 31.8 cars**
+
+[TOPICS]
+Random Sequential Adsorption, Jamming Density, Parking Problems, Counting

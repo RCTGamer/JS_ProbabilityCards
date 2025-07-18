@@ -1,0 +1,30 @@
+[CONFIG]
+title: 4♠
+difficulty: Medium
+answer: 16
+
+[PROBLEM]
+**Bunny Nap Decision**
+
+A bunny cannot decide where to take a nap. There is a rose bush $4$ steps to the left and sunflowers $8$ steps to the right. The bunny is $25\%$ likely to step toward the roses and $75\%$ likely to step toward the sunflowers. How many steps (on average) does it take until the bunny can get some rest?
+
+[HINT]
+This is a random walk between two absorbing barriers. Use the formula for expected hitting times in a biased random walk.
+
+[SOLUTION]
+Let $E_k$ be the expected number of steps to reach either boundary when starting $k$ steps from the left barrier (roses).
+
+The bunny starts at position 4 (4 steps from roses, 8 steps from sunflowers).
+
+For a biased random walk with probability $p = 0.75$ of moving right and $q = 0.25$ of moving left between barriers at 0 and 12:
+
+$E_k = \frac{k}{q-p} - \frac{12}{q-p} \cdot \frac{1-(q/p)^k}{1-(q/p)^{12}}$
+
+With $p = 0.75$, $q = 0.25$, so $q/p = 1/3$ and $q-p = -0.5$.
+
+$E_4 = \frac{4}{-0.5} - \frac{12}{-0.5} \cdot \frac{1-(1/3)^4}{1-(1/3)^{12}}$
+
+$E_4 = -8 + 24 \cdot \frac{1-1/81}{1-1/531441} = 16$
+
+[TOPICS]
+Biased Random Walk, Two Absorbing Barriers, Expected Hitting Times

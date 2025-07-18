@@ -1,0 +1,39 @@
+[CONFIG]
+title: 10♣
+difficulty: Hard
+answer: 40
+
+[PROBLEM]
+Drawing three cards
+
+Draw cards from a shuffled deck until you draw the **J♣, Q♣,** and **K♣**. How many draws will it take on average?
+
+[HINTS]
+This is similar to the coupon collector problem, but we only need to collect 3 specific cards.
+
+Think about this as waiting for the last of the three target cards to appear.
+
+The expected position of the $k$-th largest value in a random permutation of $n$ items is $\frac{k(n+1)}{n+1-k+1}$.
+
+Alternatively, think about the expected position of the maximum of the three target cards.
+
+[SOLUTION]
+We need to find the expected number of draws until we have seen all three cards: J♣, Q♣, and K♣.
+
+This is equivalent to finding the expected position of the last of these three cards to appear in a random shuffling of the deck.
+
+Let the positions of J♣, Q♣, and K♣ in the shuffled deck be $X_1, X_2, X_3$ respectively. We want $E[\max(X_1, X_2, X_3)]$.
+
+For three cards randomly placed in a deck of 52 cards, the expected position of the maximum is:
+$$E[\max(X_1, X_2, X_3)] = \frac{3 \cdot 53}{3 + 1} = \frac{159}{4} = 39.75$$
+
+More generally, for $k$ specific cards in a deck of $n$ cards:
+$$E[\text{position of last card}] = \frac{k(n+1)}{k+1}$$
+
+With $k=3$ and $n=52$:
+$$E[\text{draws needed}] = \frac{3 \cdot 53}{4} = \frac{159}{4} = 39.75$$
+
+The expected answer is approximately $\boxed{40}$.
+
+[TOPICS]
+Order Statistics, Expected Value of Maximum, Coupon Collector Variant
