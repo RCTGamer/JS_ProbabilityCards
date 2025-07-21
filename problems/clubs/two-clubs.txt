@@ -1,7 +1,8 @@
 [CONFIG]
 title: 2♣
 difficulty: Easy
-answers: a)=52, b)=26.5
+answer_a: 52
+answer_b: 26.5
 
 [PROBLEM]
 Drawing Cards Until Success
@@ -11,21 +12,19 @@ A standard deck of cards is shuffled. On average, how many cards will you have t
 a) You draw with replacement?
 b) You draw without replacement?
 
-[HINTS]
-Part a: With replacement, each draw is independent with probability 1/52.
-
-Part b: Without replacement, use the formula for expected position in a shuffled deck.
-
 [SOLUTION]
-Part a) Drawing with replacement:
-Each draw has probability $\frac{1}{52}$ of success.
-Expected number of trials until first success: $E[X] = \frac{1}{p} = \frac{1}{1/52} = 52$
+a) Drawing with replacement:
+Each draw has probability $\frac{1}{52}$ of success (or drawing the A♣).
+Expected number of trials until first success: $E[X] = \frac{1}{p} = \frac{1}{1/52} = 52$.
+To understand why this holds, search Expectation of Geometric RVS.
+Author: RCTGamer
 
 ---
 
-Part b) Drawing without replacement:
-The A♣ is equally likely to be in any of the 52 positions.
-Expected position: $E[X] = \frac{1 + 2 + ... + 52}{52} = \frac{52 \times 53}{2 \times 52} = 26.5$
+b) Drawing without replacement:
+Let $X$ be the number of cards we draw before we get the A♣ without replacement. $X$ is equivalent to the position of A♣ in a randomly shuffled deck. Because each position is equally likely, then we have
+$E[X] = \frac{1 + 2 + ... + 52}{52} = \frac{52 \times 53}{2 \times 52} = 26.5$
+Author: RCTGamer
 
 [TOPICS]
-Geometric Distribution, Expected Value, Card Drawing, Probability
+Geometric Distribution, Expected Value

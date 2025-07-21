@@ -1,7 +1,7 @@
 [CONFIG]
 title: 9♣
 difficulty: Hard
-answer: 7
+answer_a: 7
 
 [PROBLEM]
 Deck Cutting
@@ -46,6 +46,8 @@ The ratio is $\frac{2N+1-s}{s}$.
 This calculation becomes more complex, but for large $N$, the expected ratio approaches $\frac{4N+2}{N+1} \approx 4$.
 
 For this problem, the answer appears to be $\boxed{7}$.
+
+Author: RCTGamer
 
 [TOPICS]
 Expected Value, Symmetry, Random Cuts, Order Statistics

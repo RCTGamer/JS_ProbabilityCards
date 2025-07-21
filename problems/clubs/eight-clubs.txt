@@ -1,7 +1,7 @@
 [CONFIG]
 title: 8♣
 difficulty: Medium
-answer: 8
+answer: 5.5
 
 [PROBLEM]
 Diretion Change

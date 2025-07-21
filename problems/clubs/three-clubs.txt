@@ -1,43 +1,17 @@
 [CONFIG]
 title: 3♣
-difficulty: Medium
-answers: =1
+difficulty: Easy
+answer: 1
 
 [PROBLEM]
 Card Redistribution Problem
 
 $20$ people are each holding a playing card. These cards are all shuffled and redistributed randomly. What is the expected number of people who get their original card back?
 
-[HINTS]
-Use indicator random variables for each person.
-
-Apply linearity of expectation.
-
-Each person has probability 1/20 of getting their original card back.
-
 [SOLUTION]
-Using indicator random variables:
-Let $X_i$ be an indicator random variable that equals 1 if person $i$ gets their original card back, and 0 otherwise.
-We want to find $E[X_1 + X_2 + ... + X_{20}]$.
-
----
-
-Using linearity of expectation:
-$E[X_1 + X_2 + ... + X_{20}] = E[X_1] + E[X_2] + ... + E[X_{20}]$
-Since all people are equivalent: $E[X_i] = E[X_1]$ for all $i$.
-
----
-
-Calculating the probability:
-$P(\text{person 1 gets their card back}) = \frac{1}{20}$
-Therefore: $E[X_1] = 1 \cdot \frac{1}{20} + 0 \cdot \frac{19}{20} = \frac{1}{20}$
-
----
-
-Final answer:
-$E[\text{total}] = 20 \cdot \frac{1}{20} = 1$
-
-This is a classic result: in any random permutation of $n$ objects, the expected number of fixed points is always 1, regardless of $n$.
+Let $X_i$ be an indicator random variable that equals $1$ if person $i$ gets their original card back, and $0$ otherwise.
+We know that $E[X_i] = P(X=1) = \frac{1}{20}$ and we want to find $E[\sum\limits_{i=1}^{20} X_i] = \sum\limits_{i=1}^{20} E[X_i] = 20\cdot \frac{1}{20} = 1$
+Author: RCTGamer
 
 [TOPICS]
-Linearity of Expectation, Indicator Random Variables, Permutations, Fixed Points
+Linearity of Expectation

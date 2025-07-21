@@ -9,28 +9,40 @@ Two Jokers
 While inserting two jokers into a deck of cards, we unfortunately drop the **5♣** on the floor. We then shuffle the deck. What's the expected number of cards between the two jokers?
 
 [HINTS]
-Think about the deck without the 5♣. How many cards are there?
-
-Consider the positions of the two jokers among all possible arrangements.
-
-Use the fact that if we have $n$ cards total, and we place two jokers randomly, we can think of this as dividing the cards into 3 groups.
-
-The symmetry of the problem suggests that each of the 3 sections (before first joker, between jokers, after second joker) should have the same expected size.
+Calculate all the possible probabilities for each number of cards between the 2 jokers. Or find some symmetry argument  
 
 [SOLUTION]
-After dropping the 5♣, we have 51 cards plus 2 jokers, for a total of 53 cards.
+**Solution 1**
+You have $51$ cards + $2$ jokers. Note that the value/suit of every cards do not matter, all we want is to count the number of cards. 
 
-When we place the 2 jokers randomly among these 53 positions, we create 3 sections:
-1. Cards before the first joker
-2. Cards between the two jokers  
-3. Cards after the second joker
+Therefore, we can simply count the number of ways that we can have $n$ cards between $2$ jokers. Its easy to see that this can happen $52-n$ times where $n=0,1,2,...,51$. 
+i.e. if we have $1$ card between $2$ jokers, then we can have the jokers in the 1st and 3rd positions, 2nd and 4th positions,..., and 51st and 53rd positions which gives $51 = 52-1$ possible positions.
 
-By symmetry, each section has the same expected number of cards.
+Hence, our total is $\frac{\sum\limits_{i=0}^{51} i(52-i)}{\binom{53}{2}}$. We let $n=51$. 
 
-Since we have 51 regular cards total, and they're divided equally among 3 sections:
-Expected cards in each section = $\frac{51}{3} = 17$
+Then, we have $\sum\limits_{i=0}^{n} i(n+1-i) = (n+1)\sum\limits_{i=1}^{51}i - \sum\limits_{i=1}^{51} i^2 = (n+1) \cdot \frac{(n)(n+1)}{2} - \frac{n(n+1)(2n+1)}{6}$
+$ = \frac{n(n+1)}{2} \cdot (n+1 - \frac{2n+1}{3}) = \frac{n(n+1)}{2} \cdot \frac{n+2}{3}$
 
-Therefore, the expected number of cards between the two jokers is $\boxed{17}$.
+Next, we also have $\binom{53}{2} = \frac{(n+2)(n+1)}{2}$
+
+Therefore, we have $\frac{\sum\limits_{i=0}^{51} i(52-i)}{\binom{53}{2}} = \frac{\frac{n(n+1)}{2}\cdot \frac{n+2}{3}}{\frac{(n+1)(n+2)}{2}} = \frac{n}{3} = \frac{51}{3} = 17$
+
+Author: RCTGamer
+
+---
+
+**Solution 2**
+Define $X_1, X_2, X_3$ be the number of cards before the first joker, between the 2 jokers, and after the second joker and let $Y_1,Y_2$ be the positions of the first and second jokers.
+
+Suppose that we fix the second joker at some arbitrary position, say the $i$th position. Then if we arbitrarily put the first joker, its easy to see that the expected number of cards before the first joker and the expected number of cards between the first and second joker are equal. 
+
+In mathematical terms, we have $E[X_1 | Y = i] = E[X_2 | Y = i], \forall i$ which tells us that $E[X_1] = \sum E[X_1 | Y=i] P(Y = i) = \sum E[X_2 | Y=i] P(Y=i) = E[X_2]$. 
+
+We can argue similarly for the first joker at some arbitrary position to get that $E[X_2] = E[X_3]$. 
+
+Therefore, since $E[X_1 + X_2 + X_3] = E[X_1] + E[X_2] + E[X_3] = 3\cdot E[X_2]$, and $E[X_1 + X_2 + X_3] = 51$, then $E[X_2] = 17$.
+
+Author: Kant
 
 [TOPICS]
-Expected Value, Symmetry Arguments, Random Arrangements
+Expected Value, Symmetry

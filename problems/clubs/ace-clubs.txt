@@ -5,31 +5,26 @@ answer_a: 7
 answer_b: 14
 
 [PROBLEM]
-Expected Value of Playing Cards
+Expected Value of Playing Cards 
 
 Assume that **A** = 1, **J** = 11, **Q** = 12, **K** = 13.
 
 a) What is the expected value of a randomly drawn card from a standard deck?
 b) If you draw two cards randomly, what is the expected value of their sum?
 
-[HINTS]
-Part a: Calculate the expected value using the formula $E[X] = \sum xP(X=x)$ for each card value.
-
-Part b: Use the linearity of expectation: $E[X + Y] = E[X] + E[Y]$.
-
 [SOLUTION]
-Part a) Expected value of a single card:
-In a standard deck, we have 4 cards each of values 1, 2, 3, ..., 10, 11, 12, 13.
-Each card has probability $\frac{1}{52}$ of being drawn.
+a)
+Let $X$ be the value of the random card being drawn. In a standard deck, we have 4 cards each of values 1, 2, 3, ..., 10, 11, 12, 13. Each card has probability $\frac{1}{52}$ of being drawn.
 
-$E[X] = \frac{1}{52} \times 4 \times (1 + 2 + 3 + ... + 13)$
-$E[X] = \frac{4}{52} \times \frac{13 \times 14}{2} = \frac{4}{52} \times 91 = \frac{364}{52} = 7$
+$E[X] = \frac{1}{52} \times 4 \times (1 + 2 + 3 + ... + 13) = \frac{4}{52} \times \frac{13 \times 14}{2} = 7$
+Author: RCTGamer
 
 ---
 
-Part b) Expected value of sum of two cards:
-By linearity of expectation: $E[X + Y] = E[X] + E[Y]$
-Since each card has the same expected value: $E[X + Y] = 7 + 7 = 14$
+b) 
+Let $X,Y$ be the values of card number 1 and card number 2 respectively out of the two cards that are to be drawn. We know that for any arbitrary card, its expected value is $7$ from part $A$ so, $E[X]=E[Y]=7$.
+By Linearity of Expectation, we know that $E[X + Y] = E[X]+E[Y] = 14$
+Author: RCTGamer
 
 [TOPICS]
-Expected Value, Linearity of Expectation, Probability Theory, Playing Cards
+Linearity of Expectation
