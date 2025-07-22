@@ -14,7 +14,9 @@ Think about the probability of forming a pair and the total number of pairs
 [SOLUTION]
 In a full deck of 52 cards, note that we have 26 matches out of the $\binom{52}{2} = \frac{52(51)}{2} = 26\cdot 51$ possible pairs. Therefore, any arbitrary pair chosen has a probability of $\frac{26}{\frac{26}{51}} = \frac{1}{51}$.
 
-$\frac{1}{51} \cdot \frac{34\cdot 33}{2} = 11$
+Next, if we have $34$ cards remaining, we have a total of $\binom{34}{2} = \frac{34 \cdot 33}{2}$ pairs. 
+
+So by linearity of expectation, we have $E[X] = \frac{34\cdot 33}{2} \cdot \frac{1}{51} = 11$
 
 Author: RCTGamer
 

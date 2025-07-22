@@ -1,7 +1,7 @@
 [CONFIG]
 title: 10♣
 difficulty: Hard
-answer: 40
+answer: 39.75
 
 [PROBLEM]
 Drawing three cards
@@ -18,6 +18,9 @@ The expected position of the $k$-th largest value in a random permutation of $n$
 Alternatively, think about the expected position of the maximum of the three target cards.
 
 [SOLUTION]
+
+[NEED TO BE EDITED]
+
 We need to find the expected number of draws until we have seen all three cards: J♣, Q♣, and K♣.
 
 This is equivalent to finding the expected position of the last of these three cards to appear in a random shuffling of the deck.

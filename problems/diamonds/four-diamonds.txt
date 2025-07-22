@@ -1,7 +1,7 @@
 [CONFIG]
 title: 4♦
-difficulty: Hard
-answer: 1
+difficulty: Easy
+answer: No
 
 [PROBLEM]
 Three Card Monte
@@ -11,54 +11,14 @@ The **2♦, 3♦, and 4♦** are face-down in random order. You want to select t
 [HINTS]
 Think about what information you gain when the rightmost card is revealed to be the 2♦.
 
-Consider all possible arrangements of the three cards and how your chances change.
-
 [SOLUTION]
-Initially, the 2♦, 3♦, and 4♦ are arranged randomly, and you choose the leftmost card. Let's analyze the situation:
+First, note that since it is a gust of wind that blows the rightmost card, then we know that the card being opened is not intentionally "not a **4♦**".
 
-First, let's enumerate all possible arrangements of the three cards (from left to right):
-1. (2♦, 3♦, 4♦)
-2. (2♦, 4♦, 3♦)
-3. (3♦, 2♦, 4♦)
-4. (3♦, 4♦, 2♦)
-5. (4♦, 2♦, 3♦)
-6. (4♦, 3♦, 2♦)
+Therefore, the new information that we know is that the rightmost card is a **2♦**. So, the **3♦** and **4♦** are equally likely to appear in either the leftmost or middle spot which changes the probability of our selection.
 
-Each arrangement has a 1/6 probability.
+However, the probabilities of sticking with the leftmost side and the middle are both then $\frac{1}{2}$ so it does not matter if you change.
 
-You initially choose the leftmost card. Then the rightmost card is revealed to be the 2♦. This means we're in arrangement 4 or 5.
-
-In arrangement 4 (3♦, 4♦, 2♦), the 4♦ is in the middle.
-In arrangement 5 (4♦, 2♦, 3♦), the 4♦ is on the left (your initial choice).
-
-Since arrangements 4 and 5 are equally likely (each had a 1/6 chance), and we're now restricted to just these two arrangements, each now has a 1/2 probability.
-
-If you stick with the leftmost card, you'll win in arrangement 5, so your probability of winning is 1/2.
-If you switch to the middle card, you'll win in arrangement 4, so your probability of winning is also 1/2.
-
-Therefore, it doesn't matter whether you switch or not - your probability of selecting the 4♦ remains 1/2.
-
-But wait, let's reconsider this. When the rightmost card is revealed to be the 2♦, we're left with the following possible arrangements:
-- (3♦, 4♦, 2♦)
-- (4♦, 3♦, 2♦)
-
-We were actually in arrangements 4 or 6 from our original list. In arrangement 4, the 4♦ is in the middle. In arrangement 6, the 4♦ is on the left.
-
-But I made a mistake. Let me redo the analysis.
-
-When the rightmost card is revealed to be the 2♦, we're left with:
-4. (3♦, 4♦, 2♦)
-6. (4♦, 3♦, 2♦)
-
-In arrangement 4, the 4♦ is in the middle.
-In arrangement 6, the 4♦ is on the left (your initial choice).
-
-So if you stick with your initial choice (the leftmost card), you'll win in arrangement 6.
-If you switch to the middle card, you'll win in arrangement 4.
-
-Since arrangements 4 and 6 are equally likely, your probability of winning is 1/2 whether you switch or not.
-
-Therefore, it doesn't matter whether you switch or not - your probability of selecting the 4♦ remains 1/2.
+Author: RCTGamer
 
 [TOPICS]
-Probability, Conditional Probability, Monty Hall Variant
+Conditional Probability, Monty Hall Variant

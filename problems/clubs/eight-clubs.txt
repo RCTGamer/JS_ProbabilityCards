@@ -1,7 +1,7 @@
 [CONFIG]
 title: 8♣
-difficulty: Medium
-answer: 5.5
+difficulty: Hard
+answer: $\frac{22}{3}$
 
 [PROBLEM]
 Diretion Change
@@ -9,50 +9,18 @@ Diretion Change
 Arrange the **13♣'s** in random order. How many times do you expect the sequence to change direction (increasing to decreasing or vice versa)?
 
 [HINTS]
-Think about each adjacent pair of cards and whether they represent a "peak" or "valley" in the sequence.
-
-A direction change occurs when we have a local maximum or local minimum.
-
-For any three consecutive cards in positions $i-1, i, i+1$, what's the probability that position $i$ is a local extremum?
-
-Use linearity of expectation over all possible positions where direction changes can occur.
+Think about the comparison ("<" or ">") between a pair of adjacent cards and how it can be used to determine a whether the direction has changed. Can you get some probability for the comparison between two adjacent cards?
 
 [SOLUTION]
-We have 13 cards arranged in random order. A direction change occurs at position $i$ (for $2 \leq i \leq 12$) when:
-- $x_{i-1} < x_i > x_{i+1}$ (local maximum), or  
-- $x_{i-1} > x_i < x_{i+1}$ (local minimum)
+Let $X$ be the number of direction changes that occur in the sequence of $13$ cards.
 
-For any three consecutive cards in a random arrangement, there are $3! = 6$ possible orderings:
-1. $a < b < c$ (increasing)
-2. $a < c < b$ (peak at $c$)
-3. $a > b < c$ (valley at $b$) ✓
-4. $a > c < b$ (valley at $c$)
-5. $b < a < c$ (valley at $b$)
-6. $b > a > c$ (decreasing)
+Consider $3$ adjacent cards with values $a < b < c$. Then a direction change will occur if and only if the order of these $3$ cards are ordered as $(a, c, b), (b,c,a), (b,a,c), (c,a,b)$. Since there are only $6$ possible permutations, then there is a $\frac{2}{3}$ chance of a direction change occuring.
 
-Wait, let me be more systematic. For positions $i-1, i, i+1$ with values $a, b, c$:
+There are a total of $13-2 = 11$ sets of these $3$ adjacent cards in a permutation of **13♣'s**, 
 
-The 6 possible orderings are:
-1. $a < b < c$ 
-2. $a < c < b$ (local max at $b$) ✓
-3. $b < a < c$
-4. $b < c < a$ 
-5. $c < a < b$ (local max at $b$) ✓
-6. $c < b < a$
+So by Linearity of Expecation, we have $E[X] = 11 \cdot \frac{2}{3} = \frac{22}{3}$
 
-Actually, let me think about this differently. For any three positions with values $a, b, c$, the probability that $b$ is a local extremum (either max or min) is:
-
-$P(\text{local max}) = P(a < b \text{ and } c < b) = \frac{1}{3}$ (since $b$ is largest of the three)
-$P(\text{local min}) = P(a > b \text{ and } c > b) = \frac{1}{3}$ (since $b$ is smallest of the three)
-
-So $P(\text{direction change at position } i) = \frac{1}{3} + \frac{1}{3} = \frac{2}{3}$
-
-There are 11 interior positions where direction changes can occur (positions 2 through 12).
-
-By linearity of expectation:
-$E[\text{direction changes}] = 11 \times \frac{2}{3} = \frac{22}{3} \approx 7.33$
-
-The expected answer is $\boxed{8}$ (rounded).
+Author: RCTGamer
 
 [TOPICS]
-Random Permutations, Local Extrema, Linearity of Expectation
+Random Permutations, Linearity of Expectation

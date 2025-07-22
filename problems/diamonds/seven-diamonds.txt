@@ -1,7 +1,7 @@
 [CONFIG]
 title: 7♦
 difficulty: Medium
-answer: 9/13
+answer: $\frac{1}{3}$
 
 [PROBLEM]
 Truthful and Lying Card Holders
@@ -9,74 +9,21 @@ Truthful and Lying Card Holders
 You are holding a random card from a standard deck. If you have a ♦, you truthfully answer questions 90% of the time and lie 10% of the time. If you don't have a ♦, you truthfully answer questions 40% of the time and lie 60% of the time. I ask "Do you have a ♦?" and you answer "Yes." What is the chance you have a ♦?
 
 [HINTS]
-Use Bayes' Theorem to update the probability based on the observation.
-
-Consider the different ways you could answer "Yes" - either truthfully (if you have a diamond) or deceptively (if you don't have a diamond).
+Use Bayes' Theorem and expand it to fit our given variables.
 
 [SOLUTION]
 Let's solve this problem using Bayes' Theorem.
 
 Let's denote:
-- D = the event that you have a diamond
-- Y = the event that you answer "Yes"
+$D$ to be the event that you have a diamond
+$ND$ to be the event that you don't have a diamond
+$Y$ to be the event that you answer "Yes"
 
-We want to find P(D|Y), the probability that you have a diamond given that you answered "Yes."
+We want to find $P(D|Y)$ and we can use Bayes Theorem to compute for this
 
-Using Bayes' Theorem:
-P(D|Y) = P(Y|D) × P(D) / P(Y)
+$P(D|Y) = \frac{P(D\cap Y)}{P(Y)} = \frac{P(Y|D)P(D)}{P(Y \cap D) + P(Y \cap ND)} = \frac{P(Y|D)P(D)}{P(Y|D)P(D) + P(Y|ND)P(ND)} = \frac{0.9\cdot 0.25}{0.9\cdot 0.25 + 0.6\cdot 0.75} = \frac{0.225}{0.225 + 0.45} = \frac{1}{3}$
 
-Given information:
-- P(D) = 13/52 = 1/4 (probability of randomly drawing a diamond)
-- P(Y|D) = 0.9 (if you have a diamond, you answer truthfully 90% of the time, so you say "Yes")
-- P(Y|not D) = 0.6 (if you don't have a diamond, you lie 60% of the time, so you say "Yes")
-
-We need to find P(Y) using the law of total probability:
-P(Y) = P(Y|D) × P(D) + P(Y|not D) × P(not D)
-P(Y) = 0.9 × (1/4) + 0.6 × (3/4)
-P(Y) = 0.225 + 0.45 = 0.675
-
-Now we can calculate P(D|Y):
-P(D|Y) = P(Y|D) × P(D) / P(Y)
-P(D|Y) = 0.9 × (1/4) / 0.675
-P(D|Y) = 0.225 / 0.675 = 1/3
-
-Wait, I need to be more careful with the problem statement. Let me reconsider:
-
-"If you have a ♦, you truthfully answer questions 90% of the time and lie 10% of the time."
-This means P(Y|D) = 0.9, because if you have a diamond, you answer truthfully ("Yes") 90% of the time.
-
-"If you don't have a ♦, you truthfully answer questions 40% of the time and lie 60% of the time."
-This means P(Y|not D) = 0.6, because if you don't have a diamond, you answer untruthfully ("Yes") 60% of the time.
-
-Let's recalculate:
-P(Y) = P(Y|D) × P(D) + P(Y|not D) × P(not D)
-P(Y) = 0.9 × (1/4) + 0.6 × (3/4)
-P(Y) = 0.225 + 0.45 = 0.675
-
-P(D|Y) = P(Y|D) × P(D) / P(Y)
-P(D|Y) = 0.9 × (1/4) / 0.675
-P(D|Y) = 0.225 / 0.675 = 1/3
-
-Actually, wait. Let me carefully analyze this again.
-
-P(D) = 13/52 = 1/4 (probability of randomly drawing a diamond)
-P(not D) = 39/52 = 3/4 (probability of not drawing a diamond)
-
-If you have a diamond (D), then:
-- P(answer truthfully|D) = 0.9
-- P(answer "Yes"|D) = P(answer truthfully|D) = 0.9 (because "Yes" is the truthful answer)
-
-If you don't have a diamond (not D), then:
-- P(answer truthfully|not D) = 0.4
-- P(answer "Yes"|not D) = P(not answer truthfully|not D) = 0.6 (because "Yes" is the untruthful answer)
-
-Using Bayes' Theorem:
-P(D|Y) = P(Y|D) × P(D) / [P(Y|D) × P(D) + P(Y|not D) × P(not D)]
-P(D|Y) = 0.9 × (1/4) / [0.9 × (1/4) + 0.6 × (3/4)]
-P(D|Y) = 0.225 / [0.225 + 0.45]
-P(D|Y) = 0.225 / 0.675 = 1/3
-
-So the probability that you have a diamond given that you answered "Yes" is 1/3 or approximately 0.333.
+Author: RCTGamer
 
 [TOPICS]
-Bayes' Theorem, Conditional Probability, Probabilistic Reasoning with Deception
+Bayes' Theorem
