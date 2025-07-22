@@ -380,7 +380,7 @@
     <div class="container">
         <div class="header">
             <div class="nav-buttons">
-                <a href="../expectation.html" class="nav-btn">← Question List</a>
+                <a href="../classical-probability.html" class="nav-btn">← Question List</a>
                 <button class="nav-btn" onclick="previousProblem()">‹</button>
                 <button class="nav-btn" onclick="nextProblem()">›</button>
             </div>
@@ -642,22 +642,8 @@
             return sections.map(section => {
                 const lines = section.split('\n');
                 const title = lines[0];
-                
-                // Check if the last line is an author line (starts with "Author:" or similar)
-                let content = lines.slice(1);
-                let author = '';
-                
-                const lastLine = content[content.length - 1];
-                if (lastLine && (lastLine.trim().startsWith('Author:') || lastLine.trim().startsWith('- Author:'))) {
-                    author = lastLine.trim().replace(/^-?\s*Author:\s*/, '');
-                    content = content.slice(0, -1); // Remove author line from content
-                }
-                
-                return { 
-                    title, 
-                    content: content.join('<br>'),
-                    author: author
-                };
+                const content = lines.slice(1).join('<br>');
+                return { title, content };
             });
         }
         
@@ -849,38 +835,23 @@
                     </div>
                 `).join('');
                 
-                // Load hints and show/hide hint section
+                // Load hints
                 const hintEl = document.getElementById('hint-content');
-                const hintSection = document.querySelector('.expandable-section:has(#hint-content)') || 
-                                  document.querySelector('[onclick="toggleSection(\'hint\')"]').closest('.expandable-section');
-                
-                if (hints && hints.length > 0 && hints.some(hint => hint.trim())) {
+                if (hints && hints.length > 0) {
                     hintEl.innerHTML = hints.map(hint => `<p>${convertMarkdownToHtml(hint)}</p>`).join('');
-                    hintSection.style.display = 'block';
-                } else {
-                    hintSection.style.display = 'none';
                 }
                 
-                // Load solutions with author information
+                // Load solutions
                 const solutionEl = document.getElementById('solution-content');
-                const globalAuthorText = sections.author || config.author || '';
-                
                 if (solutions && solutions.length > 0) {
                     solutionEl.innerHTML = `
                         <div class="solution-content">
-                            ${solutions.map(solution => {
-                                // Use section-specific author if available, otherwise use global author
-                                const authorText = solution.author || globalAuthorText;
-                                const authorDisplay = authorText ? `<div style="margin-top: 10px; text-align: right; font-size: 0.8em; color: white; font-style: italic;">${convertMarkdownToHtml(authorText.trim())}</div>` : '';
-                                
-                                return `
-                                    <div class="solution-step">
-                                        ${convertMarkdownToHtml(solution.title)}<br>
-                                        ${convertMarkdownToHtml(solution.content)}
-                                        ${authorDisplay}
-                                    </div>
-                                `;
-                            }).join('')}
+                            ${solutions.map(solution => `
+                                <div class="solution-step">
+                                    <strong>${convertMarkdownToHtml(solution.title)}</strong><br>
+                                    ${convertMarkdownToHtml(solution.content)}
+                                </div>
+                            `).join('')}
                         </div>
                     `;
                 }
