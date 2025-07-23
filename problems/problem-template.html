@@ -202,6 +202,13 @@
             color: white;
         }
         
+        .container.solved {
+            border: 2px solid #10b981;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
+            border-radius: 10px;
+            position: relative;
+        }
+        
         .problem-navigation {
             display: flex;
             justify-content: space-between;
@@ -380,7 +387,7 @@
     <div class="container">
         <div class="header">
             <div class="nav-buttons">
-                <a href="../classical-probability.html" class="nav-btn">← Question List</a>
+                <a href="#" id="back-link" class="nav-btn">← Question List</a>
                 <button class="nav-btn" onclick="previousProblem()">‹</button>
                 <button class="nav-btn" onclick="nextProblem()">›</button>
             </div>
@@ -450,16 +457,69 @@
     </div>
 
     <script>
+        // Suit configuration - automatically detect from URL or default to clubs
+        const SUIT_CONFIG = {
+            clubs: {
+                folder: 'clubs',
+                backLink: '../problems.html',
+                defaultProblem: 'ace-clubs'
+            },
+            diamonds: {
+                folder: 'diamonds',
+                backLink: '../problems.html',
+                defaultProblem: 'ace-diamonds'
+            },
+            hearts: {
+                folder: 'hearts',
+                backLink: '../problems.html',
+                defaultProblem: 'ace-hearts'
+            },
+            spades: {
+                folder: 'spades',
+                backLink: '../problems.html',
+                defaultProblem: 'ace-spades'
+            }
+        };
+        
+        // Detect suit from URL parameters or problem name
+        function detectSuit() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const suit = urlParams.get('suit');
+            const problem = urlParams.get('problem');
+            
+            if (suit && SUIT_CONFIG[suit]) {
+                return suit;
+            }
+            
+            if (problem) {
+                for (const [suitName, config] of Object.entries(SUIT_CONFIG)) {
+                    if (problem.includes(suitName)) {
+                        return suitName;
+                    }
+                }
+            }
+            
+            // Default to clubs if no suit detected
+            return 'clubs';
+        }
+        
+        // Initialize suit configuration
+        const currentSuit = detectSuit();
+        const config = SUIT_CONFIG[currentSuit];
+        
+        // Set up back link
+        document.getElementById('back-link').href = config.backLink;
+        
         // Problem order for navigation
         const problemOrder = [
-            "ace-diamonds", "two-diamonds", "three-diamonds", "four-diamonds", "five-diamonds", 
-            "six-diamonds", "seven-diamonds", "eight-diamonds", "nine-diamonds", "ten-diamonds", 
-            "jack-diamonds", "queen-diamonds", "king-diamonds"
+            `ace-${currentSuit}`, `two-${currentSuit}`, `three-${currentSuit}`, `four-${currentSuit}`, `five-${currentSuit}`, 
+            `six-${currentSuit}`, `seven-${currentSuit}`, `eight-${currentSuit}`, `nine-${currentSuit}`, `ten-${currentSuit}`, 
+            `jack-${currentSuit}`, `queen-${currentSuit}`, `king-${currentSuit}`
         ];
         
         // Get current problem from URL parameter
         const urlParams = new URLSearchParams(window.location.search);
-        const currentProblem = urlParams.get('problem') || 'ace-diamonds';
+        const currentProblem = urlParams.get('problem') || config.defaultProblem;
         
         // Function to load text file content
         async function loadTextFile(filePath) {
@@ -664,21 +724,21 @@
         // Load problem content
         async function loadProblem(problemId) {
             try {
-                // Load the single content file for this problem
-                const contentText = await loadTextFile(`diamonds/${problemId}.txt`);
+                // Load the single content file for this problem using the detected suit folder
+                const contentText = await loadTextFile(`${config.folder}/${problemId}.txt`);
                 
                 // Parse the content into sections
                 const sections = parseContentFile(contentText);
                 
                 // Parse the config section
-                const config = parseConfig(sections.config || '');
+                const problemConfig = parseConfig(sections.config || '');
                 const problemContent = formatProblemContent(sections.problem || '');
                 const hints = formatHints(sections.hints || '');
                 const solutions = formatSolution(sections.solution || '');
-                const answers = parseAnswers(config);
+                const answers = parseAnswers(problemConfig);
                 
                 // Update page title and content
-                const problemTitle = config.title || problemId.replace('-', ' ').toUpperCase();
+                const problemTitle = problemConfig.title || problemId.replace('-', ' ').toUpperCase();
                 document.getElementById('page-title').textContent = `${problemTitle} - Problem`;
                 document.getElementById('problem-title').textContent = problemTitle;
                 
@@ -688,149 +748,9 @@
                 const rawContent = sections.problem || 'Problem content not found.';
                 contentEl.innerHTML = '<p>' + convertMarkdownToHtml(rawContent, true) + '</p>';
                 
-                // Debug mode flag - set to true to enable debug overlay
-                const DEBUG_MODE = false;
-                
-                // Enhanced Debug Information - only shown when DEBUG_MODE is true
-                if (DEBUG_MODE) {
-                    setTimeout(() => {
-                        const titleEl = contentEl.querySelector('strong:first-child');
-                        const firstPara = contentEl.querySelector('p');
-                        
-                        // Console logging
-                        console.log('Title element:', titleEl);
-                        console.log('Raw content:', rawContent);
-                        console.log('Formatted content:', contentEl.innerHTML);
-                        console.log('Problem content object:', problemContent);
-                        
-                        // Create a styled debug overlay
-                        const debugDiv = document.createElement('div');
-                        debugDiv.id = 'debug-overlay';
-                        debugDiv.style.background = '#333';
-                        debugDiv.style.padding = '15px';
-                        debugDiv.style.color = '#fff';
-                        debugDiv.style.position = 'fixed';
-                        debugDiv.style.top = '10px';
-                        debugDiv.style.right = '10px';
-                        debugDiv.style.zIndex = '1000';
-                        debugDiv.style.width = '400px';
-                        debugDiv.style.maxHeight = '80vh';
-                        debugDiv.style.overflowY = 'auto';
-                        debugDiv.style.fontFamily = 'monospace';
-                        debugDiv.style.fontSize = '12px';
-                        debugDiv.style.borderRadius = '4px';
-                        debugDiv.style.boxShadow = '0 0 10px rgba(0,0,0,0.5)';
-                    
-                    // Toggle button to hide/show content
-                    const toggleBtn = document.createElement('button');
-                    toggleBtn.innerText = 'Toggle Debug View';
-                    toggleBtn.style.background = '#8b5cf6';
-                    toggleBtn.style.border = 'none';
-                    toggleBtn.style.color = 'white';
-                    toggleBtn.style.padding = '5px 10px';
-                    toggleBtn.style.borderRadius = '4px';
-                    toggleBtn.style.cursor = 'pointer';
-                    toggleBtn.style.marginBottom = '10px';
-                    toggleBtn.onclick = function() {
-                        const content = document.getElementById('debug-content');
-                        content.style.display = content.style.display === 'none' ? 'block' : 'none';
-                    };
-                    
-                    // Content container
-                    const contentContainer = document.createElement('div');
-                    contentContainer.id = 'debug-content';
-                    
-                    // Format HTML to display nicely in the debug panel
-                    const formatHTML = (html) => {
-                        return html
-                            .replace(/</g, '&lt;')
-                            .replace(/>/g, '&gt;')
-                            .replace(/&lt;br&gt;/g, '&lt;br&gt;\n');
-                    };
-                    
-                    // Add CSS styles
-                    const styles = document.createElement('style');
-                    styles.textContent = `
-                        .debug-section {
-                            margin-bottom: 15px;
-                            border-bottom: 1px solid #555;
-                            padding-bottom: 15px;
-                        }
-                        .debug-section h3 {
-                            margin: 0 0 8px 0;
-                            color: #8b5cf6;
-                        }
-                        .debug-content {
-                            background: #222;
-                            padding: 8px;
-                            border-radius: 4px;
-                            white-space: pre-wrap;
-                            word-break: break-word;
-                            line-height: 1.4;
-                        }
-                        .debug-property {
-                            margin: 5px 0;
-                        }
-                        .property-name {
-                            color: #4ade80;
-                            font-weight: bold;
-                        }
-                    `;
-                    document.head.appendChild(styles);
-                    
-                    // Populate content
-                    contentContainer.innerHTML = `
-                        <div class="debug-section">
-                            <h3>Spacing Info</h3>
-                            <div class="debug-property">
-                                <span class="property-name">Title margin-bottom:</span> 
-                                ${titleEl ? window.getComputedStyle(titleEl).marginBottom : 'N/A'}
-                            </div>
-                            <div class="debug-property">
-                                <span class="property-name">Paragraph margin:</span> 
-                                ${firstPara ? window.getComputedStyle(firstPara).margin : 'N/A'}
-                            </div>
-                        </div>
-                        
-                        <div class="debug-section">
-                            <h3>Problem Structure</h3>
-                            <div class="debug-property">
-                                <span class="property-name">Title:</span> 
-                                "${problemContent.title}"
-                            </div>
-                            <div class="debug-property">
-                                <span class="property-name">Description:</span> 
-                                "${problemContent.description}"
-                            </div>
-                            <div class="debug-property">
-                                <span class="property-name">Parts (${problemContent.parts.length}):</span>
-                                <div class="debug-content">
-                                    ${problemContent.parts.map((part, i) => `${i+1}. "${part}"`).join('<br>')}
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="debug-section">
-                            <h3>HTML Output</h3>
-                            <div class="debug-content">${formatHTML(contentEl.innerHTML)}</div>
-                        </div>
-                        
-                        <div class="debug-section">
-                            <h3>Raw Content</h3>
-                            <div class="debug-content">${rawContent.replace(/\n/g, '<br>')}</div>
-                        </div>
-                    `;
-                    
-                    // Assemble and add to page
-                    debugDiv.appendChild(toggleBtn);
-                    debugDiv.appendChild(contentContainer);
-                    document.body.appendChild(debugDiv);
-                }, 500);
-                }
-                
                 // Set difficulty
                 const difficultyEl = document.getElementById('problem-difficulty');
-                const difficulty = config.difficulty || 'Medium';
+                const difficulty = problemConfig.difficulty || 'Medium';
                 difficultyEl.textContent = difficulty;
                 difficultyEl.className = `difficulty ${difficulty.toLowerCase()}`;
                 
@@ -863,7 +783,7 @@
                 
                 // Load solutions with author information
                 const solutionEl = document.getElementById('solution-content');
-                const globalAuthorText = sections.author || config.author || '';
+                const globalAuthorText = sections.author || problemConfig.author || '';
                 
                 if (solutions && solutions.length > 0) {
                     solutionEl.innerHTML = `
@@ -908,9 +828,53 @@
                 if (window.MathJax) {
                     MathJax.typesetPromise();
                 }
+                
+                // Update solved status display
+                updateSolvedDisplay();
             } catch (error) {
                 console.error('Error loading problem:', error);
                 document.getElementById('problem-content').innerHTML = '<p>Error loading problem content.</p>';
+            }
+        }
+        
+        // Progress tracking integration
+        function getProblemId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const card = urlParams.get('card') || config.defaultProblem;
+            return card;
+        }
+        
+        function checkIfSolved() {
+            const problemId = getProblemId();
+            const solved = window.parent && window.parent.probabilityProgress 
+                ? window.parent.probabilityProgress.getSolved() 
+                : (localStorage.getItem('solvedProblems') ? JSON.parse(localStorage.getItem('solvedProblems')) : {});
+            return solved[problemId] !== undefined;
+        }
+        
+        function markAsSolved() {
+            const problemId = getProblemId();
+            console.log(`Marking problem ${problemId} as solved`);
+            
+            // Always use localStorage for consistency
+            const solved = localStorage.getItem('solvedProblems') ? JSON.parse(localStorage.getItem('solvedProblems')) : {};
+            solved[problemId] = {
+                solvedAt: new Date().toISOString(),
+                timestamp: Date.now()
+            };
+            localStorage.setItem('solvedProblems', JSON.stringify(solved));
+            console.log('Updated localStorage:', solved);
+            
+            updateSolvedDisplay();
+        }
+        
+        function updateSolvedDisplay() {
+            const container = document.querySelector('.container');
+            
+            if (checkIfSolved()) {
+                container.classList.add('solved');
+            } else {
+                container.classList.remove('solved');
             }
         }
         
@@ -925,9 +889,12 @@
             if (Math.abs(userAnswer - correctAnswer) <= tolerance) {
                 resultDiv.className = 'result correct';
                 resultDiv.textContent = '✅ Correct! Well done!';
+                
+                // Mark problem as solved when any answer is correct
+                markAsSolved();
             } else {
                 resultDiv.className = 'result incorrect';
-                resultDiv.textContent = `❌ Incorrect. The correct answer is ${correctAnswer}.`;
+                resultDiv.textContent = `❌ Incorrect, Try Again.`;
             }
         }
         
@@ -969,7 +936,7 @@
             const currentIndex = problemOrder.indexOf(currentProblem);
             if (currentIndex > 0) {
                 const prevProblem = problemOrder[currentIndex - 1];
-                window.location.href = `diamonds-problem-template.html?problem=${prevProblem}`;
+                window.location.href = `problem-template.html?suit=${currentSuit}&problem=${prevProblem}`;
             }
         }
         
@@ -977,7 +944,7 @@
             const currentIndex = problemOrder.indexOf(currentProblem);
             if (currentIndex < problemOrder.length - 1) {
                 const nextProblem = problemOrder[currentIndex + 1];
-                window.location.href = `diamonds-problem-template.html?problem=${nextProblem}`;
+                window.location.href = `problem-template.html?suit=${currentSuit}&problem=${nextProblem}`;
             }
         }
         

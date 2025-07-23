@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jane Street Probability Playing Cards</title>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,6 +18,28 @@
             max-width: 1200px;
             margin: 0 auto;
             text-align: center;
+        }
+        
+        .solved-indicator {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #28a745;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        .display-card.solved {
+            border: 2px solid #28a745;
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
         }
         
         h1 {
@@ -186,6 +209,7 @@
     </style>
 </head>
 <body>
+    
     <div class="container">
         <h1>🂠 Jane Street Probability Playing Cards</h1>
         <p class="subtitle">Master probability theory through interactive card-themed challenges</p>
@@ -216,28 +240,28 @@
         </div>
         
         <div class="display-grid">
-            <a href="expectation.html" class="display-card" data-suit="♣">
+            <a href="problems.html?suit=clubs" class="display-card" data-suit="♣">
                 <div class="corner-suit-bottom">♣</div>
                 <div class="display-icon">♣</div>
                 <div class="display-title">Expectation and Linearity</div>
                 <div class="display-description">Expected values, linearity of expectation, and variance calculations</div>
             </a>
             
-            <a href="classical-probability.html" class="display-card" data-suit="♦">
+            <a href="problems.html?suit=diamonds" class="display-card" data-suit="♦">
                 <div class="corner-suit-bottom">♦</div>
                 <div class="display-icon">♦</div>
                 <div class="display-title">Classical and Conditional Probability</div>
                 <div class="display-description">Basic probability, Bayes' theorem, and conditional events</div>
             </a>
             
-            <a href="geometric-probability.html" class="display-card" data-suit="♥">
+            <a href="problems.html?suit=hearts" class="display-card" data-suit="♥">
                 <div class="corner-suit-bottom">♥</div>
                 <div class="display-icon">♥</div>
                 <div class="display-title">Geometric Probability</div>
                 <div class="display-description">Area-based probability and geometric distributions</div>
             </a>
             
-            <a href="random-walks.html" class="display-card" data-suit="♠">
+            <a href="problems.html?suit=spades" class="display-card" data-suit="♠">
                 <div class="corner-suit-bottom">♠</div>
                 <div class="display-icon">♠</div>
                 <div class="display-title">Random Walks and Martingales</div>
@@ -245,5 +269,77 @@
             </a>
         </div>
     </div>
+    
+    <script>
+        // Progress tracking functions
+        function getSolvedProblems() {
+            const solved = localStorage.getItem('solvedProblems');
+            return solved ? JSON.parse(solved) : {};
+        }
+        
+        function markProblemSolved(problemId) {
+            const solved = getSolvedProblems();
+            solved[problemId] = {
+                solvedAt: new Date().toISOString(),
+                timestamp: Date.now()
+            };
+            localStorage.setItem('solvedProblems', JSON.stringify(solved));
+            updateCardIndicators();
+        }
+        
+        function markProblemUnsolved(problemId) {
+            const solved = getSolvedProblems();
+            delete solved[problemId];
+            localStorage.setItem('solvedProblems', JSON.stringify(solved));
+            updateCardIndicators();
+        }
+        
+        function updateCardIndicators() {
+            const solved = getSolvedProblems();
+            const cards = document.querySelectorAll('.display-card');
+            
+            cards.forEach(card => {
+                const suit = card.getAttribute('data-suit');
+                if (!suit) return;
+                
+                // Count solved problems for this suit
+                const suitProblems = Object.keys(solved).filter(id => id.includes(suit)).length;
+                
+                // Remove existing indicators
+                const existingIndicator = card.querySelector('.solved-indicator');
+                if (existingIndicator) {
+                    existingIndicator.remove();
+                }
+                card.classList.remove('solved');
+                
+                // Add indicator if there are solved problems in this suit
+                if (suitProblems > 0) {
+                    const indicator = document.createElement('div');
+                    indicator.className = 'solved-indicator';
+                    indicator.textContent = suitProblems;
+                    indicator.title = `${suitProblems} problems solved in this suit`;
+                    card.appendChild(indicator);
+                    
+                    // Add solved class if all 13 problems in suit are solved
+                    if (suitProblems === 13) {
+                        card.classList.add('solved');
+                    }
+                }
+            });
+        }
+        
+        // Expose functions globally for use in problem pages
+        window.probabilityProgress = {
+            markSolved: markProblemSolved,
+            markUnsolved: markProblemUnsolved,
+            getSolved: getSolvedProblems,
+            updateDisplay: updateCardIndicators
+        };
+        
+        // Update card indicators on page load
+        window.onload = function() {
+            updateCardIndicators();
+        }
+    </script>
 </body>
 </html>
