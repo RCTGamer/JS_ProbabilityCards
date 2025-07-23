@@ -1,37 +1,21 @@
 [CONFIG]
 title: A♥
 difficulty: Easy
-answer: π/4
+answer: $\frac{1}{8}$
 
 [PROBLEM]
-Circle in a Square
+Distance from Center of Sphere
 
-A circle is inscribed in a unit square. If you throw a dart randomly at the square, what is the probability that it lands inside the circle?
-
-[HINTS]
-Think about the ratio of areas: the area of the circle compared to the area of the square.
-
-For a unit square, what is the radius of the inscribed circle?
-
-The area of a circle is πr², and the area of a square is side².
+A tiny model airplane has gotten stuck inside an inflatable, spherical beach ball of radius $1$ and is flying around randomly. When you stop and look, what is the probability that the plane is closer to the center of the ball than to the outside?
 
 [SOLUTION]
-We have a unit square (side length = 1) with an inscribed circle.
+The plane is closer to the center of the ball if it stops flying inside of a sphere with radius $\frac{1}{2}$ with the same center as the beach ball.
 
-For a circle inscribed in a unit square:
-- The circle's diameter equals the side length of the square
-- So the radius r = 1/2
+Therefore, the probability that the plane is closer to the center is the volume of the sphere with radius $\frac{1}{2}$ divided by the volume of the sphere with radius $1$.
 
-**Area calculations:**
-- Area of square = 1² = 1
-- Area of circle = πr² = π(1/2)² = π/4
+So we have $\frac{\frac{4}{3}\pi (\frac{1}{2})^3}{\frac{4}{3} \pi 1^3} = \frac{1}{8}$.
 
-**Probability:**
-Since the dart is thrown randomly, the probability of landing in the circle equals the ratio of areas:
-
-P(dart lands in circle) = Area of circle / Area of square = (π/4) / 1 = π/4
-
-Therefore, the probability is **π/4 ≈ 0.785** or about **78.5%**.
+Author: RCTGamer
 
 [TOPICS]
-Geometric Probability, Area Ratios, Circle and Square, Inscribed Figures
+Geometric Probability

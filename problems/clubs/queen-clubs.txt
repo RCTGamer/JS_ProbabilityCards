@@ -9,9 +9,8 @@ Maximize Face-Up Cards
 
 I deal out $MN$ cards in an $M \times N$ grid, some face up and some face down. You want to maximize the number of cards face up, but you are only allowed to flip a full row or full column at a time (as many times as you like). How many cards can you get face up at the same time no matter how I arrange the cards to start for:
 
-**a)** $M = N$ ?
-
-**b)** $M = 2^N$ ?
+a) $M = N$ ?
+b) $M = 2^N$ ?
 
 [HINTS]
 Think about this as a game theory problem where you want to guarantee a certain outcome regardless of the initial configuration.

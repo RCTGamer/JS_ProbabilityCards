@@ -1,57 +1,24 @@
 [CONFIG]
 title: 6♥
 difficulty: Medium
-answer: 0.36
+answer: 12
 
 [PROBLEM]
 Meeting Time Window
 
-Every morning, two friends independently bike to a cafe, arriving at a uniformly random time between 7am and 8am. Each person waits for t minutes in the parking lot, hoping their friend will join in time. If not, they leave coffeeless. If they are 36% likely to get their morning caffeine, what is t?
+Every morning, two friends independently bike to a cafe, arriving at a uniformly random time between 7am and 8am. Each person waits for $t$ minutes in the parking lot, hoping their friend will join in time. If not, they leave coffeeless. If they are 36% likely to get their morning caffeine, what is $t$?
 
 [HINTS]
-Set up a coordinate system where x and y represent arrival times.
-
-The constraint is that |x - y| ≤ t for them to meet.
-
-This creates a band around the diagonal y = x.
-
-The probability equals the area of this band divided by the total area.
+Set up the contraints as an inequality in terms of the number of minutes they arrive after 7am. 
 
 [SOLUTION]
-Let x and y be the arrival times of the two friends, measured in minutes after 7am.
-Both x and y are uniformly distributed on [0, 60].
+Let $X$ and $Y$ be the arrival times of the two friends, measured in minutes after 7am. Both $X$ and $Y$ are uniformly distributed on $[0, 60]$.
 
-**Meeting condition:** They meet if |x - y| ≤ t, which means:
--t ≤ x - y ≤ t, or equivalently: y ∈ [x-t, x+t]
+Then they meet if $|X-Y| \le t$. Hence, if we plot this region on the coordinate plane restricted to $X,Y \in [0,60]$, we know that this has an area of $3600 - (60-t)^2$
 
-**Geometric setup:**
-- Total sample space: 60 × 60 square with area 3600
-- Meeting region: band of width 2t around the diagonal y = x
+This gives a probability of meeting being $\frac{3600 - (60-t)^2}{3600} = 0.36 \implies \frac{(60-t)^2}{60^2} = 1 - 0.36 = 0.64 \implies \frac{60-t}{60} = 0.8 \implies t = 12$
 
-**Area calculation:**
-The region where they DON'T meet consists of two triangles:
-- Upper triangle: y > x + t
-- Lower triangle: y < x - t
-
-Each triangle has legs of length (60 - t).
-Area of each triangle = (1/2)(60 - t)²
-Total "no meeting" area = 2 × (1/2)(60 - t)² = (60 - t)²
-
-**Meeting area:** 3600 - (60 - t)² = 3600 - (3600 - 120t + t²) = 120t - t²
-
-**Probability:** P = (120t - t²)/3600 = 0.36
-
-**Solving:** 120t - t² = 0.36 × 3600 = 1296
-t² - 120t + 1296 = 0
-
-Using the quadratic formula:
-t = (120 ± √(14400 - 5184))/2 = (120 ± √9216)/2 = (120 ± 96)/2
-
-So t = 108 or t = 12.
-
-Since t must be less than 60 (can't wait longer than the full hour), we have **t = 12 minutes**.
-
-**Verification:** P = (120×12 - 144)/3600 = (1440 - 144)/3600 = 1296/3600 = 0.36 ✓
+Author: RCTGamer
 
 [TOPICS]
-Geometric Probability, Meeting Problems, Quadratic Equations, Area Calculations
+Geometric Probability, Coordinate Geometry

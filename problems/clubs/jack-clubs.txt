@@ -7,7 +7,7 @@ answer_b: 1
 [PROBLEM]
 Card Pairing and Matching Ranks
 
-We have $2N$ cards: 1 through $N$ of both ♣ and ♠. Remove the 1♣ and a random ♠. Remove a pair of cards: the 2♣ and an associated ♠, the 3♣ and an associated ♠ (the 2♠ if you can find it, or else a random ♠). Continue similarly (with the 3♣, 4♣, etc) until all cards are paired and removed.
+We have $2N$ cards: 1 through $N$ of both ♣ and ♠. Remove the **1♣** and a random ♠. Remove a pair of cards: the **2♣** and an associated ♠ (the **2♠** if you can find it, else a random ♠). Continue similarly (with the 3♣, 4♣, etc) until all cards are paired and removed.
 
 a) What's the chance $N$♣ and $N$♠ form a pair?
 b) On average, how many pairs have matching rank?

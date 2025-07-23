@@ -1,47 +1,24 @@
 [CONFIG]
 title: 5♥
-difficulty: Easy
-answer: 1/2
+difficulty: Medium
+answer: $\frac{2(l^2 + w^2)}{wl(l+w)}$
 
 [PROBLEM]
-Random Point in Triangle
+Stopping over diagonal lines
 
-A point is chosen uniformly at random inside an equilateral triangle. What is the probability that the point is closer to the center of the triangle than to any of its sides?
+A circular zamboni (of radius $1$) was driving around an ice rink of length $l$ and width $w$ ($l, w \ge 2$). The zamboni broke down at a uniformly random point on the rink. What is the chance that it stopped over a diagonal line?
 
 [HINTS]
-Consider the perpendicular distances from the point to each side.
-
-The center of an equilateral triangle is equidistant from all sides.
-
-Think about the region where a point is closer to the center than to the boundary.
+Consider the distances from the diagonals to each side.
 
 [SOLUTION]
-Let's work with an equilateral triangle with side length s.
+For each corner, if the circular zamboni broke down on the width, it's center must be less than $\frac{w}{l}$ units away from the corner for the zamboni to lie on the diagonal. 
 
-**Key facts:**
-- The distance from the center to any side (apothem) is h/3 where h is the height
-- For an equilateral triangle with side s: h = s√3/2
-- So the apothem = h/3 = s√3/6
+Similarly, the circular zamboni broke down on the length, it's center must be less than $\frac{l}{w}$ units away from the corner for the zamboni to lie on the diagonal.
 
-**Region of interest:** Points closer to center than to boundary.
+Since $l,w > 2$, then we don't need to worry about overlapping areas in different corners. Since we have $4$ corners, then we have a total of $4(\frac{w}{l} + \frac{l}{w})$ lines where the zamboni can break down.
 
-This forms a smaller equilateral triangle centered at the original center.
-
-**Finding the scaling factor:**
-A point is closer to the center than to the boundary when its distance to center is less than its distance to the nearest side.
-
-The locus of points equidistant from the center and the nearest side forms the boundary of our region.
-
-For an equilateral triangle, this creates a smaller similar triangle.
-
-**Scaling calculation:**
-The ratio of areas equals the square of the ratio of corresponding lengths.
-
-By symmetry and geometric analysis, the favorable region has area exactly half the original triangle.
-
-**Therefore:** P = 1/2
-
-This can be proven rigorously using coordinate geometry or by noting that the median point divides each median in ratio 2:1, creating the 1/2 area ratio.
+Dividing by the total length, we have $\frac{4 \cdot (\frac{l}{w} + \frac{w}{l})}{2(w+l)} = \frac{2(l^2 + w^2)}{wl(l+w)}$.
 
 [TOPICS]
-Geometric Probability, Equilateral Triangles, Distance to Center, Area Ratios
+Geometric Probability, Distance from Diagonals

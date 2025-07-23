@@ -1,7 +1,7 @@
 [CONFIG]
 title: A♠
-difficulty: Medium
-answer: 0.3125
+difficulty: Easy
+answer: $\frac{231}{1024}$
 
 [PROBLEM]
 **Two Crabs Random Walk**
@@ -9,21 +9,16 @@ answer: 0.3125
 Two crabs are facing each other on the beach. Each second they randomly walk one step to the right or one step to the left (independently). After $6$ seconds, what is the chance they are still across from each other?
 
 [HINT]
-Consider the relative position between the two crabs. Think about what it means for them to be "across from each other" after 6 steps.
+Consider different possible relative positions of the two crabs.
 
 [SOLUTION]
-Let's denote the relative position between the two crabs. Initially they are distance 0 apart.
+There are 7 possible locations after $6$ steps for a crab: $6,4,2$ steps to either the right or left or its right where it started.
 
-Each second, the relative distance changes by:
-- +2 with probability 1/4 (both move away from each other)
-- 0 with probability 1/2 (one moves toward, one away)  
-- -2 with probability 1/4 (both move toward each other)
+If we go from the right most to left most possible position, this happens with probability $\frac{\binom{6}{0}}{2^6}, \frac{\binom{6}{1}}{2^6},...,\frac{\binom{6}{6}}{2^6}$.
 
-For them to be across from each other after 6 seconds, their relative distance must be 0.
+Therefore, the probability that both crabs ends up in the same position is $(\frac{\binom{6}{0}}{2^6})^2 + (\frac{\binom{6}{1}}{2^6})^2 + (\frac{\binom{6}{2}}{2^6})^2 + (\frac{\binom{6}{6}}{2^6})^2 = \frac{231}{2^{10}} \approx 0.2256$
 
-This is equivalent to a random walk where we move +1 with probability 1/4, stay at 0 with probability 1/2, and move -1 with probability 1/4.
-
-After 6 steps, the probability of being at position 0 is $\frac{5}{16} = 0.3125$.
+Author: RCTGamer
 
 [TOPICS]
-Random Walks, Probability, Symmetric Random Walk
+Random Walks

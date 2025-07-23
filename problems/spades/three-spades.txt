@@ -12,23 +12,11 @@ A turtle is staring out at the horizon, one step away from the ocean. The turtle
 This is a biased random walk with an absorbing barrier. Set up a recursive equation for the probability of reaching the ocean from each position.
 
 [SOLUTION]
-Let $p_k$ be the probability of reaching the ocean when the turtle is $k$ steps away from it.
+Let $p_{i,n}$ be the probability of ending up in the ocean when the turtle is $i$ steps away from the ocean and if the turtle stops moving when it is $n$ steps away from the ocean.
 
-We want to find $p_1$.
-
-Setting up the recursive equation:
-- $p_0 = 1$ (already at ocean)
-- $p_k = \frac{1}{3} p_{k-1} + \frac{2}{3} p_{k+1}$ for $k \geq 1$
-
-This gives us the general solution $p_k = A + B \cdot \left(\frac{1}{2}\right)^k$.
-
-Using boundary conditions:
-- $p_0 = 1$
-- $\lim_{k \to \infty} p_k = 0$
-
-We get $A = 0$ and $B = 1$, so $p_k = \left(\frac{1}{2}\right)^k$.
+We want to find $\lim\limits_{n\to \infty} p_{1,n}$
 
 Therefore, $p_1 = \frac{1}{2}$.
 
 [TOPICS]
-Biased Random Walk, Absorbing Barriers, Gambler's Ruin
+Boundary Problems for One Dimensional Random Walks, Absorbing Barriers, Gambler's Ruin  

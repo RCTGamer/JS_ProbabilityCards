@@ -1,10 +1,10 @@
 [CONFIG]
 title: 9♦
 difficulty: Medium
-answer: 1
+answer: a
 
 [PROBLEM]
-Easy Problem?
+Drawing cards
 
 Which of these events is most likely assuming cards are drawn from a shuffled deck with replacement:
 a) at least 1 ♦ when 4 cards are drawn
@@ -12,56 +12,27 @@ b) at least 2 ♦ when 8 cards are drawn
 c) at least 3 ♦ when 12 cards are drawn
 
 [HINTS]
-For each scenario, use the binomial distribution to calculate the probability.
-
-Remember that the probability of drawing a diamond in a single draw is 1/4.
+For each scenario, use the binomial distribution and complimentary counting.
 
 [SOLUTION]
-Let's calculate the probability of each event:
-
-The probability of drawing a diamond in a single draw is 13/52 = 1/4 = 0.25.
+We note that the probability of drawing a diamond in a single draw is $\frac{1}{4}$. We use this to calculate the probability of each event:
 
 a) At least 1 ♦ when 4 cards are drawn:
-P(at least 1 ♦) = 1 - P(0 ♦)
-P(0 ♦) = (3/4)^4 = 0.31640625
-P(at least 1 ♦) = 1 - 0.31640625 = 0.68359375
+Let $X$ be the event where we get at least 1♦ when $4$ cards are drawn. The chance of this happening is 1 - P(No diamonds when 4 cards are drawn)
+$P(X) = 1 - (\frac{3}{4})^4 = 1 - \frac{81}{256} = \frac{175}{256} \approx 0.6836$
 
 b) At least 2 ♦ when 8 cards are drawn:
-P(at least 2 ♦) = 1 - P(0 ♦) - P(1 ♦)
-P(0 ♦) = (3/4)^8 = 0.10011394
-P(1 ♦) = 8 × (1/4) × (3/4)^7 = 8 × 0.25 × 0.13348525 = 0.26697050
-P(at least 2 ♦) = 1 - 0.10011394 - 0.26697050 = 0.63291556
+Let $Y$ be the event where we get at least 2♦ when $8$ cards are drawn. The chance of this happening is 1 - P(No diamonds when 8 cards are drawn) - P(only 1♦ when 8 cards are drawn)
+$P(Y) = 1 - (\frac{3}{4})^8 - 8\cdot (\frac{3}{4})^7 (\frac{1}{4}) = 1 - \frac{3^7 (3 + 8)}{4^8} \approx 0.6329$
 
 c) At least 3 ♦ when 12 cards are drawn:
-P(at least 3 ♦) = 1 - P(0 ♦) - P(1 ♦) - P(2 ♦)
-P(0 ♦) = (3/4)^12 = 0.03169902
-P(1 ♦) = 12 × (1/4) × (3/4)^11 = 12 × 0.25 × 0.04226536 = 0.12679607
-P(2 ♦) = (12 choose 2) × (1/4)^2 × (3/4)^10 = 66 × 0.0625 × 0.05635381 = 0.23266945
-P(at least 3 ♦) = 1 - 0.03169902 - 0.12679607 - 0.23266945 = 0.60883546
+Let $Z$
 
-Comparing the three probabilities:
-a) P(at least 1 ♦ in 4 draws) = 0.68359375
-b) P(at least 2 ♦ in 8 draws) = 0.63291556
-c) P(at least 3 ♦ in 12 draws) = 0.60883546
+c) At least 3 ♦ when 12 cards are drawn:
+Let $Z$ be the event where we get at least 3♦ when $12$ cards are drawn. The chance of this happening is 1 - P(No diamonds) - P(only 1 diamond) - P(only 2 diamonds) when drawing $12$ cards.
+$P(Z) = 1 - (\frac{3}{4})^12 - 12\cdot (\frac{3}{4})^{11} \frac{1}{4} - 66\cdot (\frac{3}{4})^{10} \frac{1}{4^2} = 1 - \frac{3^{10}(9 + 12\cdot 3 + 66)}{4^{12}} = 0.6093$
 
-Therefore, event a) is the most likely: drawing at least 1 diamond when 4 cards are drawn.
-
-Let me verify the calculations:
-
-a) P(at least 1 ♦ in 4 draws) = 1 - (3/4)^4 = 1 - 0.31640625 = 0.68359375
-
-b) P(at least 2 ♦ in 8 draws) = 1 - P(0 ♦) - P(1 ♦)
-   P(0 ♦) = (3/4)^8 = 0.10011394
-   P(1 ♦) = 8C1 × (1/4)^1 × (3/4)^7 = 8 × 0.25 × 0.13348525 = 0.26697050
-   P(at least 2 ♦) = 1 - 0.10011394 - 0.26697050 = 0.63291556
-
-c) P(at least 3 ♦ in 12 draws) = 1 - P(0 ♦) - P(1 ♦) - P(2 ♦)
-   P(0 ♦) = (3/4)^12 = 0.03169902
-   P(1 ♦) = 12C1 × (1/4)^1 × (3/4)^11 = 12 × 0.25 × 0.04226536 = 0.12679607
-   P(2 ♦) = 12C2 × (1/4)^2 × (3/4)^10 = 66 × 0.0625 × 0.05635381 = 0.23266945
-   P(at least 3 ♦) = 1 - 0.03169902 - 0.12679607 - 0.23266945 = 0.60883546
-
-So the answer is a): at least 1 ♦ when 4 cards are drawn is the most likely event.
+Author: RCTGamer
 
 [TOPICS]
-Binomial Distribution, Probability, Combinatorics, Card Drawing with Replacement
+Binomial Distribution, Complimentary Counting

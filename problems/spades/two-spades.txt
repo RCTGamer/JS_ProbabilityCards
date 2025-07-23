@@ -1,7 +1,9 @@
 [CONFIG]
 title: 2♠
-difficulty: Hard
-answer: Multiple parts
+difficulty: Medium
+answer_a: RB
+answer_b: 3
+answer_c: 8
 
 [PROBLEM]
 **Ant Trail Patterns**
@@ -18,13 +20,19 @@ c) What about **BBR**?
 This is a Markov chain problem. Consider the states based on what patterns you've seen so far.
 
 [SOLUTION]
-**Part a)** Both BB and RB have the same probability of appearing first. Each has probability 1/2.
+a)
+If **R** appears even once in the first two ants, then its impossible to see **BB** before **RB**. Therefore, we see **BB** first if and only if it appears as the first two ants, which happens with proabiblity $\frac{1}{4}$. Otherwise, we see **RB** first for $\frac{3}{4}$ of the time. So, we are more likely to see **RB** first.
 
-**Part b)** Using Markov chain analysis, the expected number of ants to see either BB or RB is 3.
+b) 
+We will see **BB** or **RB** if **B** appears any time from the second ant onwards. $E[B] = 2$ since a **B** appears just as likely as **R**, so it takes $1 + E[B] = 3$
 
-**Part c)** For the pattern BBR, the expected waiting time is 8 ants.
+c)
+The expected value of seeing **BBR** is to first see **BB** then for the next *R* to appear anytime after **BB** appears. This is equivalent to $E[BBR] = E[BB] + E[R]$
 
-The key insight is to set up states representing the progress toward completing each pattern and solve the resulting system of linear equations.
+$E[BB] = \frac{1}{2}(E[B] + 1) + \frac{1}{2} E[BB] \implies \frac{1}{2} E[BB] = \frac{1}{2}(2 + 1) \implies E[BB] = 6$
+$E[R] = 2$
+
+So we have $E[BBR] = 6 + 2 = 8$
 
 [TOPICS]
-Markov Chains, Pattern Waiting Times, Expected Value
+Markov Chains, Expected Values

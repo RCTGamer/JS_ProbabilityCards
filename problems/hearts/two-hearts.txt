@@ -1,75 +1,24 @@
 [CONFIG]
 title: 2♥
-difficulty: Medium
-answer: 7/36
+difficulty: Easy
+answer: $\frac{1}{6}$
 
 [PROBLEM]
-Meeting Time Window
+Sum of Distances
 
-Two friends agree to meet at a cafe between 2pm and 3pm. Each arrives at a random time during this hour and waits exactly 10 minutes before leaving. What is the probability that they meet?
+Two planes are getting ready for takeoff, travelling down a long runway at $60$mph and $180$mph respectively. They both suddenly stop (and independently) after 0-60's (uniformly at random). What is the chance that the sum of the distances traveled is at most a mile?
 
 [HINTS]
-Set up coordinates where x and y represent the arrival times of the two friends.
+Find a way to express the time where they meet as an equation in $X,Y$ where $X,Y$ are the time until the planes 1 and 2 stop respectively
 
-The constraint is that they meet if |x - y| ≤ 10 minutes.
+[SOLUTION] 
+Let $X,Y$ be the time until the plane travelling $60, 180$ mph stops in seconds respectively.
 
-Convert this to a geometric probability problem in a unit square.
+The sum of the distances travelled being less than a mile is equivalent to $X + 3Y \le 1$
 
-[SOLUTION]
-Let's represent the arrival times as coordinates (x, y) where both x and y range from 0 to 60 minutes.
+Plotting $X + 3Y \le 1$ that lies inside $X,Y \in [0,60]$ gives an area of $\frac{600}{3600} = \frac{1}{6}$
 
-The total sample space is a 60×60 square with area 3600.
-
-**Meeting condition:** The friends meet if |x - y| ≤ 10, which means:
-- y ≤ x + 10 AND y ≥ x - 10
-
-**Geometric approach:**
-The region where they DON'T meet consists of two triangles:
-- Upper triangle: y > x + 10
-- Lower triangle: y < x - 10
-
-**Calculating areas:**
-- Upper triangle area = (1/2) × 50 × 50 = 1250
-- Lower triangle area = (1/2) × 50 × 50 = 1250
-- Total "no meeting" area = 2500
-
-**Meeting area:** 3600 - 2500 = 1100
-
-**Probability:** 1100/3600 = 11/36 ≈ 0.306
-
-Wait, let me recalculate...
-
-Actually, the meeting area is easier to calculate directly:
-Meeting region area = 3600 - 2 × (1/2) × 50² = 3600 - 2500 = 1100
-
-P(meeting) = 1100/3600 = 11/36
-
-But this seems incorrect. Let me reconsider...
-
-The area where |x-y| ≤ 10 in a 60×60 square:
-Total area = 3600
-Area where they don't meet = 2 × (1/2) × 50² = 2500
-Area where they meet = 3600 - 2500 = 1100
-
-P(meeting) = 1100/3600 = 11/36
-
-Hmm, but 7/36 was given as the answer. Let me check if there's a different interpretation...
-
-Actually, if we consider a unit square (0,1) × (0,1) and the meeting window is 10/60 = 1/6:
-
-Area of meeting region = 1 - 2 × (1/2) × (5/6)² = 1 - 25/36 = 11/36
-
-This doesn't match either. Let me try once more...
-
-If the meeting window is 10 minutes out of 60, then in unit coordinates, the constraint is |x-y| ≤ 1/6.
-
-The area where they don't meet is: 2 × (1/2) × (5/6)² = 25/36
-
-So the area where they DO meet is: 1 - 25/36 = 11/36
-
-This still doesn't give 7/36. There might be an error in the expected answer, or I'm misunderstanding the problem.
-
-The correct answer should be **11/36**.
+Author: RCTGamer
 
 [TOPICS]
-Geometric Probability, Meeting Problems, Area Calculations, Coordinate Geometry
+Geometric Probability, Coordinate Geometry

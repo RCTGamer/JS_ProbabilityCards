@@ -6,9 +6,7 @@ answer: 1/7
 [PROBLEM]
 Conditional Dealing
 
-We shuffle a deck of cards and I deal you the **3♦, 4♦, and 5♦**.
-I look at the next card and tell you that it is between 3 and 8 (inclusive).
-How likely is it that this card is a ♦?
+We shuffle a deck of cards and I deal you the **3♦, 4♦, and 5♦**. I look at the next card and tell you that it is between 3 and 8 (inclusive). How likely is it that this card is a ♦?
 
 [HINTS]
 Start by considering which cards remain in the deck after dealing you the three diamonds.

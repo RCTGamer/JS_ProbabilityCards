@@ -1,52 +1,26 @@
 [CONFIG]
 title: 7♥
 difficulty: Medium
-answer: 1/3
+answer: $\frac{N(N-1)}{4}$
 
 [PROBLEM]
-Random Chord Length
+Cyclists Meeting on a track
 
-A chord is drawn at random in a circle of radius 1. What is the probability that the chord is longer than the side of an inscribed equilateral triangle?
+$N$ cyclists are biking around a circular track at a rate of 1 rpm. THey start in uniformly random locations and random orientations (clockwise or counter). Just before a pair would collide, they instantly reverse direction. What is the expected number of times all the cyclists reverse direction each minute?
 
 [HINTS]
-There are different ways to interpret "random chord" - this affects the answer!
-
-Assume the chord is determined by choosing two random points on the circle.
-
-Find the side length of an inscribed equilateral triangle in a unit circle.
-
-The chord length depends on the central angle between the two points.
+Does the "instantly reverse direction" condition matter? and think about each cyclist individually
 
 [SOLUTION]
-**Step 1: Side length of inscribed equilateral triangle**
-For an equilateral triangle inscribed in a circle of radius R = 1:
-- The central angle for each side is 2π/3 = 120°
-- Side length = 2R sin(π/3) = 2 × 1 × (√3/2) = √3
+Note that having the pair of bikers instantly reverse direction is the same as letting them simply pass through each other since we don't care about the identity of the bikers.
 
-**Step 2: Random chord setup**
-Choose two random points A and B on the circle. Let θ be the central angle between them.
-Since the points are chosen uniformly, θ is uniformly distributed on [0, π].
-(We consider only the smaller arc, so θ ≤ π)
+So, we simply wish to find the number of times cyclists "pass by each other"
 
-**Step 3: Chord length formula**
-For central angle θ, the chord length is:
-L = 2R sin(θ/2) = 2 sin(θ/2)
+For every pair of cyclist, they have a $\frac{1}{2}$ chance of meeting, which is when one of them turns clockwise and the other moves counter clockwise.
 
-**Step 4: Condition for long chord**
-We want L > √3:
-2 sin(θ/2) > √3
-sin(θ/2) > √3/2
-θ/2 > π/3
-θ > 2π/3
+Since we have $\frac{N(N-1)}{2}$ pairs of cyclists, then by linearity of expectation, we expect $\frac{N(N-1)}{4}$ cyclists to "pass by each other" each minute.
 
-**Step 5: Probability calculation**
-Since θ is uniform on [0, π]:
-P(chord longer than triangle side) = P(θ > 2π/3) = (π - 2π/3)/π = (π/3)/π = 1/3
-
-**Alternative interpretation:**
-Note: This assumes we pick two random points on the circle. Other interpretations of "random chord" (like random midpoint, or random direction through random point) give different answers (1/2 and 1/4 respectively). This is known as **Bertrand's Paradox**.
-
-**Answer: 1/3**
+Author: RCTGamer
 
 [TOPICS]
-Geometric Probability, Bertrand's Paradox, Inscribed Triangles, Chord Lengths
+Geometric Probability, Reversing Directions Problems, Linearity of Expectation

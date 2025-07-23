@@ -8,6 +8,7 @@ answer_b: $\frac{12}{13}$
 More Monty Hall
 
 I have all $13$♦s. We both want to end the game with the **5♦**. You randomly select one of my cards but cannot look at it. I look at my cards and then place $11$ face up. The **5♦** is not among them.
+
 a) Should you trade the card you initially chose for my remaining card?
 b) What is the chance you find the **5♦** if so?
 
