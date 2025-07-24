@@ -6,7 +6,7 @@ answer: Approximately sqrt(8/27) * n
 [PROBLEM]
 **Bee Hexagonal Lattice Walk**
 
-A bee is wandering around an infinitely large beehive, walking along the edges of a hexagonal honeycomb 2D lattice. This bee is very efficient and does not want to walk along an edge it previously walked on. For very large $n$, approximately how many possible $n$-step walks are there that the bee could take from a given starting position?
+[*] A bee is wandering around an infinitely large beehive, walking along the edges of a hexagonal honeycomb 2D lattice. This bee is very efficient and does not want to walk along an edge it previously walked on. For very large $n$, approximately how many possible $n$-step walks are there that the bee could take from a given starting position?
 
 [HINT]
 This is about self-avoiding walks on the hexagonal lattice. The growth rate is related to the connective constant of the lattice.

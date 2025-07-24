@@ -6,7 +6,7 @@ answer: 0.34
 [PROBLEM]
 **Hawk 3D Random Walk**
 
-A hawk is flying around in 3D space. Don't worry-- it is not bound by silly rules like gravity and can burrow deep into the ground. Every moment, it takes a step in one of six directions (±x, ±y, ±z). What is the probability that the hawk ever returns to where it started?
+[*] A hawk is flying around in 3D space. Don't worry-- it is not bound by silly rules like gravity and can burrow deep into the ground. Every moment, it takes a step in one of six directions, horizontal, vertical, or forward/backward direction. What is the probability that the hawk ever returns to where it started?
 
 [HINT]
 This is about 3D random walk recurrence. Unlike 1D and 2D, 3D random walks have different behavior.

@@ -6,8 +6,8 @@ answer: 0.547
 [PROBLEM]
 Random Disk Packing
 
-Helicopters (radius 1 circles) are landing in a very large L×L lot. Each minute, a helicopter arrives and randomly picks an available point in the lot to land (without crashing into another helicopter). When no more helicopters can fit:
-a) What fraction of the lot is occupied?
+[**] Helicopters (radius 1 circles) are landing in a very large $L\times L$ lot. Each minute, a helicopter arrives and randomly picks an available point in the lot to land (without crashing into another helicopter). When no more helicopters can fit:
+a) On Average, what fraction of the lot is occupied?
 b) What about for 3 and 4 dimensions?
 
 [HINTS]

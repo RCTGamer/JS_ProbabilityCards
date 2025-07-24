@@ -6,7 +6,7 @@ answer: ln(L)
 [PROBLEM]
 Parking Gap Analysis
 
-Cars of length 2 try to park on a length L road. Each minute, a new car parks at a uniformly random spot on the road without crashing into another car or running off the road. When no more cars fit:
+[**] Cars of length 2 try to park on a length L road. Each minute, a new car parks at a uniformly random spot on the road without crashing into another car or running off the road. When no more cars fit:
 a) What is the expected size of the largest gap between adjacent cars (as a function of L)?
 b) How about the smallest gap between adjacent cars?
 

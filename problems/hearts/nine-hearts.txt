@@ -6,7 +6,7 @@ answer: 1/e
 [PROBLEM]
 Random Parking (Continuous)
 
-Cars of length 2 are parking on a street of length 100, with no designated spaces. Each minute, a car arrives and parks at a uniformly random spot on the road without crashing into another car or running off the road. When no more cars can possibly fit, roughly what fraction of parking meters are unoccupied by a car?
+Cars of length $2$ are parking on a street of length $100$, with parking meters evenly spaced every length $1$. Each minute, a car arrives and parks at a uniformly randomly open spot, aligning its front bumper with a parking meter. When no more cars can possibly fit, roughly what fraction of parking meters are unoccupied by a car?
 
 [HINTS]
 This is the continuous version of the parking problem.
