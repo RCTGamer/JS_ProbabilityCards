@@ -20,5 +20,7 @@ Since $l,w > 2$, then we don't need to worry about overlapping areas in differen
 
 Dividing by the total length, we have $\frac{4 \cdot (\frac{l}{w} + \frac{w}{l})}{2(w+l)} = \frac{2(l^2 + w^2)}{wl(l+w)}$.
 
+Author: RCTGamer
+
 [TOPICS]
 Geometric Probability, Distance from Diagonals

@@ -202,12 +202,14 @@
             color: white;
         }
         
+        /* Solved container styling disabled
         .container.solved {
             border: 2px solid #10b981;
             box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
             border-radius: 10px;
             position: relative;
         }
+        */
         
         .problem-navigation {
             display: flex;
@@ -461,22 +463,22 @@
         const SUIT_CONFIG = {
             clubs: {
                 folder: 'clubs',
-                backLink: '../problems.html',
+                backLink: '../problems.html?suit=clubs',
                 defaultProblem: 'ace-clubs'
             },
             diamonds: {
                 folder: 'diamonds',
-                backLink: '../problems.html',
+                backLink: '../problems.html?suit=diamonds',
                 defaultProblem: 'ace-diamonds'
             },
             hearts: {
                 folder: 'hearts',
-                backLink: '../problems.html',
+                backLink: '../problems.html?suit=hearts',
                 defaultProblem: 'ace-hearts'
             },
             spades: {
                 folder: 'spades',
-                backLink: '../problems.html',
+                backLink: '../problems.html?suit=spades',
                 defaultProblem: 'ace-spades'
             }
         };
@@ -950,6 +952,9 @@
         
         // Load the current problem
         loadProblem(currentProblem);
+        
+        // Uncomment the line below to clear all progress data
+        // localStorage.removeItem('solvedProblems');
     </script>
 </body>
 </html>
