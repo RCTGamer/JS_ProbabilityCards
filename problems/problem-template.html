@@ -405,6 +405,25 @@
             margin-bottom: 15px;
             display: block;
         }
+        
+        .submit-solution-btn {
+            display: inline-block;
+            background: #8b5cf6;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.2s ease;
+        }
+        
+        .submit-solution-btn:hover {
+            background: #7c3aed;
+            text-decoration: none;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -897,6 +916,16 @@
                 solutionTabBtn.innerHTML = 'Solution <span class="solution-lock-indicator locked">🔒</span>';
                 solutionContent.style.display = 'none';
                 lockedMessage.style.display = 'block';
+                
+                // Update the locked message to include submit button
+                lockedMessage.innerHTML = `
+                    <span class="lock-icon">🔒</span>
+                    <p>This solution is currently locked.</p>
+                    <p>Think you have the answer? Submit your solution below!</p>
+                    <a href="https://forms.gle/tb45ktzqfLg4t6N3A" target="_blank" class="submit-solution-btn">
+                        📝 Submit Your Solution
+                    </a>
+                `;
             } else {
                 solutionTabBtn.innerHTML = 'Solution';
                 solutionContent.style.display = 'block';
