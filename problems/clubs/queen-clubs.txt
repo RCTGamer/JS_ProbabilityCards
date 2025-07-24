@@ -1,8 +1,6 @@
 [CONFIG]
 title: Q♣
 difficulty: Hard
-answer_a: 7
-answer_b: 14
 solution_locked: true
 
 [PROBLEM]

@@ -1,7 +1,6 @@
 [CONFIG]
 title: J♥
 difficulty: Hard
-answer: 0.5
 solution_locked: true
 
 [PROBLEM]

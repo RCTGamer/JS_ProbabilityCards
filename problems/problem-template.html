@@ -812,14 +812,30 @@
                 
                 // Load answer section
                 const answerEl = document.getElementById('answer-section');
-                answerEl.innerHTML = answers.map(answer => `
-                    <div class="answer-row">
-                        ${answer.label ? `<span class="answer-label">${answer.label}</span>` : ''}
-                        <input type="number" class="answer-input" id="answer${answer.id}" placeholder="Answer" step="0.01">
-                        <button class="submit-btn" onclick="checkAnswer('${answer.id}', ${answer.correct})">Submit</button>
-                        <div id="result${answer.id}" class="result" style="display: none;"></div>
-                    </div>
-                `).join('');
+                
+                // Check if there are any answers to display
+                if (answers && answers.length > 0) {
+                    // Display normal answer input section
+                    answerEl.innerHTML = answers.map(answer => `
+                        <div class="answer-row">
+                            ${answer.label ? `<span class="answer-label">${answer.label}</span>` : ''}
+                            <input type="number" class="answer-input" id="answer${answer.id}" placeholder="Answer" step="0.01">
+                            <button class="submit-btn" onclick="checkAnswer('${answer.id}', ${answer.correct})">Submit</button>
+                            <div id="result${answer.id}" class="result" style="display: none;"></div>
+                        </div>
+                    `).join('');
+                } else {
+                    // No answer provided - show submit solution button
+                    answerEl.innerHTML = `
+                        <div style="text-align: center; padding: 20px;">
+                            <p style="color: #e0e0e0; margin-bottom: 15px;">No answer provided for this problem.</p>
+                            <p style="color: #ccc; margin-bottom: 20px;">Think you can solve it? Submit your solution!</p>
+                            <a href="https://forms.gle/tb45ktzqfLg4t6N3A" target="_blank" class="submit-solution-btn">
+                                📝 Submit Your Solution
+                            </a>
+                        </div>
+                    `;
+                }
                 
                 // Load hints and show/hide hint section
                 const hintEl = document.getElementById('hint-content');

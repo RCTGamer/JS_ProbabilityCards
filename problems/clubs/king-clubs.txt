@@ -1,7 +1,6 @@
 [CONFIG]
 title: K♣
 difficulty: Hard
-answer: 7
 solution_locked: true
 
 [PROBLEM]

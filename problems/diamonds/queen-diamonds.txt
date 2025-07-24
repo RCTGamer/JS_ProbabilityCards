@@ -1,7 +1,6 @@
 [CONFIG]
 title: Q♦
 difficulty: Hard
-answer: 1/10
 solution_locked: true
 
 [PROBLEM]

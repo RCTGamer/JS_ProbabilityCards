@@ -1,13 +1,12 @@
 [CONFIG]
 title: K♦
 difficulty: Hard
-answer: 0
 solution_locked: true
 
 [PROBLEM]
 Asymptotic Limit of LIS
 
-`[*]` I have a very large deck of $N$ cards: the **A♦-N♦**. If I shuffle the deck, what is the chance that the longest increasing subsequence has more than $\sqrt{2N} + \sqrt{8}N^{1/6}$ cards?
+[&#42;] I have a very large deck of $N$ cards: the **A♦-N♦**. If I shuffle the deck, what is the chance that the longest increasing subsequence has more than $\sqrt{2N} + \sqrt{8}N^{1/6}$ cards?
 
 [HINTS]
 This problem relates to the asymptotic behavior of the longest increasing subsequence in random permutations.

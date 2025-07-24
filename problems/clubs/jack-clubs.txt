@@ -1,8 +1,6 @@
 [CONFIG]
 title: J♣
 difficulty: Hard
-answer_a: 0.5
-answer_b: 1
 solution_locked: true
 
 

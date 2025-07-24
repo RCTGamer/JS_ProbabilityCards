@@ -1,7 +1,6 @@
 [CONFIG]
 title: 10♦
 difficulty: Hard
-answer: 3/4
 solution_locked: true
 
 [PROBLEM]

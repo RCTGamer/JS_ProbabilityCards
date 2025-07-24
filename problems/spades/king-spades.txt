@@ -1,14 +1,12 @@
 [CONFIG]
 title: K♠
 difficulty: Expert
-answer_a: 8 walks, 
-answer_b: Approximately mu^n
 solution_locked: true
 
 [PROBLEM]
 **Dog Manhattan Walk**
 
-`[**]` Your dog is taking itself for a walk around Manhattan, a perfect infinite 2D grid. Your dog likes to explore, so it never wants to visit the same block twice.
+[&#42;&#42;] Your dog is taking itself for a walk around Manhattan, a perfect infinite 2D grid. Your dog likes to explore, so it never wants to visit the same block twice.
 
 a) How many $4$-block walks could your dog take?
 
