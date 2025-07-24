@@ -3,6 +3,7 @@ title: 9♣
 difficulty: Hard
 answer_a: $\frac{N+1}{2}$
 answer_b: 
+solution_locked: true
 
 [PROBLEM]
 Deck Cutting

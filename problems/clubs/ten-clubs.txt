@@ -2,6 +2,7 @@
 title: 10♣
 difficulty: Hard
 answer: 39.75
+solution_locked: true
 
 [PROBLEM]
 Drawing three cards

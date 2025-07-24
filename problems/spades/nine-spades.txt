@@ -2,6 +2,7 @@
 title: 9♠
 difficulty: Hard
 answer: N turns
+solution_locked: true
 
 [PROBLEM]
 **Monkey Card War Game**

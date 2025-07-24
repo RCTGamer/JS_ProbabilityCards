@@ -2,6 +2,7 @@
 title: 3♠
 difficulty: Medium
 answer: 0.5
+solution_locked: true
 
 [PROBLEM]
 **Turtle Ocean Walk**

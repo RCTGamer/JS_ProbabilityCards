@@ -2,7 +2,8 @@
 title: 8♥
 difficulty: Hard
 answer_a: $\frac{1}{2^{N-1}}$
-answer_b: $\frac{2 + \binom{N}{\frac{N}{2}}}{2^N}$
+answer_b: $\frac{2 + \binom{N}{\frac{N}{2}}}{2^N}$ 
+solution_locked: true
 
 [PROBLEM]
 Cyclists Arriving in the same position

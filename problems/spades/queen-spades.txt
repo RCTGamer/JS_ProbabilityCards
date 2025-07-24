@@ -2,6 +2,7 @@
 title: Q♠
 difficulty: Expert
 answer: Approximately sqrt(8/27) * n
+solution_locked: true
 
 [PROBLEM]
 **Bee Hexagonal Lattice Walk**

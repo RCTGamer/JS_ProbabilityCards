@@ -2,6 +2,7 @@
 title: 9♥
 difficulty: Medium
 answer: 1/e
+solution_locked: true
 
 [PROBLEM]
 Random Parking (Continuous)

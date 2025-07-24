@@ -379,6 +379,32 @@
         .tab-content.active {
             display: block;
         }
+        
+        .solution-lock-indicator {
+            font-size: 14px;
+            margin-left: 8px;
+        }
+        
+        .solution-lock-indicator.locked {
+            color: #dc3545;
+        }
+        
+        .solution-lock-indicator.unlocked {
+            color: #28a745;
+        }
+        
+        .solution-locked {
+            padding: 40px 20px;
+            text-align: center;
+            color: #999;
+            font-style: italic;
+        }
+        
+        .solution-locked .lock-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -405,7 +431,7 @@
         <div class="tab-container">
             <div class="tab-navigation">
                 <button class="tab-btn active" onclick="switchTab('problem')">Problem</button>
-                <button class="tab-btn" onclick="switchTab('solution')">Solution</button>
+                <button class="tab-btn" onclick="switchTab('solution')" id="solution-tab-btn">Solution</button>
             </div>
         </div>
 
@@ -449,6 +475,11 @@
                 <div class="section-content expanded" id="solution-content">
                     <!-- Solutions will be dynamically loaded here -->
                 </div>
+            </div>
+            <div id="solution-locked-message" class="solution-locked" style="display: none;">
+                <span class="lock-icon">🔒</span>
+                <p>This solution is currently locked.</p>
+                <p>Click the lock button above to unlock it.</p>
             </div>
         </div>
 
@@ -833,6 +864,9 @@
                 
                 // Update solved status display
                 updateSolvedDisplay();
+                
+                // Update solution lock display based on config
+                updateSolutionDisplay(problemConfig);
             } catch (error) {
                 console.error('Error loading problem:', error);
                 document.getElementById('problem-content').innerHTML = '<p>Error loading problem content.</p>';
@@ -842,8 +876,32 @@
         // Progress tracking integration
         function getProblemId() {
             const urlParams = new URLSearchParams(window.location.search);
-            const card = urlParams.get('card') || config.defaultProblem;
-            return card;
+            const problem = urlParams.get('problem') || config.defaultProblem;
+            return problem;
+        }
+        
+        // Solution locking functions - developer controlled
+        function isSolutionLocked(problemConfig) {
+            // Check if the problem config has solution_locked set to true
+            return problemConfig.solution_locked === 'true' || problemConfig.solution_locked === true;
+        }
+        
+        function updateSolutionDisplay(problemConfig) {
+            const isLocked = isSolutionLocked(problemConfig);
+            const solutionContent = document.querySelector('#solution-tab .expandable-section');
+            const lockedMessage = document.getElementById('solution-locked-message');
+            const solutionTabBtn = document.getElementById('solution-tab-btn');
+            
+            // Update tab text with indicator
+            if (isLocked) {
+                solutionTabBtn.innerHTML = 'Solution <span class="solution-lock-indicator locked">🔒</span>';
+                solutionContent.style.display = 'none';
+                lockedMessage.style.display = 'block';
+            } else {
+                solutionTabBtn.innerHTML = 'Solution';
+                solutionContent.style.display = 'block';
+                lockedMessage.style.display = 'none';
+            }
         }
         
         function checkIfSolved() {

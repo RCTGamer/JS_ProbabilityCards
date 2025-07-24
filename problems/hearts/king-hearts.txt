@@ -2,6 +2,7 @@
 title: K♥
 difficulty: Hard
 answer: 0.547
+solution_locked: true
 
 [PROBLEM]
 Random Disk Packing

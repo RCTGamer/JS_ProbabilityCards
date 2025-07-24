@@ -1,7 +1,9 @@
 [CONFIG]
 title: K♠
 difficulty: Expert
-answer: a) 8 walks, b) Approximately mu^n
+answer_a: 8 walks, 
+answer_b: Approximately mu^n
+solution_locked: true
 
 [PROBLEM]
 **Dog Manhattan Walk**

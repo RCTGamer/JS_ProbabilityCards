@@ -2,6 +2,7 @@
 title: Q♥
 difficulty: Hard
 answer: ln(L)
+solution_locked: true
 
 [PROBLEM]
 Parking Gap Analysis

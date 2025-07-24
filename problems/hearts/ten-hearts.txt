@@ -2,6 +2,7 @@
 title: 10♥
 difficulty: Medium
 answer: 31.8
+solution_locked: true
 
 [PROBLEM]
 Random Parking Count
