@@ -3,7 +3,6 @@ title: J♣
 difficulty: Hard
 solution_locked: true
 
-
 [PROBLEM]
 Card Pairing and Matching Ranks
 

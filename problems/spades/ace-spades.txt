@@ -8,7 +8,7 @@ answer: $\frac{231}{1024}$
 
 Two crabs are facing each other on the beach. Each second they randomly walk one step to the right or one step to the left (independently). After $6$ seconds, what is the chance they are still across from each other?
 
-[HINT]
+[HINTS]
 Consider different possible relative positions of the two crabs.
 
 [SOLUTION]
@@ -16,7 +16,7 @@ There are 7 possible locations after $6$ steps for a crab: $6,4,2$ steps to eith
 
 If we go from the right most to left most possible position, this happens with probability $\frac{\binom{6}{0}}{2^6}, \frac{\binom{6}{1}}{2^6},...,\frac{\binom{6}{6}}{2^6}$.
 
-Therefore, the probability that both crabs ends up in the same position is $(\frac{\binom{6}{0}}{2^6})^2 + (\frac{\binom{6}{1}}{2^6})^2 + (\frac{\binom{6}{2}}{2^6})^2 + (\frac{\binom{6}{6}}{2^6})^2 = \frac{231}{2^{10}} \approx 0.2256$
+Therefore, the probability that both crabs ends up in the same position is $(\frac{\binom{6}{0}}{2^6})^2 + (\frac{\binom{6}{1}}{2^6})^2 + (\frac{\binom{6}{2}}{2^6})^2 + ... + (\frac{\binom{6}{6}}{2^6})^2 = \frac{231}{2^{10}} \approx 0.2256$
 
 Author: RCTGamer
 

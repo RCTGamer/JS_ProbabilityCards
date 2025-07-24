@@ -154,6 +154,28 @@
             line-height: 1;
             transform: rotate(180deg);
         }
+        
+        .display-card.locked {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background: #f0f0f0;
+            pointer-events: none;
+        }
+        
+        .display-card.locked:hover {
+            transform: none;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        .display-card.locked .lock-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            color: #666;
+            z-index: 10;
+        }
     </style>
 </head>
 <body>
@@ -173,22 +195,27 @@
             clubs: {
                 symbol: '♣',
                 title: 'Expectation and Linearity',
-                cards: ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king']
+                cards: ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king'],
+                lockFromCard: 'four' // Lock from four onwards (four, five, six, seven, eight, nine, ten, jack, queen, king will be locked)
             },
             diamonds: {
                 symbol: '♦',
                 title: 'Classical and Conditional Probability',
-                cards: ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king']
+                cards: ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king'],
+                lockFromCard: 'four'
+                // No lockFromCard means all cards are unlocked
             },
             hearts: {
                 symbol: '♥',
                 title: 'Geometric Probability',
-                cards: ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king']
+                cards: ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king'],
+                lockFromCard: 'four' // Lock from four onwards (four, five, six, seven, eight, nine, ten, jack, queen, king will be locked)
             },
             spades: {
                 symbol: '♠',
                 title: 'Random Walks and Martingales',
-                cards: ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king']
+                cards: ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king'],
+                lockFromCard: 'four' // Lock from four onwards (four, five, six, seven, eight, nine, ten, jack, queen, king will be locked)
             }
         };
 
@@ -215,6 +242,15 @@
             return suit && SUIT_CONFIG[suit] ? suit : 'clubs'; // Default to clubs
         }
 
+        function isCardLocked(cardName, config) {
+            if (!config.lockFromCard) return false;
+            
+            const lockIndex = config.cards.indexOf(config.lockFromCard);
+            const cardIndex = config.cards.indexOf(cardName);
+            
+            return cardIndex >= lockIndex;
+        }
+
         function generateCards() {
             const currentSuit = getCurrentSuit();
             const config = SUIT_CONFIG[currentSuit];
@@ -229,14 +265,27 @@
             
             config.cards.forEach(card => {
                 const cardElement = document.createElement('a');
-                cardElement.href = `problems/problem-template.html?suit=${currentSuit}&problem=${card}-${currentSuit}`;
-                cardElement.className = 'display-card';
+                const isLocked = isCardLocked(card, config);
+                
+                if (isLocked) {
+                    cardElement.href = '#';
+                    cardElement.className = 'display-card locked';
+                    cardElement.onclick = function(e) {
+                        e.preventDefault();
+                        return false;
+                    };
+                } else {
+                    cardElement.href = `problems/problem-template.html?suit=${currentSuit}&problem=${card}-${currentSuit}`;
+                    cardElement.className = 'display-card';
+                }
+                
                 cardElement.setAttribute('data-suit', config.symbol);
                 
                 const displayValue = CARD_DISPLAY[card];
                 cardElement.innerHTML = `
                     <div class="corner-suit-bottom">${config.symbol}</div>
                     <div class="display-icon">${displayValue}${config.symbol}</div>
+                    ${isLocked ? '<div class="lock-overlay">🔒</div>' : ''}
                 `;
                 
                 cardGrid.appendChild(cardElement);

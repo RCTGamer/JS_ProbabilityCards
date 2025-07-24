@@ -249,14 +249,17 @@
         .section-header {
             background: #333;
             padding: 15px 20px;
-            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
             user-select: none;
         }
         
-        .section-header:hover {
+        .section-header[onclick] {
+            cursor: pointer;
+        }
+        
+        .section-header[onclick]:hover {
             background: #3a3a3a;
         }
         
@@ -424,12 +427,92 @@
             text-decoration: none;
             color: white;
         }
+        
+        /* Debug panel styles */
+        .debug-panel {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            width: 300px;
+            max-height: 400px;
+            background: #1a1a1a;
+            border: 2px solid #ff6b6b;
+            border-radius: 8px;
+            padding: 15px;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-y: auto;
+            z-index: 9999;
+            display: none;
+        }
+        
+        .debug-panel h4 {
+            margin: 0 0 10px 0;
+            color: #ff6b6b;
+            font-size: 14px;
+        }
+        
+        .debug-section {
+            margin-bottom: 15px;
+            padding: 8px;
+            background: #2a2a2a;
+            border-radius: 4px;
+        }
+        
+        .debug-label {
+            color: #ffd93d;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .debug-content {
+            color: #a8e6cf;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        
+        .debug-toggle {
+            position: fixed;
+            top: 10px;
+            right: 320px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            z-index: 10000;
+        }
     </style>
 </head>
 <body>
     <!-- Side navigation buttons -->
     <button class="side-nav-btn left" onclick="previousProblem()" id="side-prev-btn">‹</button>
     <button class="side-nav-btn right" onclick="nextProblem()" id="side-next-btn">›</button>
+    
+    <!-- Debug panel -->
+    <button class="debug-toggle" onclick="toggleDebugPanel()">Debug</button>
+    <div class="debug-panel" id="debug-panel">
+        <h4>🐛 Debug Information</h4>
+        <div class="debug-section">
+            <div class="debug-label">Raw Hints Section:</div>
+            <div class="debug-content" id="debug-raw-hints">Not loaded yet</div>
+        </div>
+        <div class="debug-section">
+            <div class="debug-label">Formatted Hints Array:</div>
+            <div class="debug-content" id="debug-formatted-hints">Not loaded yet</div>
+        </div>
+        <div class="debug-section">
+            <div class="debug-label">Hint Section Display:</div>
+            <div class="debug-content" id="debug-hint-display">Not loaded yet</div>
+        </div>
+        <div class="debug-section">
+            <div class="debug-label">All Sections Found:</div>
+            <div class="debug-content" id="debug-all-sections">Not loaded yet</div>
+        </div>
+    </div>
     
     <div class="container">
         <div class="header">
@@ -487,9 +570,8 @@
 
         <div id="solution-tab" class="tab-content">
             <div class="expandable-section">
-                <div class="section-header" onclick="toggleSection('solution')">
+                <div class="section-header">
                     <span>Solution</span>
-                    <span class="chevron" id="solution-chevron">▼</span>
                 </div>
                 <div class="section-content expanded" id="solution-content">
                     <!-- Solutions will be dynamically loaded here -->
@@ -514,24 +596,72 @@
             clubs: {
                 folder: 'clubs',
                 backLink: '../problems.html?suit=clubs',
-                defaultProblem: 'ace-clubs'
+                defaultProblem: 'ace-clubs',
+                cards: ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king'],
+                lockFromCard: 'four' // Lock from queen onwards
             },
             diamonds: {
                 folder: 'diamonds',
                 backLink: '../problems.html?suit=diamonds',
-                defaultProblem: 'ace-diamonds'
+                defaultProblem: 'ace-diamonds',
+                cards: ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king'],
+                lockFromCard: 'four'
+                // No lockFromCard means all cards are unlocked
             },
             hearts: {
                 folder: 'hearts',
                 backLink: '../problems.html?suit=hearts',
-                defaultProblem: 'ace-hearts'
+                defaultProblem: 'ace-hearts',
+                cards: ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king'],
+                lockFromCard: 'four' // Lock from jack onwards
             },
             spades: {
                 folder: 'spades',
                 backLink: '../problems.html?suit=spades',
-                defaultProblem: 'ace-spades'
+                defaultProblem: 'ace-spades',
+                cards: ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king'],
+                lockFromCard: 'four' // Lock from ten onwards
             }
         };
+        
+        // Helper function to check if a card is locked
+        function isCardLocked(cardName, suit) {
+            if (!SUIT_CONFIG[suit] || !SUIT_CONFIG[suit].lockFromCard) {
+                return false;
+            }
+            
+            const cards = SUIT_CONFIG[suit].cards;
+            const lockIndex = cards.indexOf(SUIT_CONFIG[suit].lockFromCard);
+            const cardIndex = cards.indexOf(cardName);
+            
+            return cardIndex >= lockIndex && lockIndex !== -1;
+        }
+
+        // Function to get next unlocked card
+        function getNextUnlockedCard(currentCard, suit) {
+            const cards = SUIT_CONFIG[suit].cards;
+            const currentIndex = cards.indexOf(currentCard);
+            
+            for (let i = currentIndex + 1; i < cards.length; i++) {
+                if (!isCardLocked(cards[i], suit)) {
+                    return cards[i];
+                }
+            }
+            return null;
+        }
+
+        // Function to get previous unlocked card
+        function getPreviousUnlockedCard(currentCard, suit) {
+            const cards = SUIT_CONFIG[suit].cards;
+            const currentIndex = cards.indexOf(currentCard);
+            
+            for (let i = currentIndex - 1; i >= 0; i--) {
+                if (!isCardLocked(cards[i], suit)) {
+                    return cards[i];
+                }
+            }
+            return null;
+        }
         
         // Detect suit from URL parameters or problem name
         function detectSuit() {
@@ -572,6 +702,28 @@
         // Get current problem from URL parameter
         const urlParams = new URLSearchParams(window.location.search);
         const currentProblem = urlParams.get('problem') || config.defaultProblem;
+        
+        // Check if current card is locked and redirect if necessary
+        function checkCardAccess() {
+            const cardName = currentProblem.replace(`-${currentSuit}`, '');
+            
+            if (isCardLocked(cardName, currentSuit)) {
+                // Show error message and redirect to problems page
+                document.body.innerHTML = `
+                    <div style="text-align: center; padding: 50px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+                        <h1 style="color: #e74c3c; margin-bottom: 20px;">🔒 Card Locked</h1>
+                        <p style="color: #666; font-size: 18px; margin-bottom: 30px;">
+                            This card is currently locked. Please complete the previous cards first.
+                        </p>
+                        <a href="${config.backLink}" style="background: #333; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
+                            Return to Problems
+                        </a>
+                    </div>
+                `;
+                return false;
+            }
+            return true;
+        }
         
         // Function to load text file content
         async function loadTextFile(filePath) {
@@ -745,7 +897,19 @@
         
         // Function to format hints
         function formatHints(hintsText) {
-            return hintsText.split('\n\n').filter(hint => hint.trim());
+            if (!hintsText || !hintsText.trim()) {
+                return [];
+            }
+            
+            // First try splitting by double newlines for multi-paragraph hints
+            let hints = hintsText.split('\n\n').filter(hint => hint.trim());
+            
+            // If no double newlines found, treat the entire text as a single hint
+            if (hints.length === 0 || (hints.length === 1 && !hints[0].includes('\n'))) {
+                hints = [hintsText.trim()];
+            }
+            
+            return hints;
         }
         
         // Function to format solution
@@ -785,7 +949,7 @@
                 // Parse the config section
                 const problemConfig = parseConfig(sections.config || '');
                 const problemContent = formatProblemContent(sections.problem || '');
-                const hints = formatHints(sections.hints || '');
+                const hints = formatHints(sections.hints || sections.hint || '');
                 const solutions = formatSolution(sections.solution || '');
                 const answers = parseAnswers(problemConfig);
                 
@@ -848,6 +1012,9 @@
                 } else {
                     hintSection.style.display = 'none';
                 }
+                
+                // Update debug information
+                updateDebugInfo(sections, hints, hintSection);
                 
                 // Load solutions with author information
                 const solutionEl = document.getElementById('solution-content');
@@ -1039,22 +1206,88 @@
         // Navigation functions
         function previousProblem() {
             const currentIndex = problemOrder.indexOf(currentProblem);
+            const currentCard = currentProblem.replace(`-${currentSuit}`, '');
+            
             if (currentIndex > 0) {
-                const prevProblem = problemOrder[currentIndex - 1];
-                window.location.href = `problem-template.html?suit=${currentSuit}&problem=${prevProblem}`;
+                const prevCard = getPreviousUnlockedCard(currentCard, currentSuit);
+                if (prevCard) {
+                    const prevProblem = `${prevCard}-${currentSuit}`;
+                    window.location.href = `problem-template.html?suit=${currentSuit}&problem=${prevProblem}`;
+                }
             }
         }
         
         function nextProblem() {
             const currentIndex = problemOrder.indexOf(currentProblem);
+            const currentCard = currentProblem.replace(`-${currentSuit}`, '');
+            
             if (currentIndex < problemOrder.length - 1) {
-                const nextProblem = problemOrder[currentIndex + 1];
-                window.location.href = `problem-template.html?suit=${currentSuit}&problem=${nextProblem}`;
+                const nextCard = getNextUnlockedCard(currentCard, currentSuit);
+                if (nextCard) {
+                    const nextProblem = `${nextCard}-${currentSuit}`;
+                    window.location.href = `problem-template.html?suit=${currentSuit}&problem=${nextProblem}`;
+                }
             }
         }
         
-        // Load the current problem
-        loadProblem(currentProblem);
+        // Function to update navigation button states
+        function updateNavigationButtons() {
+            const currentCard = currentProblem.replace(`-${currentSuit}`, '');
+            
+            // Check if previous card exists and is unlocked
+            const prevCard = getPreviousUnlockedCard(currentCard, currentSuit);
+            const prevBtn = document.getElementById('prev-btn');
+            const sidePrevBtn = document.getElementById('side-prev-btn');
+            if (prevCard) {
+                prevBtn.disabled = false;
+                sidePrevBtn.disabled = false;
+            } else {
+                prevBtn.disabled = true;
+                sidePrevBtn.disabled = true;
+            }
+            
+            // Check if next card exists and is unlocked
+            const nextCard = getNextUnlockedCard(currentCard, currentSuit);
+            const nextBtn = document.getElementById('next-btn');
+            const sideNextBtn = document.getElementById('side-next-btn');
+            if (nextCard) {
+                nextBtn.disabled = false;
+                sideNextBtn.disabled = false;
+            } else {
+                nextBtn.disabled = true;
+                sideNextBtn.disabled = true;
+            }
+        }
+        
+        // Debug functions
+        function toggleDebugPanel() {
+            const panel = document.getElementById('debug-panel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        function updateDebugInfo(sections, hints, hintSection) {
+            // Update raw hints section
+            const rawHints = sections.hint || sections.hints || 'No hint/hints section found';
+            document.getElementById('debug-raw-hints').textContent = rawHints;
+            
+            // Update formatted hints array
+            const formattedHints = hints && hints.length > 0 ? JSON.stringify(hints, null, 2) : 'No hints formatted';
+            document.getElementById('debug-formatted-hints').textContent = formattedHints;
+            
+            // Update hint section display status
+            const displayStatus = hintSection ? `Visible: ${hintSection.style.display !== 'none'}` : 'Section not found';
+            document.getElementById('debug-hint-display').textContent = displayStatus;
+            
+            // Update all sections found
+            const allSections = Object.keys(sections).join(', ') || 'No sections found';
+            document.getElementById('debug-all-sections').textContent = allSections;
+        }
+        
+        // Check card access and load the problem if allowed
+        if (checkCardAccess()) {
+            loadProblem(currentProblem);
+            updateNavigationButtons();
+        }
         
         // Uncomment the line below to clear all progress data
         // localStorage.removeItem('solvedProblems');
