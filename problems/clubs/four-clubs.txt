@@ -1,12 +1,14 @@
 [CONFIG]
 title: 4♣
 difficulty: Easy
-answer: 2.5
+answer: 502
 
 [PROBLEM]
 Handshake Problem
 
 $10$ people are sitting in a circle. Each has their own deck of cards. They each shuffle their deck and draw a random card. If the card is red, the holder turns to shake hands with the player to their left. If the card is black, they turn to shake hands with the person to their right. How many handshakes are expected to succeed?
+
+(If your answer is in $\frac{a}{b}$, Find $100a + b$)
 
 [HINTS]
 Consider the expected number of handshakes between each a single pair of adjacent players.

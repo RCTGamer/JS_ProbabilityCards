@@ -1,8 +1,8 @@
 [CONFIG]
 title: 3♥
 difficulty: Easy
-answer_a: $\frac{1}{2}$
-answer_b: $\frac{1}{2}$
+answer_a: 102
+answer_b: 102
 
 [PROBLEM]
 Cyclists on a Sphere
@@ -11,6 +11,8 @@ Two cyclists are randomly biking around the unit circle. They each stop at unifo
 
 a) How likely is the triangle to be acute? 
 b) If the unit circle was a unit sphere instead, how likely is the trinagle acute?
+
+(If your answer is in $\frac{a}{b}$, Find $100a + b$)
 
 [HINTS]
 Find the arc in the circle / region on the sphere the two points need to form an acute triangle

@@ -11,15 +11,6 @@ I deal out $MN$ cards in an $M \times N$ grid, some face up and some face down. 
 a) $M = N$ ?
 b) $M = 2^N$ ?
 
-[HINTS]
-Think about this as a game theory problem where you want to guarantee a certain outcome regardless of the initial configuration.
-
-For each cell $(i,j)$, its final state depends on whether row $i$ is flipped an odd/even number of times and whether column $j$ is flipped an odd/even number of times.
-
-The key insight is that the final state of each card depends only on the parity of flips for its row and column.
-
-Consider the worst-case initial arrangement that your opponent might choose.
-
 [SOLUTION]
 Let's think about this systematically. Each card's final state (face up or down) depends on:
 - Its initial state

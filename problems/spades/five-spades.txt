@@ -1,7 +1,6 @@
 [CONFIG]
 title: 5♠
 difficulty: Hard
-answer: 400
 solution_locked: true
 
 [PROBLEM]

@@ -1,12 +1,14 @@
 [CONFIG]
 title: 8♦
 difficulty: Medium
-answer: $\frac{13}{25}
+answer: 1325
 
 [PROBLEM]
 Diamond Mystery
 
 We are playing with a standard deck. I remove one ♦ and some non-♦s but I don't tell you how many! I secretly flip a fair coin; on heads I return the missing ♦, on tails I return one of the other missing cards. You shuffle the deck and draw one card; it's a ♦. What's the probability my coin came up heads?
+
+(If your answer is in $\frac{a}{b}$, Find $100a + b$)
 
 [HINTS]
 Use Bayes Theorem to expand the needed probability from our given information

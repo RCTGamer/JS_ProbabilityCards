@@ -1,12 +1,14 @@
 [CONFIG]
 title: 4♦
 difficulty: Easy
-answer: No
+answer: 1
 
 [PROBLEM]
 Three Card Monte
 
 The **2♦, 3♦, and 4♦** are face-down in random order. You want to select the **4♦**. You point to the leftmost card. A gust of wind blows, flipping the rightmost card and revealing that it is the **2♦**. Do you switch your choice from the leftmost to the middle?
+
+(0 for yes and 1 for no)
 
 [HINTS]
 Think about what information you gain when the rightmost card is revealed to be the 2♦.

@@ -1,12 +1,14 @@
 [CONFIG]
 title: A♥
 difficulty: Easy
-answer: $\frac{1}{8}$
+answer: 108
 
 [PROBLEM]
 Distance from Center of Sphere
 
 A tiny model airplane has gotten stuck inside an inflatable, spherical beach ball of radius $1$ and is flying around randomly. When you stop and look, what is the probability that the plane is closer to the center of the ball than to the outside?
+
+(If your answer is in $\frac{a}{b}$, Find $100a + b$)
 
 [SOLUTION]
 The plane is closer to the center of the ball if it stops flying inside of a sphere with radius $\frac{1}{2}$ with the same center as the beach ball.

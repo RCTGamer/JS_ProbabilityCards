@@ -1,12 +1,14 @@
 [CONFIG]
 title: 4♥
 difficulty: Easy
-answer: $\frac{1}{16}$
+answer: 116
 
 [PROBLEM]
 Buffon's Needle Variation
 
 A round helicopter of diameter $3$ is trying to land. Its landing zone is covered in painted lines which form a grid of $4\times 4$ squares (each square has length $4$). The helicopter is supposed to land fully within a square, but the pilot did not pay attention and landed randomly. What is the chance that the helicopter falls within a square nonetheless.
+
+(If your answer is in $\frac{a}{b}$, Find $100a + b$)
 
 [HINTS]
 Consider where the center of the circle can lie within the square.

@@ -1,7 +1,6 @@
 [CONFIG]
 title: 6♠
 difficulty: Hard
-answer: 0.999
 solution_locked: true
 
 [PROBLEM]

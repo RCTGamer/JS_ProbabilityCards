@@ -1,12 +1,14 @@
 [CONFIG]
 title: 2♥
 difficulty: Easy
-answer: $\frac{1}{6}$
+answer: 106
 
 [PROBLEM]
 Sum of Distances
 
 Two planes are getting ready for takeoff, travelling down a long runway at $60$mph and $180$mph respectively. They both suddenly stop (and independently) after 0-60s (uniformly at random). What is the chance that the sum of the distances traveled is at most a mile?
+
+(If your answer is in $\frac{a}{b}$, Find $100a + b$)
 
 [HINTS]
 Find a way to express the time where they meet as an equation in $X,Y$ where $X,Y$ are the time until the planes 1 and 2 stop respectively

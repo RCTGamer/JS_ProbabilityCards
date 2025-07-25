@@ -1,7 +1,7 @@
 [CONFIG]
 title: 9♦
 difficulty: Medium
-answer: a
+answer: 1
 
 [PROBLEM]
 Drawing cards
@@ -10,6 +10,8 @@ Which of these events is most likely assuming cards are drawn from a shuffled de
 a) at least 1 ♦ when 4 cards are drawn
 b) at least 2 ♦ when 8 cards are drawn
 c) at least 3 ♦ when 12 cards are drawn
+
+(1,2,3 for a,b,c respectively)
 
 [HINTS]
 For each scenario, use the binomial distribution and complimentary counting.

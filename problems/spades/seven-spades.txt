@@ -1,7 +1,6 @@
 [CONFIG]
 title: 7♠
 difficulty: Hard
-answer: Depends on N
 solution_locked: true
 
 [PROBLEM]

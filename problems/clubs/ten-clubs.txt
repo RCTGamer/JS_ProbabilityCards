@@ -1,7 +1,7 @@
 [CONFIG]
 title: 10♣
 difficulty: Hard
-answer: 39.75
+answer: 15904
 solution_locked: true
 
 [PROBLEM]
@@ -9,18 +9,11 @@ Drawing three cards
 
 Draw cards from a shuffled deck until you draw the **J♣, Q♣,** and **K♣**. How many draws will it take on average?
 
-[HINTS]
-This is similar to the coupon collector problem, but we only need to collect 3 specific cards.
-
-Think about this as waiting for the last of the three target cards to appear.
-
-The expected position of the $k$-th largest value in a random permutation of $n$ items is $\frac{k(n+1)}{n+1-k+1}$.
-
-Alternatively, think about the expected position of the maximum of the three target cards.
+(If your answer is in $\frac{a}{b}$, Find $100a + b$)
 
 [SOLUTION]
 
-[NEED TO BE EDITED]
+NEED TO BE EDITED
 
 We need to find the expected number of draws until we have seen all three cards: J♣, Q♣, and K♣.
 

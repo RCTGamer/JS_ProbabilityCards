@@ -1,16 +1,16 @@
 [CONFIG]
 title: 5♦
 difficulty: Easy
-answer_a: Yes
-answer_b: $\frac{12}{13}$
+answer_a: 0
+answer_b: 1213
 
 [PROBLEM]
 More Monty Hall
 
 I have all $13$♦s. We both want to end the game with the **5♦**. You randomly select one of my cards but cannot look at it. I look at my cards and then place $11$ face up. The **5♦** is not among them.
 
-a) Should you trade the card you initially chose for my remaining card?
-b) What is the chance you find the **5♦** if so?
+a) Should you trade the card you initially chose for my remaining card? (0 for yes 1 for no)
+b) What is the chance you find the **5♦** if so? (If your answer is in $\frac{a}{b}$, Find $100a + b$)
 
 [HINTS]
 Think about whether I would intentionally withhold the **5♦** or not.

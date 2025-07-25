@@ -8,17 +8,6 @@ Sum-Free Subsets
 
 You and I are playing a strange deck of cards that consists of 1 through $N$ ♣'s. I remove $r$ cards from the deck. Without knowing which $r$ I removed, how large of a sum-free subset can you promise me you can find in your cards? (A set $S$ is sum-free if there does not exist $s_1, s_2, s_3 \in S$ with $s_1 + s_2 = s_3$).
 
-[HINTS]
-A sum-free set cannot contain any three numbers $a, b, c$ where $a + b = c$.
-
-Think about what types of numbers can coexist in a sum-free set.
-
-Consider taking all numbers greater than $\frac{N}{2}$. Why might this be sum-free?
-
-The adversary will try to remove cards to minimize your largest guaranteed sum-free set.
-
-Think about modular arithmetic and residue classes.
-
 [SOLUTION]
 We need to find the largest sum-free subset we can guarantee, regardless of which $r$ cards the adversary removes.
 

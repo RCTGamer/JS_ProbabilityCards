@@ -1,12 +1,14 @@
 [CONFIG]
 title: 7♦
 difficulty: Medium
-answer: $\frac{1}{3}$
+answer: 103
 
 [PROBLEM]
 Truthful and Lying Card Holders
 
 You are holding a random card from a standard deck. If you have a ♦, you truthfully answer questions 90% of the time and lie 10% of the time. If you don't have a ♦, you truthfully answer questions 40% of the time and lie 60% of the time. I ask "Do you have a ♦?" and you answer "Yes." What is the chance you have a ♦?
+
+(If your answer is in $\frac{a}{b}$, Find $100a + b$)
 
 [HINTS]
 Use Bayes' Theorem and expand it to fit our given variables.

@@ -1,12 +1,14 @@
 [CONFIG]
 title: 6♣
 difficulty: Easy
-answer: 8.33
+answer: 2503
 
 [PROBLEM]
 One of Each Suit
 
 You have a pile of a very, very large number of cards (equal numbers of each suit). How many cards on average do you have to draw before you have at least one card of each suit?
+
+(If your answer is in $\frac{a}{b}$, Find $100a + b$)
 
 [HINTS]
 Read about Coupon Collection Problem. Or think of the Expected Value of drawing the 1st new suit, 2nd new suit, etc

@@ -1,16 +1,15 @@
 [CONFIG]
 title: 9♣
 difficulty: Hard
-answer_a: $\frac{N+1}{2}$
-answer_b: 
-solution_locked: true
+answer_a: 112
+answer_b: 0
 
 [PROBLEM]
 Deck Cutting
 
 A very large deck of $2N+1$ cards is cut at one of its $2N$ gaps randomly. As a function of $N$, 
 
-a) On average, how many cards are in the smaller pile? 
+a) On average, how many cards are in the smaller pile? (If your answer is in $\frac{aN + b}{c}$, Find $100a + 10b + c$)
 b) What is the expected ratio of the size of the larger pile to the smaller pile?
 
 [HINTS]

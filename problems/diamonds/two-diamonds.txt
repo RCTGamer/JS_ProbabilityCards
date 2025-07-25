@@ -1,12 +1,14 @@
 [CONFIG]
 title: 2♦
 difficulty: Easy
-answer: $\frac{1}{\binom{51}{12}}$
+answer: 622
 
 [PROBLEM]
 Same Suit
 
 If you draw $13$ random cards from a standard deck, what is the chance that they are all of the same suit?
+
+(If your answer is in $\frac{a}{\binom{b}{c}}$, Find $100a + 10b + c$)
 
 [HINTS]
 Consider the total number of ways to draw 13 cards from a 52-card deck.

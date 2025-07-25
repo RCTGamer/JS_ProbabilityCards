@@ -2,7 +2,7 @@
 title: 2♣
 difficulty: Easy
 answer_a: 52
-answer_b: 26.5
+answer_b: 5302
 
 [PROBLEM]
 Drawing Cards Until Success
@@ -10,7 +10,7 @@ Drawing Cards Until Success
 A standard deck of cards is shuffled. On average, how many cards will you have to draw to get the A♣ if:
 
 a) You draw with replacement?
-b) You draw without replacement?
+b) You draw without replacement (if your answer is in $\frac{a}{b}$, answer $100a + b$)?
 
 [SOLUTION]
 a) Drawing with replacement:

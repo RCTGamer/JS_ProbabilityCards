@@ -1,12 +1,14 @@
 [CONFIG]
 title: A♦
 difficulty: Easy
-answer: $\frac{4}{13}
+answer: 413
 
 [PROBLEM]
 Simple Probabilities
 
 A standard deck of cards is shuffled. What is the chance that the third card from the top is either a diamond or an ace?
+
+(If your answer is in $\frac{a}{b}$, Find $100a + b$)
 
 [SOLUTION]
 There are $13$ diamonds and $4$ aces in a deck. However, the A♦ is double counted, so we should remove subtract this. So there are $16$ cards which satisfies this condition.

@@ -1,12 +1,14 @@
 [CONFIG]
 title: A♠
 difficulty: Easy
-answer: $\frac{231}{1024}$
+answer: $2311024$
 
 [PROBLEM]
 **Two Crabs Random Walk**
 
 Two crabs are facing each other on the beach. Each second they randomly walk one step to the right or one step to the left (independently). After $6$ seconds, what is the chance they are still across from each other?
+
+(If your answer is in $\frac{a}{b}$, Find $10,000a + b$)
 
 [HINTS]
 Consider different possible relative positions of the two crabs.

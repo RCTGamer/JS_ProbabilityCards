@@ -1,7 +1,6 @@
 [CONFIG]
 title: 10♠
 difficulty: Medium
-answer: 1
 solution_locked: true
 
 [PROBLEM]

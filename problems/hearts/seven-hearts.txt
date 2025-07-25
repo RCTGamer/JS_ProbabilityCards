@@ -1,12 +1,14 @@
 [CONFIG]
 title: 7♥
 difficulty: Medium
-answer: $\frac{N(N-1)}{4}$
+answer: 33
 
 [PROBLEM]
 Cyclists Meeting on a track
 
 $N$ cyclists are biking around a circular track at a rate of 1 rpm. THey start in uniformly random locations and random orientations (clockwise or counter). Just before a pair would collide, they instantly reverse direction. What is the expected number of times all the cyclists reverse direction each minute?
+
+(Find the answer for $N=12$)
 
 [HINTS]
 Does the "instantly reverse direction" condition matter? and think about each cyclist individually

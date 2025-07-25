@@ -1,12 +1,14 @@
 [CONFIG]
 title: 5♥
 difficulty: Medium
-answer: $\frac{2(l^2 + w^2)}{wl(l+w)}$
+answer: 1760
 
 [PROBLEM]
 Stopping over diagonal lines
 
 A circular zamboni (of radius $1$) was driving around an ice rink of length $l$ and width $w$ ($l, w \ge 2$). The zamboni broke down at a uniformly random point on the rink. What is the chance that it stopped over a diagonal line?
+
+(Find the answer for $w=10, l=6$, and if your answer is in $\frac{a}{b}$, Find $100a + b$)
 
 [HINTS]
 Consider the distances from the diagonals to each side.

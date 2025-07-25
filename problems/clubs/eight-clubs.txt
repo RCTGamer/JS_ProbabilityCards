@@ -1,12 +1,14 @@
 [CONFIG]
 title: 8♣
 difficulty: Hard
-answer: $\frac{22}{3}$
+answer: 2203
 
 [PROBLEM]
 Diretion Change
 
 Arrange the **13♣'s** in random order. How many times do you expect the sequence to change direction (increasing to decreasing or vice versa)?
+
+(If your answer is in $\frac{a}{b}$, Find $100a + b$)
 
 [HINTS]
 Think about the comparison ("<" or ">") between a pair of adjacent cards and how it can be used to determine a whether the direction has changed. Can you get some probability for the comparison between two adjacent cards?

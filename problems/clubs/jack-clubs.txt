@@ -11,15 +11,6 @@ We have $2N$ cards: 1 through $N$ of both ♣ and ♠. Remove the **1♣** and a
 a) What's the chance $N$♣ and $N$♠ form a pair?
 b) On average, how many pairs have matching rank?
 
-[HINTS]
-For part (a): Think about when the $N$♠ card gets removed. It can either be removed early (paired with a smaller ♣) or saved for the $N$♣.
-
-For part (b): Use linearity of expectation. For each rank $i$, what's the probability that $i$♣ and $i$♠ end up paired together?
-
-The key insight is that at each step, if the target ♠ is available, it gets paired; otherwise a random ♠ is chosen.
-
-Think about this as a recursive process or use symmetry arguments.
-
 [SOLUTION]
 **Part (a):** Probability that $N$♣ and $N$♠ form a pair.
 

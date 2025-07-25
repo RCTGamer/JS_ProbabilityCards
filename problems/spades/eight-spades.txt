@@ -1,7 +1,6 @@
 [CONFIG]
 title: 8♠
 difficulty: Hard
-answer: Formula depends on B and C
 solution_locked: true
 
 [PROBLEM]
