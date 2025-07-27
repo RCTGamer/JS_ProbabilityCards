@@ -1,22 +1,26 @@
 [CONFIG]
 title: 3♠
-difficulty: Medium
-solution_locked: true
+difficulty: Easy
+answer = 102
 
 [PROBLEM]
 **Turtle Ocean Walk**
 
 A turtle is staring out at the horizon, one step away from the ocean. The turtle takes random steps, with probability $\frac{2}{3}$ back toward the top of the beach and with probability $\frac{1}{3}$ toward the ocean. What's the chance the turtle ever makes it to the ocean?
 
+(If your answer is in $\frac{a}{b}$, Find $100a + b$)
+
 [HINT]
 This is a biased random walk with an absorbing barrier. Set up a recursive equation for the probability of reaching the ocean from each position.
 
 [SOLUTION]
-Let $p_{i,n}$ be the probability of ending up in the ocean when the turtle is $i$ steps away from the ocean and if the turtle stops moving when it is $n$ steps away from the ocean.
+Let $p_{i}$ be the probability of ending up in the ocean when the turtle is $i$ steps away from the Ocean
 
-We want to find $\lim\limits_{n\to \infty} p_{1,n}$
+Then note that $p_{2} = p_{1}^2$ since getting to the ocean when you are two steps away needs you to first get to the "one step away", followed by actually getting to the ocean. 
 
-Therefore, $p_1 = \frac{1}{2}$.
+Therefore, we can set up the equation $p_1 = \frac{1}{3} + \frac{2}{3} p_2 = \frac{1}{3} + \frac{2}{3} p_1^2 \implies p_1 = 1,\frac{1}{2}$ and it is clearly the later option.
+
+Author: Devansh
 
 [TOPICS]
 Boundary Problems for One Dimensional Random Walks, Absorbing Barriers, Gambler's Ruin  

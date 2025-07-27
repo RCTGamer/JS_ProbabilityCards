@@ -1,7 +1,7 @@
 [CONFIG]
 title: 2♠
 difficulty: Medium
-answer_a: RB
+answer_a: 1s
 answer_b: 3
 answer_c: 8
 
@@ -10,7 +10,7 @@ answer_c: 8
 
 A bee left some honeycomb on the ground and now a very long trail of red and black ants (in random order) has formed.
 
-a) Which is more likely to appear first in the trail, two black ants in a row (**BB**) or a red ant followed by a black ant (**RB**)?
+a) Which is more likely to appear first in the trail, two black ants in a row (**BB**) or a red ant followed by a black ant (**RB**)? Answer $0$ for **BB** and $1$ otherwise.
 
 b) How many ants does it take on average to see **BB** or **RB**?
 
