@@ -1,7 +1,7 @@
 [CONFIG]
 title: 3♠
 difficulty: Easy
-answer = 102
+answer: 102
 
 [PROBLEM]
 **Turtle Ocean Walk**
