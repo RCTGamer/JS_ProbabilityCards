@@ -2,7 +2,7 @@
 title: J♣
 difficulty: Hard
 answer_a: 102
-solution_locked: True
+solution_locked: true
 
 [PROBLEM]
 Extended Drunk Passenger Problem
