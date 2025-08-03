@@ -1,8 +1,8 @@
 [CONFIG]
 title: 9♣
-difficulty: Hard
+difficulty: Easy
 answer_a: 112
-answer_b: 0
+answer_b: 1507300
 
 [PROBLEM]
 Deck Cutting
@@ -10,7 +10,7 @@ Deck Cutting
 A very large deck of $2N+1$ cards is cut at one of its $2N$ gaps randomly. As a function of $N$, 
 
 a) On average, how many cards are in the smaller pile? (If your answer is in $\frac{aN + b}{c}$, Find $100a + 10b + c$)
-b) What is the expected ratio of the size of the larger pile to the smaller pile?
+b) What is the expected ratio of the size of the larger pile to the smaller pile for $N=5$? (If your answer is in the form of $\frac{a}{b}$, write $1000a + b$) 
 
 [HINTS]
 Consider the possible cut positions i.e. $(1, 2N), (2, 2N-1),...$
@@ -18,7 +18,7 @@ Consider the possible cut positions i.e. $(1, 2N), (2, 2N-1),...$
 [SOLUTION]
 a)
 Let $X$ be the number of cards in the smaller pile. We have $2N$ possible cut positions with pile sizes $(1,2N), (2,2N-1),..., (2N, 1)$. Each of these pile sizes are equally likely. 
-Therefore, we have $E[X] = \frac{1}{2n} \cdot 2(1+2+...+N) = \frac{N+1}{2}$
+Therefore, we have $E[X] = \frac{1}{2N} \cdot 2(1+2+...+N) = \frac{N+1}{2}$
 
 Author: RCTGamer
 
@@ -26,11 +26,10 @@ Author: RCTGamer
 
 b)
 Let $Y$ be the ratio of the size of the larger pile to the smaller pile. Similarly, we have
-$E[Y] = \frac{1}{2n} \cdot 2(\frac{N+1}{N} + \frac{N+2}{N-1} + ... + \frac{2N}{1})$
-
-[NEED TO BE FINISHED]
+$E[Y] = \frac{1}{2N} \cdot 2(\frac{N+1}{N} + \frac{N+2}{N-1} + ... + \frac{2N}{1}) = \frac{1}{2N} \cdot 2(\frac{2N+1}{N} + \frac{2N+1}{N-1} + ... + \frac{2N+1}{1}) - 1$
+$= \frac{2N+1}{N} \cdot $H_N - 1$ where $H_N = \sum\limits_{i=1}^N \frac{1}{i}$ or $H_N$ is the the sum of the harmonic series till then $N$th term.
 
 Author: RCTGamer
 
 [TOPICS]
-Expected Value, Symmetry, Random Cuts, Order Statistics
+Expected Value, Symmetry
