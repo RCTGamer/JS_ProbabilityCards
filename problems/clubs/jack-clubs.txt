@@ -1,30 +1,41 @@
 [CONFIG]
 title: J♣
 difficulty: Hard
-solution_locked: true
+answer_a: 102
+answer_b: idk
 
 [PROBLEM]
-Card Pairing and Matching Ranks
+Extended Drunk Passenger Problem
 
 We have $2N$ cards: 1 through $N$ of both ♣ and ♠. Remove the **1♣** and a random ♠. Remove a pair of cards: the **2♣** and an associated ♠ (the **2♠** if you can find it, else a random ♠). Continue similarly (with the 3♣, 4♣, etc) until all cards are paired and removed.
 
-a) What's the chance $N$♣ and $N$♠ form a pair?
+a) What's the chance $N$♣ and $N$♠ form a pair? (If your answer is in $\frac{a}{b}$, answer $100a + b$)
 b) On average, how many pairs have matching rank?
 
+[HINTS]
+Consider the Drunk Passenger Problem for a) 
+
 [SOLUTION]
-**Part (a):** Probability that $N$♣ and $N$♠ form a pair.
+(a) Probability that $N$♣ and $N$♠ form a pair.
 
-When we reach the $N$♣, the $N$♠ will be paired with it if and only if $N$♠ hasn't been removed yet.
+This is similar to the "drunk passenger problem"
 
-At each step $k$ (for $k = 1, 2, \ldots, N-1$), when we pair $k$♣ with a ♠:
-- If $k$♠ is available, we pair it with $k$♣  
-- If $k$♠ is not available, we choose a random ♠ from those remaining
+Note this is equivalent to the probability that **1♠** is chosen before $N$♠ (which is $\frac{1}{2}$). To show why: 
 
-The $N$♠ survives to be paired with $N$♣ if it's never chosen as a "random ♠" in steps 1 through $N-1$.
+First note that we have a $\frac{1}{2}$ chance of **1♠** being picked rather than $N$♠. (where the first option guarantees that $N$♣ and $N$♠ form a pair while the second option guarantees it does not happen)
 
-By symmetry, each remaining ♠ at any step has an equal chance of being the one chosen. Working through the recursive probability calculation, we get:
+Otherwise, suppose that the random ♠ removed when removing **1♣** the the $K$♠, When we reach the $K$♣, we then again have a $\frac{1}{2}$ chance in selecting the **1♠** is chosen before $N$♠
 
-$$P(N♣ \text{ pairs with } N♠) = \frac{1}{2}$$
+So the K♣ "turns" into the new **1♣** we can repeatedly apply this logic. 
+
+This gives a final probability of $\frac{1}{2}$
+
+[Refer to this video for more information.](https://www.youtube.com/watch?v=C52c6Yh37uA)
+
+Author: RCTGamer
+
+---
+(b) Expected number of matching pairs.
 
 **Part (b):** Expected number of matching pairs.
 
@@ -42,4 +53,4 @@ For this specific problem setup, the answers are:
 **b)** $\boxed{1}$ (on average)
 
 [TOPICS]
-Recursive Probability, Linearity of Expectation, Symmetry Arguments, Indicator Random Variables
+Drunk Passenger Problem Linearity of Expectation, Symmetry Arguments
