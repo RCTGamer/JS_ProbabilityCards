@@ -1,8 +1,7 @@
 [CONFIG]
 title: 10♣
-difficulty: Hard
+difficulty: Medium
 answer: 15904
-solution_locked: true
 
 [PROBLEM]
 Drawing three cards
@@ -11,26 +10,23 @@ Draw cards from a shuffled deck until you draw the **J♣, Q♣,** and **K♣**.
 
 (If your answer is in $\frac{a}{b}$, Find $100a + b$)
 
+[HINTS]
+Think about **5♣**, and the solution which argues that the expectation of certain regions are the same
+
 [SOLUTION]
+WLOG, we let **J♣, Q♣,** and **K♣** appear in this order as we draw the cards. We let $X_1,X_2,X_3,X_4$ to be the number of cards before the J♣, between the J♣, Q♣ exclusive, between the Q♣, K♣ exclusive, and after the K♣ respectively in the deck.
 
-NEED TO BE EDITED
+The problem is equivalent to finding $E[X_1 + X_2 + X_3 + 3]$ where the $3$ comes from adding the **J♣, Q♣,** and **K♣**
 
-We need to find the expected number of draws until we have seen all three cards: J♣, Q♣, and K♣.
+Now, suppose we let Q♣ and K♣ be at some arbitrary fixed position say $(i,j)$. Then, clearly by symmetry, we know that $E[X_1 | (Q♣, K♣) = (i,j)] + E[X_2 | (Q♣, K♣) = (i,j)]$
 
-This is equivalent to finding the expected position of the last of these three cards to appear in a random shuffling of the deck.
+Since this is true for any arbitrary $(i,j)$, then we know that we must have $E[X_1] = E[X_2]$ when we sum this up over all possible $(i,j)$. 
 
-Let the positions of J♣, Q♣, and K♣ in the shuffled deck be $X_1, X_2, X_3$ respectively. We want $E[\max(X_1, X_2, X_3)]$.
+Similarly, we can argue the same for $E[X_2] = E[X_3]$ and $E[X_3] = E[X_4]$ where we assume we fix **J♣,K♣** and **Q♣,K♣** respectively.
 
-For three cards randomly placed in a deck of 52 cards, the expected position of the maximum is:
-$$E[\max(X_1, X_2, X_3)] = \frac{3 \cdot 53}{3 + 1} = \frac{159}{4} = 39.75$$
+Therefore, since we know that $X_1 + X_2 + X_3 + X_4 = 52-3 = 49 \implies E[X_1] = ... = E[X_4] = \frac{49}{4}$ which gives us that $E[X_1 + X_2 + X_3 + 3] = \frac{147 + 12}{4} = \frac{159}{4}$
 
-More generally, for $k$ specific cards in a deck of $n$ cards:
-$$E[\text{position of last card}] = \frac{k(n+1)}{k+1}$$
-
-With $k=3$ and $n=52$:
-$$E[\text{draws needed}] = \frac{3 \cdot 53}{4} = \frac{159}{4} = 39.75$$
-
-The expected answer is approximately $\boxed{40}$.
+Author: RCTGamer
 
 [TOPICS]
-Order Statistics, Expected Value of Maximum, Coupon Collector Variant
+Order Statistics, Expected Value of Maximum
