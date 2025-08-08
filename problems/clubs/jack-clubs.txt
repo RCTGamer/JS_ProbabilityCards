@@ -10,10 +10,10 @@ Extended Drunk Passenger Problem
 We have $2N$ cards: 1 through $N$ of both ♣ and ♠. Remove the **1♣** and a random ♠. Remove a pair of cards: the **2♣** and an associated ♠ (the **2♠** if you can find it, else a random ♠). Continue similarly (with the 3♣, 4♣, etc) until all cards are paired and removed.
 
 a) What's the chance $N$♣ and $N$♠ form a pair? (If your answer is in $\frac{a}{b}$, answer $100a + b$)
-b) On average, how many pairs have matching rank?
+b) On average, how many pairs have matching rank (for $N$ = 5)?
 
 [HINTS]
-Consider the Drunk Passenger Problem for a) 
+Consider the Drunk Passenger Problem for a) and consider the cases for each of these pairs while using the same intuition of "ending only when certain cards are chosen" for b)
 
 [SOLUTION]
 (a) Probability that $N$♣ and $N$♠ form a pair.
@@ -22,7 +22,7 @@ This is similar to the "drunk passenger problem"
 
 Note this is equivalent to the probability that **1♠** is chosen before $N$♠ (which is $\frac{1}{2}$). To show why: 
 
-First note that we have a $\frac{1}{2}$ chance of **1♠** being picked rather than $N$♠. (where the first option guarantees that $N$♣ and $N$♠ form a pair while the second option guarantees it does not happen)
+First note that we have a $\frac{1}{2}$ chance of **1♠** being picked rather than $N$♠ when removing the **1♣**. (where the first option guarantees that $N$♣ and $N$♠ form a pair while the second option guarantees it does not happen)
 
 Otherwise, suppose that the random ♠ removed when removing **1♣** the the $K$♠, When we reach the $K$♣, we then again have a $\frac{1}{2}$ chance in selecting the **1♠** is chosen before $N$♠
 
@@ -35,9 +35,21 @@ This gives a final probability of $\frac{1}{2}$
 Author: RCTGamer
 
 ---
-(b) Expected number of matching pairs.
+(b) Expected number of matching pairs
 
+We denote $X_k$ to be the event where $K$♠ and $K$♣ are paired together. (for $K \ge 2$)
 
+Then, similar to the example above, we focus on cards **1♠**, $K$♠, $K+1$♠, ... ,$N$♠ which is a total of $N-K+2$ cards. 
+
+Starting from card **1♣**, we have a probability of $\frac{N-K+1}{N-K+2}$ of selecting any of the cards besides $K$♠ which guarantees us that we will pair $K$♠ and $K$♣ and otherwise, we are guaranteed that we won't.
+
+Now, suppose **1♣** gets paired with $J$♠ where $2 \le J \le K-1$, then when we reach $J$♣ which has no partners, then we still have probaiblity $\frac{N-K+1}{N-K+2}$ of selecting the cards mentioned above while maintaining the same guaranteed pairing or not pairing of $K$♠ and $K$♣
+
+By inductive reasoning, we can guarantee that we can pair $K$♠ and $K$♣ with probability $\frac{N-K+1}{N-K+2}$.
+
+By linearity of expectation, we know that the expected number of pairs is $\sum\limits_{i=2}^N \frac{N-K+1}{N-K+2}$
+
+Author: RCTGamer
 
 [TOPICS]
-Drunk Passenger Problem, Linearity of Expectation, Symmetry Arguments
+Drunk Passenger Problem, Linearity of Expectation, Combinatorial Arguments
