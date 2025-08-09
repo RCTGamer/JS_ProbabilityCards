@@ -49,6 +49,8 @@ By inductive reasoning, we can guarantee that we can pair $K$♠ and $K$♣ with
 
 By linearity of expectation, we know that the expected number of pairs is $\sum\limits_{i=2}^N \frac{N-K+1}{N-K+2}$
 
+Check out [this website](https://www.cut-the-knot.org/Probability/NumberOfHappyPassengers.shtml) too which provides an inductive approach (from Abd) 
+
 Author: RCTGamer
 
 [TOPICS]

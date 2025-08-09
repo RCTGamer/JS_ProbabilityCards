@@ -1,33 +1,39 @@
 [CONFIG]
 title: 8♥
 difficulty: Hard
-answer_a: $\frac{1}{2^{N-1}}$
-answer_b: $\frac{2 + \binom{N}{\frac{N}{2}}}{2^N}$
-solution_locked: true
+answer_a: 116
+answer_b: 1132
 
 [PROBLEM]
 Cyclists Arriving in the same position
 
-$N$ cyclists are biking around a circular track at a rate of 1 rpm. THey start in uniformly random locations and random orientations (clockwise or counter). Just before a pair would collide, they instantly reverse direction. What is the probability that after 1 minute, all cyclists are where they started if:
+$N$ cyclists are biking around a circular track at a rate of 1 rpm. They start in uniformly random locations and random orientations (clockwise or counter). Just before a pair would collide, they instantly reverse direction. What is the probability that after 1 minute, all cyclists are where they started if:
 
-a) $N$ is odd
-b) $N$ is even
+a) $N$ is odd (for $N = 5$, if your answer is in $\frac{a}{b}$ input $100a + b$)
+b) $N$ is even (for $N=6$, if your answer is in $\frac{a}{b}$ input $100a+b$)
 
 [HINTS]
-Consider the relationship between the rotation angle and the square's size.
-
-As the inner square rotates, its size changes to fit within the outer square.
-
-At 45° rotation, the inner square has maximum size.
-
-At 0° rotation, the inner square degenerates to a line.
+Consider whether there must be some fixed condition on the positions of the cyclists. And how do we ensure that they end up starting in the same location.
 
 [SOLUTION]
-a)
-If $N$ is odd, then we have probability $\frac{2}{2^N} = \frac{1}{2^{N-1}}$
+First, we take note that since no cyclist can overtake another hence the rotation must be preserved. 
+Moreover, we note that from the logic of the 7♥, we know that every cyclist will simply end up in the initial location of some other cyclist (could also be its own initial location)
+
+Next, suppose that we have $R$ cyclists going clockwise and $L$ cyclists going counter-clockwise. Note that any any given time, we will always have $R$ cyclists going clockwise and $L$ cyclists going counter-clockwise. 
+
+So if we sum the movements of all of the cyclists, we will have $(R-L) \mod n$ rounds towards the clockwise direction, which also represents the number of positions toward the clockwise direction that each cyclists move.
+
+Therefore, the only way for each cyclist will arrive in their initial position is if $L=n$, $R=n$, or $L=R$.
+
+a) 
+If $N$ is odd, then since $L+R = n$ where $n$ is odd, we can only have $L=n$ or $R=n$ which happens with probability $\frac{1}{2^{n-1}}$
 
 b)
-If $N$ is even, then we have probability $\frac{2 + \binom{N}{\frac{N}{2}}}{2^N}$
+If $N$ is even, then we have $L=n$ or $R=n$ or $L = R = \frac{n}{2}$ which happens with probability $\frac{2 + \binom{N}{\frac{N}{2}}}{2^N}$
+
+The solution for this was from here: [Circular Ant Problem](https://josmfs.net/wordpress/wp-content/uploads/2025/03/Circular-Ant-Problem-250223.pdf) 
+
+Author: RCTGamer
 
 [TOPICS]
 Geometric Probability, Expected Value, Integration, Square Rotation
