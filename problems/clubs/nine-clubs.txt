@@ -2,7 +2,7 @@
 title: 9♣
 difficulty: Easy
 answer_a: 112
-answer_b: 1507300
+answer_b: 1207300
 
 [PROBLEM]
 Deck Cutting
@@ -27,7 +27,7 @@ Author: RCTGamer
 b)
 Let $Y$ be the ratio of the size of the larger pile to the smaller pile. Similarly, we have
 $E[Y] = \frac{1}{2N} \cdot 2(\frac{N+1}{N} + \frac{N+2}{N-1} + ... + \frac{2N}{1}) = \frac{1}{2N} \cdot 2(\frac{2N+1}{N} + \frac{2N+1}{N-1} + ... + \frac{2N+1}{1}) - 1$
-$= \frac{2N+1}{N} \cdot $H_N - 1$ where $H_N = \sum\limits_{i=1}^N \frac{1}{i}$ or $H_N$ is the the sum of the harmonic series till then $N$th term.
+$= \frac{2N+1}{N} \cdot H_N - 1$ where $H_N = \sum\limits_{i=1}^N \frac{1}{i}$ or $H_N$ is the the sum of the harmonic series till then $N$th term.
 
 Author: RCTGamer
 
