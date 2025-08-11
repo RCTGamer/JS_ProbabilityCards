@@ -1,7 +1,7 @@
 [CONFIG]
 title: 2♦
 difficulty: Easy
-answer: 622
+answer: 933
 
 [PROBLEM]
 Same Suit
